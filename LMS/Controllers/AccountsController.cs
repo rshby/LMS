@@ -22,6 +22,7 @@ namespace LMS.Controllers
             this.configuration = configuration;
         }
 
+        //Mendaftar Akun
         [HttpPost("register")]
         public ActionResult Register(RegisterVM inputData)
         {
@@ -60,6 +61,51 @@ namespace LMS.Controllers
                 return BadRequest(new
                 {
                     message = "gagal insert",
+                    error = e.Message
+                });
+            }
+        }
+
+        //Login
+        [HttpPost("login")]
+        public ActionResult Login(LoginVM inputData)
+        {
+            try
+            {
+                //Cek Apakah Email Ada di Database
+                if (accountRepo.CekEmail(inputData.Email) == 1)
+                {
+                    var hasilLogin = accountRepo.Login(inputData);
+                    if (hasilLogin == 1)
+                    {
+                        return Ok(new
+                        {
+                            status = 200,
+                            message = "login berhasil"
+                        });
+                    }
+                    else
+                    {
+                        return BadRequest(new
+                        {
+                            message = "password anda salah"
+                        });
+                    }
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        message = "data email tidak ditemukan di database"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal login",
                     error = e.Message
                 });
             }

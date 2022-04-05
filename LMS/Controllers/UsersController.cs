@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using LMS.Repository.Data;
 using Microsoft.Extensions.Configuration;
 using System;
+using LMS.ViewModels;
 
 namespace LMS.Controllers
 {
@@ -52,6 +53,40 @@ namespace LMS.Controllers
                 return BadRequest(new { 
                     message = e.Message,
                     keterangan = "gagal get data"
+                });
+            }
+        }
+
+        //Get Master Data By Email
+        [HttpGet("masterbyemail")]
+        public ActionResult GetMasterUserByEmail(MasterUserVM inputData)
+        {
+            try
+            {
+                if (userRepo.CekEmail(inputData.Email) == 1)
+                {
+                    return Ok(new
+                    {
+                        status = 200,
+                        message = "data ditemukan",
+                        data = userRepo.GetMasterUserByEmail(inputData.Email)
+                    });
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        message = "data tidak ditemukan"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal Get Master User By Email",
+                    error = e.Message
                 });
             }
         }

@@ -35,6 +35,20 @@ namespace LMS.Repository.Data
             return BCrypt.Net.BCrypt.Verify(inputPassword, passwordBenar);
         }
 
+        //Cek Email Apakah Ada di Database
+        public int CekEmail(string inputEmail)
+        {
+            var cek = myContext.Accounts.SingleOrDefault(u => u.Email == inputEmail);
+            if (cek != null)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         //Insert Register Account
         public int Register(RegisterVM inputData)
         {
@@ -80,7 +94,7 @@ namespace LMS.Repository.Data
                 Account account = new Account()
                 {
                     Email = user.Email,
-                    Password = inputData.Password,
+                    Password = HashingPassword(inputData.Password),
                     Role_Id = 1
                 };
                 myContext.Accounts.Add(account);
@@ -91,6 +105,21 @@ namespace LMS.Repository.Data
             else
             {
                 return 0;
+            }
+        }
+
+        //Login
+        public int Login(LoginVM inputData)
+        {
+            //Ambil Data Email dan Password
+            var data = myContext.Accounts.SingleOrDefault(a => a.Email == inputData.Email);
+            if (data.Email == inputData.Email && data.Password == inputData.Password)
+            {
+                return 1; //Password benar
+            }
+            else
+            {
+                return 0; //Password Salah
             }
         }
     }
