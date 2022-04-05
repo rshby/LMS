@@ -7,5 +7,6 @@ namespace LMS.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        //ini dibuat reo
     }
 }
