@@ -20,29 +20,41 @@ namespace LMS.Repository
             entities = myContext.Set<Entity>();
         }
 
-        public int Delete(Key key)
+        //Delete Data
+        public int Delete(Key id)
         {
-            throw new System.NotImplementedException();
+            var hasilData = entities.Find(id);
+            myContext.Remove(hasilData);
+            var result = myContext.SaveChanges();
+            return result;
         }
 
+        //Get All Data
         public IEnumerable<Entity> GET()
         {
-            throw new System.NotImplementedException();
+            return entities.ToList();
         }
 
-        public Entity Get(Key key)
+        //Get Data By Id
+        public Entity Get(Key id)
         {
-            throw new System.NotImplementedException();
+            return entities.Find(id);
         }
 
+        //Insert Data
         public int Insert(Entity entity)
         {
-            throw new System.NotImplementedException();
+            entities.Add(entity);
+            var result = myContext.SaveChanges();
+            return result;
         }
 
+        //Update Data By Id
         public int Update(Entity entity)
         {
-            throw new System.NotImplementedException();
+            myContext.Entry(entity).State = EntityState.Modified;
+            var result = myContext.SaveChanges();
+            return result;
         }
     }
 }
