@@ -44,5 +44,8 @@ namespace LMS.Models
 
         [JsonIgnore]
         public virtual Category Category { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Section> Sections { get; set; }
     }
 }
