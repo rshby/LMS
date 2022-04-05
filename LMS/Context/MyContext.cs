@@ -1,6 +1,6 @@
 ﻿namespace LMS.Context
 {
-    public class MyContext : DbContext
+    public class MyContext
     {
 
     }
