@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="Base\" />
     <Folder Include="Repository\Data\" />
-    <Folder Include="Repository\Interface\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
