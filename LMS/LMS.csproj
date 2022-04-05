@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Context\" />
+    <Folder Include="Models\" />
+    <Folder Include="Base\" />
+    <Folder Include="Repository\Data\" />
+    <Folder Include="Repository\Interface\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+
+</Project>
