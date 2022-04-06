@@ -31,6 +31,7 @@ namespace LMS
             services.AddControllers();
 
             services.AddScoped<AccountRepository>();
+            services.AddScoped <ClassRepository>();
             services.AddScoped<UserRepository>();
             services.AddScoped<ProvinceRepository>();
             services.AddScoped<CityRepository>();
