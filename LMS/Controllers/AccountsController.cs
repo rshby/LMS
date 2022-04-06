@@ -110,5 +110,120 @@ namespace LMS.Controllers
                 });
             }
         }
+
+        //Forgot Password
+        [HttpPost("forgotpassword")]
+        public ActionResult ForgotPassword(LoginVM inputData)
+        {
+            try
+            {
+                //Cek Apakah Data Dengan Email Tersebut Ada di Database
+                if (accountRepo.CekEmail(inputData.Email) == 1)
+                {
+                    //Lakukan Update ForgotPassword (panggil dari accountRepo)
+                    var hasilForgotPassword = accountRepo.ForgotPassword(inputData.Email);
+
+                    if (hasilForgotPassword == 1)
+                    {
+                        return Ok(new
+                        {
+                            status = 200,
+                            message = "berhasil, silahkan cek email"
+                        });
+                    }
+                    else
+                    {
+                        return BadRequest(new{
+                            message = "gagal kirim otp ke email"
+                        });
+                    }
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        status = 404,
+                        message = $"data dengan email {inputData.Email} tidak ada di database"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal kirim kode otp",
+                    error = e.Message
+                });
+            }
+        }
+
+        //Change Password
+        [HttpPost("changepassword")]
+        public ActionResult ChangePassword(ChangePasswordVM inputData)
+        {
+            try
+            {
+                //Cek Data dengan Email Apakah Ada di Database
+                if (accountRepo.CekEmail(inputData.Email) == 1)
+                {
+                    //Hasil Change Password (panggil method dari Repo)
+                    var hasilChangePassword = accountRepo.ChangePassword(inputData);
+                    if (hasilChangePassword == 1)
+                    {
+                        //Sukses
+                        return Ok(new
+                        {
+                            status = 200,
+                            message = "sukses mengganti password"
+                        });
+                    }
+                    else if (hasilChangePassword == -1)
+                    {
+                        //Password dan ConfirmPassword Tidak Sama
+                        return BadRequest(new
+                        {
+                            status = 400,
+                            message = "Password dan ConfirmPassword Tidak Sama"
+                        });
+                    }
+                    else if(hasilChangePassword == -2)
+                    {
+                        //Kode OTP Tidak Sesuai
+                        return BadRequest(new
+                        {
+                            status = 400,
+                            message = "kode OTP tidak sesuai"
+                        });
+                    }
+                    else
+                    {
+                        //Waktu Habis
+                        return BadRequest(new
+                        {
+                            status = 400,
+                            message = "Kode OTP sudah tidak berlaku"
+                        });
+                    }
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        status = 404,
+                        message = $"data dengan email {inputData.Email} tidak ditemukan"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal change password",
+                    error = e.Message
+                });
+            }
+        }
     }
 }
