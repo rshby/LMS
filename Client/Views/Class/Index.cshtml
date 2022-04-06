@@ -1,126 +1,57 @@
 ﻿
 @{
     ViewData["Title"] = "Index";
-    Layout = null;
 }
 
-<html>
-
-<head>
-    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-cyFXZtmM2vBT9TVs"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <span>Daftar Kelas A </span> <button id="gen-a-button">Bayar!</button> <br />
-    <span>Daftar Kelas B </span> <button id="gen-b-button">Bayar!</button> <br />
-    <span>Daftar Kelas C </span> <button id="gen-c-button">Bayar!</button> <br />
-
-
-    <script type="text/javascript">
-        var genButton = document.getElementById('gen-a-button');
-        genButton.addEventListener('click', function () {
-            let timestamp = Math.round(Date.now() / 1000);
-            console.log(timestamp);
-            $.ajax({
-                url: "https://app.sandbox.midtrans.com/snap/v1/transactions",
-                type: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Authorization": "Basic " + "U0ItTWlkLXNlcnZlci1sdHhEaS1iQ3hMSGV6Z281MlRHa183cXA6"
-                },
-                data: JSON.stringify({
-                    "transaction_details": {
-                        "order_id": `PAY-CLASS-A-${timestamp}`,
-                        "gross_amount": 2000000
-                    },
-                    "credit_card": {
-                        "secure": true
-                    },
-                    "customer_details": {
-                        "first_name": "Dari",
-                        "last_name": "Client",
-                        "email": "Daclint@mail.com",
-                        "phone": "08110000000"
-                    }
-                })
-            }).done((result) => {
-                snap.pay(result.token);
-            }).fail((error) => {
-                console.log(error);
-            });
-        });
-
-        var genButton = document.getElementById('gen-b-button');
-        genButton.addEventListener('click', function () {
-            let timestamp = Math.round(Date.now() / 1000);
-            console.log(timestamp);
-            $.ajax({
-                url: "https://app.sandbox.midtrans.com/snap/v1/transactions",
-                type: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Authorization": "Basic " + "U0ItTWlkLXNlcnZlci1sdHhEaS1iQ3hMSGV6Z281MlRHa183cXA6"
-                },
-                data: JSON.stringify({
-                    "transaction_details": {
-                        "order_id": `PAY-CLASS-B-${timestamp}`,
-                        "gross_amount": 3000000
-                    },
-                    "credit_card": {
-                        "secure": true
-                    },
-                    "customer_details": {
-                        "first_name": "Dari",
-                        "last_name": "Client",
-                        "email": "Daclint@mail.com",
-                        "phone": "08110000000"
-                    }
-                })
-            }).done((result) => {
-                snap.pay(result.token);
-            }).fail((error) => {
-                console.log(error);
-            });
-        });
-
-        var genButton = document.getElementById('gen-c-button');
-        genButton.addEventListener('click', function () {
-            let timestamp = Math.round(Date.now() / 1000);
-            $.ajax({
-                url: "https://app.sandbox.midtrans.com/snap/v1/transactions",
-                type: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Authorization": "Basic " + "U0ItTWlkLXNlcnZlci1sdHhEaS1iQ3hMSGV6Z281MlRHa183cXA6"
-                },
-                data: JSON.stringify({
-                    "transaction_details": {
-                        "order_id": `PAY-CLASS-C-${timestamp}`,
-                        "gross_amount": 2500000
-                    },
-                    "credit_card": {
-                        "secure": true
-                    },
-                    "customer_details": {
-                        "first_name": "Dari",
-                        "last_name": "Client",
-                        "email": "Daclint@mail.com",
-                        "phone": "08110000000"
-                    }
-                })
-            }).done((result) => {
-                snap.pay(result.token);
-            }).fail((error) => {
-                console.log(error);
-            });
-        });
-    </script>
-</body>
-
-</html>
-
+<form>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Email address</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Example select</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlSelect2">Example multiple select</label>
+        <select multiple class="form-control" id="exampleFormControlSelect2">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+</form>
+<ul>
+    <li class="dropdown">
+        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown Form<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox">Two
+                    </label>
+                </div>
+            </li>
+            <li>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox">Two
+                    </label>
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>
 
