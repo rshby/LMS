@@ -1,6 +1,10 @@
 ﻿using LMS.Context;
 using LMS.Models;
 using LMS.ViewModels;
+using MailKit.Net.Smtp;
+using Microsoft.EntityFrameworkCore;
+using MimeKit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,7 +13,7 @@ namespace LMS.Repository.Data
     public class AccountRepository : GeneralRepository<MyContext,Account, string>
     {
         private readonly MyContext myContext;
-        public IEnumerable<object> Account { get; set; }
+        public IEnumerable<Account> Account { get; set; }
 
         //Constructor
         public AccountRepository(MyContext myContext) : base(myContext)
@@ -113,13 +117,99 @@ namespace LMS.Repository.Data
         {
             //Ambil Data Email dan Password
             var data = myContext.Accounts.SingleOrDefault(a => a.Email == inputData.Email);
-            if (data.Email == inputData.Email && data.Password == inputData.Password)
+            if (data.Email == inputData.Email && ValidatePassword(inputData.Password, data.Password))
             {
                 return 1; //Password benar
             }
             else
             {
                 return 0; //Password Salah
+            }
+        }
+
+        // Forgot Password kirim ke email
+        public int ForgotPassword(string inputEmail)
+        {
+            //data (Email dan Password) dari inputEmail
+            var data = myContext.Accounts.SingleOrDefault(a => a.Email == inputEmail);
+
+            //Siapkan Objek Untuk Update Ke Database Account
+            var dataUpdate = new Account()
+            {
+                Email = data.Email.ToString(),
+                Password = "123",
+                OTP = new Random().Next(111111, 999999),
+                ExpiredToken = DateTime.Now.AddMinutes(5),
+                IsUsed = false,
+                Role_Id = data.Role_Id
+            };
+
+            //Update ke database
+            myContext.Entry(data).CurrentValues.SetValues(dataUpdate);
+            myContext.SaveChanges();
+            
+            // Kirim Kode OTP Ke Email
+            var email = new MimeMessage();
+            email.From.Add(new MailboxAddress("LMS System", "rshby99@gmail.com"));
+            email.To.Add(MailboxAddress.Parse(inputEmail));
+            email.Subject = "Kode OTP LMS";
+            email.Body = new TextPart("Plain") { Text = $"Kode OTP : {dataUpdate.OTP}" };
+            
+            SmtpClient smtp = new SmtpClient();
+            smtp.Connect("smtp.gmail.com", 465, true);
+            smtp.Authenticate("rshby99@gmail.com", "reo050299");
+            smtp.Send(email);
+            smtp.Disconnect(true);
+            smtp.Dispose();
+            
+            return 1; // Cek Email   
+        }
+
+        //Change Password
+        public int ChangePassword(ChangePasswordVM inputData)
+        {
+            //ambil data sesuai dengan Email yang dimasukkan
+            var data = myContext.Accounts.SingleOrDefault(a => a.Email == inputData.Email);
+
+            //Cek Password dan Confirm Password
+            if (inputData.Password == inputData.ConfirmPassword)
+            {
+                //Cek OTP harus sesuai dengan yang diinput
+                if (inputData.OTP == data.OTP)
+                {
+                    //Cek Waktu
+                    if (DateTime.Now <= data.ExpiredToken)
+                    {
+                        //Siapkan Object Untuk Update Database Account
+                        var dataUpdate = new Account()
+                        {
+                            Email = inputData.Email,
+                            Password = HashingPassword(inputData.Password),
+                            IsUsed = true,
+                            Role_Id = data.Role_Id,
+                            OTP = 0
+                        };
+
+                        //Update ke Database Account
+                        myContext.Entry(data).CurrentValues.SetValues(dataUpdate);
+                        myContext.SaveChanges();
+
+                        //Sukses
+                        return 1;
+                    }
+                    else
+                    {
+                        return -3; //waktu sudah habis
+                    }
+                }
+                else
+                {
+                    return -2; //OTP Tidak sesuai
+                }
+            }
+            else
+            {
+                return -1; // Confirm Password Tidak Sama
             }
         }
     }
