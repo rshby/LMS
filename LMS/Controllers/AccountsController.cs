@@ -16,6 +16,7 @@ namespace LMS.Controllers
         private readonly AccountRepository accountRepo;
         public IConfiguration configuration;
 
+        //Costructor
         public AccountsController(AccountRepository accountRepo, IConfiguration configuration) : base(accountRepo)
         {
             this.accountRepo = accountRepo;

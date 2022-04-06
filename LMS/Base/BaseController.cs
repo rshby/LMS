@@ -22,7 +22,11 @@ namespace LMS.Base
         public ActionResult<Entity> Get()
         {
             var result = repository.GET();
-            return Ok(result);
+            return Ok(new { 
+                status = 200,
+                message = "data ditemukan",
+                data = result
+            });
         }
 
         [HttpGet("{Key}")]

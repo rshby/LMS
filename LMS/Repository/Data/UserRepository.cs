@@ -2,6 +2,7 @@
 using LMS.Models;
 using LMS.ViewModels;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LMS.Repository.Data
@@ -9,6 +10,7 @@ namespace LMS.Repository.Data
     public class UserRepository : GeneralRepository<MyContext, User, string>
     {
         private readonly MyContext myContext;
+        public IEnumerable<User> User { get; set; }
 
         //Constructor
         public UserRepository(MyContext myContext) : base(myContext)

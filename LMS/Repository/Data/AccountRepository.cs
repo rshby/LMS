@@ -13,7 +13,7 @@ namespace LMS.Repository.Data
     public class AccountRepository : GeneralRepository<MyContext,Account, string>
     {
         private readonly MyContext myContext;
-        public IEnumerable<object> Account { get; set; }
+        public IEnumerable<Account> Account { get; set; }
 
         //Constructor
         public AccountRepository(MyContext myContext) : base(myContext)
