@@ -16,6 +16,9 @@ namespace LMS.Models
         public string Name { get; set; }
 
         [Required]
+        public string ZipCode { get; set; }
+
+        [Required]
         [ForeignKey("District")]
         public int District_Id { get; set; }
 
