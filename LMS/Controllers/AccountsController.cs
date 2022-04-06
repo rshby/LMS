@@ -36,6 +36,7 @@ namespace LMS.Controllers
                     {
                         return Ok(new
                         {
+                            status = 200,
                             message = "Sukses Register Berhasil"
                         }); 
                     }
@@ -43,6 +44,7 @@ namespace LMS.Controllers
                     {
                         return BadRequest(new
                         {
+                            status = 400,
                             message = "maaf, nomor telepon sudah ada"
                         });
                     }
@@ -51,6 +53,7 @@ namespace LMS.Controllers
                 {
                     return BadRequest(new
                     {
+                        status = 400,
                         message = "data register tidak terisi"
                     });
                 }
@@ -88,6 +91,7 @@ namespace LMS.Controllers
                     {
                         return BadRequest(new
                         {
+                            status = 400,
                             message = "password anda salah"
                         });
                     }
@@ -96,6 +100,7 @@ namespace LMS.Controllers
                 {
                     return NotFound(new
                     {
+                        status = 404,
                         message = "data email tidak ditemukan di database"
                     });
                 }

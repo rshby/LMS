@@ -90,5 +90,52 @@ namespace LMS.Controllers
                 });
             }
         }
+
+        //Update Data Master By Email
+        [HttpPut("updatemaster")]
+        public ActionResult UpdateMaster(RegisterVM inputData)
+        {
+            try
+            {
+                //Cek Apakah Email Ada
+                if (userRepo.CekEmail(inputData.Email) == 1)
+                {
+                    var hasilUpdate = userRepo.UpdateMasterUser(inputData);
+                    if (hasilUpdate ==1)
+                    {
+                        //Sukses Update
+                        return Ok(new
+                        {
+                            status = 200,
+                            message = "sukses update data master"
+                        });
+                    }
+                    else
+                    {
+                        return BadRequest(new
+                        {
+                            message = "gagal update data master"
+                        });
+                    }
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        status = 404,
+                        message = $"data dengan email {inputData.Email} tidak ada di database"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal update data master user",
+                    error = e.Message
+                });
+            }
+        }
     }
 }
