@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client.Controllers
 {
-    public class HomeController : Controller
+    public class AdminHomeController : Controller
     {
         public IActionResult Index()
         {

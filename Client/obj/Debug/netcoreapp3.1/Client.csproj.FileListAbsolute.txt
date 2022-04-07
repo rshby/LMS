@@ -207,9 +207,7 @@ C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Client.TagH
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Client.TagHelpers.output.cache
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Client.RazorCoreGenerate.cache
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Class\Index.cshtml.g.cs
-C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
-C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
@@ -223,3 +221,6 @@ C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Client.genr
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Class\Details.cshtml.g.cs
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Privacy.cshtml.g.cs
+C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ViewGeneralAdmin.cshtml.g.cs
+C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutAdmin.cshtml.g.cs
+C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\AdminHome\Index.cshtml.g.cs
