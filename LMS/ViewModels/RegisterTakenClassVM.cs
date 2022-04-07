@@ -4,5 +4,6 @@
     {
         public string Email { get; set; }
         public int Class_Id { get; set; }
+        public string OrderId { get; set; }
     }
 }

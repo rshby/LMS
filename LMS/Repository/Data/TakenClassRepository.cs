@@ -59,6 +59,9 @@ namespace LMS.Repository.Data
                     Email = inputData.Email,
                     ProgressChapter = 0,
                     IsDone = false,
+                    OrderId =  inputData.OrderId,
+                    Expired = DateTime.Now.AddDays(1),
+                    IsPaid = false,
                     Class_Id = inputData.Class_Id
                 };
 
@@ -95,7 +98,10 @@ namespace LMS.Repository.Data
                     Level = dt.tcl.l.Name,
                     Category = dt.ct.Name,
                     Price = dt.tcl.tc.c.Price,
-                    Rating = dt.tcl.tc.c.Rating
+                    Rating = dt.tcl.tc.c.Rating,
+                    OrderId = dt.tcl.tc.t.OrderId,
+                    Expired = dt.tcl.tc.t.Expired,
+                    IsPaid = dt.tcl.tc.t.IsPaid
                 }).ToList();
             return data;
         }
@@ -103,14 +109,14 @@ namespace LMS.Repository.Data
         //Get TakenClass By Email
         public List<TakenClassVM> GetTakenClassByEmail(string inputEmail)
         {
-            var data = GetTakenClassLengkap().Where(u => u.Email == inputEmail).ToList();
+            var data = GetTakenClassLengkap().Where(d => (d.Email == inputEmail) && (d.IsPaid == true)).ToList();
             return data;
         }
 
         //Get Taken Class By Email and IsDone
         public List<TakenClassVM> GetTakenClassByIsDone(TakenClassIsDoneVM inputData)
         {
-            var data = GetTakenClassByEmail(inputData.Email).Where(x => x.IsDone == Convert.ToBoolean(inputData.IsDone)).ToList();
+            var data = GetTakenClassByEmail(inputData.Email).Where(d => d.IsDone == Convert.ToBoolean(inputData.IsDone) && (d.IsPaid == true)).ToList();
             return data;
         }
 
@@ -137,7 +143,7 @@ namespace LMS.Repository.Data
             var dataTC = myContext.TakenClasses.SingleOrDefault(x => x.Id == dataTakenClass.Id);
 
             //Cek Apakah ProgressChapter < TotalChapter
-            if (dataTakenClass.ProgressChapter < dataTakenClass.TotalChapter)
+            if (dataTakenClass.ProgressChapter < dataTakenClass.TotalChapter) 
             {
                 //Siapkan Object Untuk Menampung Data Update TakenClass
                 TakenClass updateTakenClass = new TakenClass()
@@ -146,13 +152,17 @@ namespace LMS.Repository.Data
                     Email = inputData.Email,
                     ProgressChapter = dataTakenClass.ProgressChapter + 1,
                     IsDone = false,
-                    Class_Id = dataTakenClass.Class_Id,
+                    OrderId = dataTakenClass.OrderId,
+                    Expired = dataTakenClass.Expired,
+                    IsPaid = dataTakenClass.IsPaid,
+                    Class_Id = dataTakenClass.Class_Id
                 };
 
                 //Proses Update 
                 myContext.Entry(dataTC).CurrentValues.SetValues(updateTakenClass);
                 myContext.SaveChanges();
 
+                // Sukses Chapter Bertambah
                 return 1;
             }
             else
@@ -164,6 +174,9 @@ namespace LMS.Repository.Data
                     Email = inputData.Email,
                     ProgressChapter = dataTakenClass.ProgressChapter,
                     IsDone = true,
+                    OrderId = dataTakenClass.OrderId,
+                    Expired = dataTakenClass.Expired,
+                    IsPaid = dataTakenClass.IsPaid,
                     Class_Id = dataTakenClass.Class_Id,
                 };
 
@@ -171,50 +184,27 @@ namespace LMS.Repository.Data
                 myContext.Entry(dataTC).CurrentValues.SetValues(updateTakenClass);
                 myContext.SaveChanges();
 
+                // Chapter Terselesaikan semua
                 return -1;
             }
         }
 
-
-        // ---------------------------------------- Uji Coba ---------------------------------------------------------------------
-        public int DaftarKelas(string inputEmail, int inputClassId)
+        // Get Taken Class By email Yang Belum Bayar
+        //Mendapatkan Daftar TakenClass Berdasarkan Usernya siapa dan Belum Bayar
+        public List<TakenClassVM> GetTakenClassByIsPaidFalse(TakenClassVM inputData)
         {
-            //Ambil Data User dengan Email Yang diinput
-            var dataUser = myContext.Users.SingleOrDefault(x => x.Email == inputEmail);
-
-            //Kodingan Daftar Kelas sukses
-            TakenClass data = new TakenClass()
-            {
-                Email = inputEmail,
-                ProgressChapter = 0,
-                IsDone = false,
-                //WaktuBayar = DateTime.Now,
-                //LimitBayar = DateTime.Now.AddDays(1),
-                //IsPaid = false,
-                Class_Id = inputClassId
-            };
-
-            CountDownTimer timer = new CountDownTimer();
-            return 0;
+            //Ambil Data
+            var data = GetTakenClassLengkap().Where(d => (d.Email == inputData.Email) && (d.IsPaid == false)).ToList();
+            return data;
         }
 
-        public int HapusJikaExpiredVA(string inputEmail, int inputClassId, DateTime inputTimeLimit)
+        //Get Taken Class By Order_Id
+        //Mendapatkan Data TakenClass Berdasarkan Order_Id TakenClass -> hasil 1 data saja
+        public TakenClassVM GetTakenClassByOrderId(TakenClassVM inputData)
         {
-            //Ambil Data TakenClass sesuai dengan Email dan Class_Id yang diminta
-            var data = myContext.TakenClasses.FirstOrDefault(x => (x.Email == inputEmail) && (x.Class_Id == inputClassId));
-
-            if (DateTime.Now >= inputTimeLimit)
-            {
-                //hapus Data TakenClass
-                myContext.Remove(data);
-                var result = myContext.SaveChanges();
-
-                return 1; //Sukses Hapus
-            }
-            else
-            {
-                return 0; //Tidak Dihapus
-            }
+            //Ambil Data
+            var data = GetTakenClassLengkap().FirstOrDefault(d => d.OrderId == inputData.OrderId);
+            return data;
         }
     }
 }

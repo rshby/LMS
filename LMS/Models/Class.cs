@@ -15,6 +15,8 @@ namespace LMS.Models
         [Required]
         public string Name { get; set; }
 
+        public string UrlPic { get; set; }
+
         [Required]
         public string Desc { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿
 using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -21,6 +22,10 @@ namespace LMS.Models
 
         [Required]
         public bool IsDone { get; set; }
+
+        public string OrderId { get; set; }
+        public DateTime Expired { get; set; }
+        public bool IsPaid { get; set; }
 
         [Required]
         [ForeignKey("Class")]

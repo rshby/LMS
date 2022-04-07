@@ -236,6 +236,55 @@ namespace LMS.Controllers
             }
         }
 
+        //Get Taken Class By Email dan Class_Id -> hasil 1 data aja
+        //Mendapatkan data taken classes spesifik siapa usernya dan kelas apa yang diambil
+        [HttpGet("byEmailAndClassId")]
+        public ActionResult ByEmailAndClassId(TakenClassVM inputData)
+        {
+            try
+            {
+                //Cek Email dan Class_Id apakah Ada di database
+                if (takenClassRepo.CekEmail(inputData.Email) == 1 && takenClassRepo.CekClassId(inputData.Class_Id))
+                {
+                    var data = takenClassRepo.GetTakenClassByEmailClassId(inputData.Email, inputData.Class_Id);
+                    if (data != null)
+                    {
+                        return Ok(new
+                        {
+                            status = 200,
+                            message = "data ditemukan",
+                            data = data
+                        });
+                    }
+                    else
+                    {
+                        return NotFound(new
+                        {
+                            status = 404,
+                            message = "data tidak ditemukan"
+                        });
+                    }
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        status = 404,
+                        message = "data email dan class id tidak ditemukan di database"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal get data",
+                    error = e.Message
+                });
+            }
+        }
+
         //Next Chapter (Menambah ProgressChapter)
         [HttpPost("nextchapter")]
         public ActionResult NextChapter(RegisterTakenClassVM inputData)
@@ -257,6 +306,13 @@ namespace LMS.Controllers
                             data = data
                         });
                     }
+                    else if(hasilNextChapter == -1)
+                    {
+                        return Ok(new { 
+                            status = 200,
+                            message = "semua chapter terselesaikan"
+                        });
+                    }
                     else
                     {
                         return BadRequest(new
@@ -271,7 +327,7 @@ namespace LMS.Controllers
                     return NotFound(new
                     {
                         status = 404,
-                        message = "data tidak ditemukan"
+                        message = "data email atau class id tidak ditemukan di database"
                     });
                 }
             }
@@ -281,6 +337,94 @@ namespace LMS.Controllers
                 return BadRequest(new
                 {
                     message = "gagal next chapter",
+                    error = e.Message
+                });
+            }
+        }
+
+        //Get Taken Class By IsPaid = False
+        //Mendapatkan Daftar TakenClass Berdasarkan Usernya siapa dan Belum Bayar
+        [HttpGet("ispaidfalse")]
+        public ActionResult GetTakenClassIsPaidFalse(TakenClassVM inputData)
+        {
+            try
+            {
+                //Cek Email
+                if (takenClassRepo.CekEmail(inputData.Email) == 1)
+                {
+                    //Ambil data dari takenclassRepo
+                    var data = takenClassRepo.GetTakenClassByIsPaidFalse(inputData);
+
+                    //Cek jika variabal data ada isinya
+                    if (data.Count != 0)
+                    {
+                        return Ok(new
+                        {
+                            status = 200,
+                            message = "data ditemukan",
+                            data = data
+                        });
+                    }
+                    else
+                    {
+                        return NotFound(new
+                        {
+                            status = 404,
+                            message = "data tidak ditemukan"
+                        });
+                    }
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        status = 404,
+                        message = $"data dengan email {inputData.Email} tidak ditemukan"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new
+                {
+                    message = "gagal get data",
+                    error = e.Message
+                });
+            }
+        }
+
+        //Get Taken Class By OrderId
+        //Melihat data TakenClass berdasarkan OrderId yang Diinput -> hasil 1 data
+        [HttpGet("byorderid")]
+        public ActionResult GetTakenClassByOrderId(TakenClassVM inputData)
+        {
+            try
+            {
+                var data = takenClassRepo.GetTakenClassByOrderId(inputData);
+                if (data != null)
+                {
+                    return Ok(new
+                    {
+                        status = 200,
+                        message = "data ditemukan",
+                        data = data
+                    });
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        status = 400,
+                        message = "data tidak ditemukan"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal menampilkan data",
                     error = e.Message
                 });
             }
