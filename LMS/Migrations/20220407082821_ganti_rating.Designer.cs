@@ -4,14 +4,16 @@ using LMS.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LMS.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20220407082821_ganti_rating")]
+    partial class ganti_rating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,8 +152,8 @@ namespace LMS.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<double>("Rating")
-                        .HasColumnType("float");
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
 
                     b.Property<int>("TotalChapter")
                         .HasColumnType("int");
@@ -217,8 +219,8 @@ namespace LMS.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("Rating")
-                        .HasColumnType("float");
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
 
                     b.Property<string>("Review")
                         .IsRequired()

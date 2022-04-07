@@ -15,7 +15,7 @@ namespace LMS.ViewModels
         public string Level { get; set; }
         public string Category { get; set; }
         public int Price { get; set; }
-        public int Rating { get; set; }
+        public double Rating { get; set; }
         public string OrderId { get; set; }
         public DateTime Expired { get; set; }
         public bool IsPaid { get; set; }

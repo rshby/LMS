@@ -32,9 +32,9 @@ namespace LMS.Repository.Data
         }
 
         //Cek Id Class Apakah Ada di Database
-        public bool CekClassId(int id)
+        public bool CekClassId(int inputId)
         {
-            var cek = myContext.Classes.SingleOrDefault(x => x.Id == id);
+            var cek = myContext.Classes.Where(x => x.Id == inputId);
             if (cek != null)
             {
                 return true;
@@ -61,7 +61,7 @@ namespace LMS.Repository.Data
                     IsDone = false,
                     OrderId =  inputData.OrderId,
                     Expired = DateTime.Now.AddDays(1),
-                    IsPaid = false,
+                    IsPaid = true,  // Nanti diganti false
                     Class_Id = inputData.Class_Id
                 };
 

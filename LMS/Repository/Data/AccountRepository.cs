@@ -45,11 +45,11 @@ namespace LMS.Repository.Data
             var cek = myContext.Accounts.SingleOrDefault(u => u.Email == inputEmail);
             if (cek != null)
             {
-                return 1;
+                return 1; // email sudah ada di database
             }
             else
             {
-                return 0;
+                return 0; // email belum ada di database
             }
         }
 
