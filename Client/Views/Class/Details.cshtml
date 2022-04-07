@@ -3,13 +3,184 @@
     ViewData["Title"] = "Details";
 }
 
-<span>Daftar Kelas A </span>
-<button id="gen-a-button">Bayar!</button>
-<br />
-<span>Daftar Kelas B </span>
-<button id="gen-b-button">Bayar!</button>
-<br />
-<span>Daftar Kelas C </span>
-<button id="gen-c-button">Bayar!</button>
-<br />
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="https://dummyimage.com/sqrpop" alt="" />
+        </div>
+        <div class="col-sm-8 align-self-center">
+            <h5 class="mb-3 font-weight-bold">(Nama Kelas A)</h5>
+            <p>(Deskripsi: Laoreet ac, aliquam sit amet justo nunc tempor, metus vel placerat suscipit, orci nisl iaculis eros, a tincidunt nisi odio eget lorem nulla condimentum tempor mattis ut vitae feugiat augue cras ut metus a risus iaculis scelerisque eu ac ante fusce non varius purus aenean nec magna felis fusce vestibulum.)</p>
+            <p><span>(Nama Kategori)</span> <span>(Level)</span> <span>(Rating)</span></p>
+            <button id="gen-a-button" type="button" class="btn btn-primary">Take Class</button>
+            <button id="gen-a-button" type="button" class="btn btn-info">Give Feedback</button>
+            <button id="gen-a-button" type="button" class="btn btn-success">View Certificate</button>
+        </div>
+    </div>
+</div>
 
+<div class="container card mb-3">
+    <div class="card-body">
+        <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+                <a class="nav-link active" href="#classSect">Class Sections</a>
+            </li>
+        </ul>
+
+        <div id="#classSect" class="row">
+            <div class="col-4">
+                <div class="list-group" id="list-tab" role="tablist" style="height: 30rem; overflow: scroll;">
+                    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#sect1">(Nama Section 1)</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#sect2">(Nama Section 2)</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#sect3">(Nama Section 3)</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#sect4">(Nama Section 4)</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#sect2">(Nama Section 2)</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#sect3">(Nama Section 3)</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#sect4">(Nama Section 4)</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#sect2">(Nama Section 2)</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#sect3">(Nama Section 3)</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#sect4">(Nama Section 4)</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#sect2">(Nama Section 2)</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#sect3">(Nama Section 3)</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#sect4">(Nama Section 4)</a>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="sect1">
+                        <h4>(Nama Section 1)</h4>
+                        <br />
+                        <div id="vidSect1" class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="sect2">
+                        <h4>(Nama Section 2)</h4>
+                        <br />
+                        <div id="vidSect1" class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="sect3">
+                        <h4>(Nama Section 3)</h4>
+                        <br />
+                        <div id="vidSect1" class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="sect4">
+                        <h4>(Nama Section 4)</h4>
+                        <br />
+                        <div id="vidSect1" class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@* Payment Midtrans JS *@
+<script type="text/javascript">
+        var genButton = document.getElementById('gen-a-button');
+        genButton.addEventListener('click', function () {
+            let timestamp = Math.round(Date.now() / 1000);
+            $.ajax({
+                url: "https://app.sandbox.midtrans.com/snap/v1/transactions",
+                type: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": "Basic " + "U0ItTWlkLXNlcnZlci1sdHhEaS1iQ3hMSGV6Z281MlRHa183cXA6"
+                },
+                data: JSON.stringify({
+                    "transaction_details": {
+                        "order_id": `PAY-CLASS-A-${timestamp}`,
+                        "gross_amount": 2000000
+                    },
+                    "credit_card": {
+                        "secure": true
+                    },
+                    "customer_details": {
+                        "first_name": "Dari",
+                        "last_name": "Client",
+                        "email": "Daclint@mail.com",
+                        "phone": "08110000000"
+                    }
+                })
+            }).done((result) => {
+                snap.pay(result.token);
+            }).fail((error) => {
+                console.log(error);
+            });
+        });
+
+        var genButton = document.getElementById('gen-b-button');
+        genButton.addEventListener('click', function () {
+            let timestamp = Math.round(Date.now() / 1000);
+            console.log(timestamp);
+            $.ajax({
+                url: "https://app.sandbox.midtrans.com/snap/v1/transactions",
+                type: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": "Basic " + "U0ItTWlkLXNlcnZlci1sdHhEaS1iQ3hMSGV6Z281MlRHa183cXA6"
+                },
+                data: JSON.stringify({
+                    "transaction_details": {
+                        "order_id": `PAY-CLASS-B-${timestamp}`,
+                        "gross_amount": 3000000
+                    },
+                    "credit_card": {
+                        "secure": true
+                    },
+                    "customer_details": {
+                        "first_name": "Dari",
+                        "last_name": "Client",
+                        "email": "Daclint@mail.com",
+                        "phone": "08110000000"
+                    }
+                })
+            }).done((result) => {
+                snap.pay(result.token);
+            }).fail((error) => {
+                console.log(error);
+            });
+        });
+
+        var genButton = document.getElementById('gen-c-button');
+        genButton.addEventListener('click', function () {
+            let timestamp = Math.round(Date.now() / 1000);
+            $.ajax({
+                url: "https://app.sandbox.midtrans.com/snap/v1/transactions",
+                type: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization": "Basic " + "U0ItTWlkLXNlcnZlci1sdHhEaS1iQ3hMSGV6Z281MlRHa183cXA6"
+                },
+                data: JSON.stringify({
+                    "transaction_details": {
+                        "order_id": `PAY-CLASS-C-${timestamp}`,
+                        "gross_amount": 2500000
+                    },
+                    "credit_card": {
+                        "secure": true
+                    },
+                    "customer_details": {
+                        "first_name": "Dari",
+                        "last_name": "Client",
+                        "email": "Daclint@mail.com",
+                        "phone": "08110000000"
+                    }
+                })
+            }).done((result) => {
+                snap.pay(result.token);
+            }).fail((error) => {
+                console.log(error);
+            });
+        });
+</script>

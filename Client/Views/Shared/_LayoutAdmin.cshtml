@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Client</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="~/css/site.css" />
     <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-cyFXZtmM2vBT9TVs"></script>
 </head>
@@ -18,10 +19,10 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-item nav-link" href="#">Home</a>
+                            <a class="nav-item nav-link" href="~/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-item nav-link" href="#">Classes</a>
+                            <a class="nav-item nav-link" href="~/class">Codemy Classes</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
@@ -30,8 +31,8 @@
                                 Account
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">My Dashboard</a>
-                                <a class="dropdown-item" href="#">My Account</a>
+                                <a class="dropdown-item" href="~/dashboard">My Dashboard</a>
+                                <a class="dropdown-item" href="~/account">My Account</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Logout</a>
                             </div>
@@ -51,116 +52,22 @@
 
     @* Footer *@
     <footer class="border-top footer text-muted">
-        <div class="container-fluid mx-3">
-            &copy; 2022 - Codemy - MCC Project
+        <div class="container-fluid">
+            <span class="ml-5">&copy; 2022 - Codemy - MCC Project</span>
         </div>
     </footer>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @* Payment Midtrans JS *@
-    <script type="text/javascript">
-        var genButton = document.getElementById('gen-a-button');
-        genButton.addEventListener('click', function () {
-            let timestamp = Math.round(Date.now() / 1000);
-            console.log(timestamp);
-            $.ajax({
-                url: "https://app.sandbox.midtrans.com/snap/v1/transactions",
-                type: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Authorization": "Basic " + "U0ItTWlkLXNlcnZlci1sdHhEaS1iQ3hMSGV6Z281MlRHa183cXA6"
-                },
-                data: JSON.stringify({
-                    "transaction_details": {
-                        "order_id": `PAY-CLASS-A-${timestamp}`,
-                        "gross_amount": 2000000
-                    },
-                    "credit_card": {
-                        "secure": true
-                    },
-                    "customer_details": {
-                        "first_name": "Dari",
-                        "last_name": "Client",
-                        "email": "Daclint@mail.com",
-                        "phone": "08110000000"
-                    }
-                })
-            }).done((result) => {
-                snap.pay(result.token);
-            }).fail((error) => {
-                console.log(error);
-            });
-        });
-
-        var genButton = document.getElementById('gen-b-button');
-        genButton.addEventListener('click', function () {
-            let timestamp = Math.round(Date.now() / 1000);
-            console.log(timestamp);
-            $.ajax({
-                url: "https://app.sandbox.midtrans.com/snap/v1/transactions",
-                type: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Authorization": "Basic " + "U0ItTWlkLXNlcnZlci1sdHhEaS1iQ3hMSGV6Z281MlRHa183cXA6"
-                },
-                data: JSON.stringify({
-                    "transaction_details": {
-                        "order_id": `PAY-CLASS-B-${timestamp}`,
-                        "gross_amount": 3000000
-                    },
-                    "credit_card": {
-                        "secure": true
-                    },
-                    "customer_details": {
-                        "first_name": "Dari",
-                        "last_name": "Client",
-                        "email": "Daclint@mail.com",
-                        "phone": "08110000000"
-                    }
-                })
-            }).done((result) => {
-                snap.pay(result.token);
-            }).fail((error) => {
-                console.log(error);
-            });
-        });
-
-        var genButton = document.getElementById('gen-c-button');
-        genButton.addEventListener('click', function () {
-            let timestamp = Math.round(Date.now() / 1000);
-            $.ajax({
-                url: "https://app.sandbox.midtrans.com/snap/v1/transactions",
-                type: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Authorization": "Basic " + "U0ItTWlkLXNlcnZlci1sdHhEaS1iQ3hMSGV6Z281MlRHa183cXA6"
-                },
-                data: JSON.stringify({
-                    "transaction_details": {
-                        "order_id": `PAY-CLASS-C-${timestamp}`,
-                        "gross_amount": 2500000
-                    },
-                    "credit_card": {
-                        "secure": true
-                    },
-                    "customer_details": {
-                        "first_name": "Dari",
-                        "last_name": "Client",
-                        "email": "Daclint@mail.com",
-                        "phone": "08110000000"
-                    }
-                })
-            }).done((result) => {
-                snap.pay(result.token);
-            }).fail((error) => {
-                console.log(error);
-            });
+    @* Class Filter *@
+    <script>
+        $('#cg').change(function () {
+            var selectedItem = $('#cg').val();
+            console.log(selectedItem);
         });
     </script>
     @RenderSection("Scripts", required: false)
