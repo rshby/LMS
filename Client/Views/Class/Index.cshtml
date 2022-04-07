@@ -3,55 +3,145 @@
     ViewData["Title"] = "Index";
 }
 
-<form>
-    <div class="form-group">
-        <label for="exampleFormControlInput1">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlSelect1">Example select</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlSelect2">Example multiple select</label>
-        <select multiple class="form-control" id="exampleFormControlSelect2">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlTextarea1">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-</form>
-<ul>
-    <li class="dropdown">
-        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown Form<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            <li>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox">Two
-                    </label>
+<div id="mainTitle" class="text-center mb-5 mt-5">
+    <h3>Daftar Kelas Codemy</h3>
+    <p>Silahkan pilih kelas yang kamu inginkan</p>
+</div>
+
+<div class="container text-center">
+    <div class="card">
+        <div id="mainCard" class="card-body">
+            <div id="filter" class="row mb-3">
+                <div class="col-sm">
+                    <p class="mb-0">Level</p>
+                    <select id="lv" class="selectpicker" multiple>
+                        <option>Beginner</option>
+                        <option>Intermediate</option>
+                        <option>Expert</option>
+                    </select>
                 </div>
-            </li>
-            <li>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox">Two
-                    </label>
+
+                <div class="col-sm">
+                    <p class="mb-0">Category</p>
+                    <select id="cg" class="selectpicker" multiple>
+                        <option>Front-End</option>
+                        <option>Back-End</option>
+                        <option>Fullstack</option>
+                    </select>
                 </div>
-            </li>
-        </ul>
-    </li>
-</ul>
+
+                <div class="col-sm">
+                    <p class="mb-0">Price Range</p>
+                    <select id="cg" class="selectpicker" multiple>
+                        <option>500.000 - 1.000.000</option>
+                        <option>1.000.001 - 2.500.000</option>
+                        <option>2.500.000+</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="classes">
+                <div class="row mb-3">
+                    <div class="col-sm">
+                        <div class="card">
+                            <div class="card-body text-left">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <img src="https://www.fpaceforum.com/media/100x100.4555/full" alt="" />
+                                    </div>
+                                    <div class="col-sm-9 align-self-center">
+                                        <h5 class="mb-4 font-weight-bold"><a href="class/details">(Nama Kelas A)</a></h5>
+                                        <span>(Nama Kategori)</span> <span>(Level)</span> <span>(Rating)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card">
+                            <div class="card-body text-left">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <img src="https://www.fpaceforum.com/media/100x100.4555/full" alt="" />
+                                    </div>
+                                    <div class="col-sm-9 align-self-center">
+                                        <h5 class="mb-4 font-weight-bold"><a href="class/details">(Nama Kelas B)</a></h5>
+                                        <span>(Nama Kategori)</span> <span>(Level)</span> <span>(Rating)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-sm">
+                        <div class="card">
+                            <div class="card-body text-left">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <img src="https://www.fpaceforum.com/media/100x100.4555/full" alt="" />
+                                    </div>
+                                    <div class="col-sm-9 align-self-center">
+                                        <h5 class="mb-4 font-weight-bold"><a href="class/details">(Nama Kelas C)</a></h5>
+                                        <span>(Nama Kategori)</span> <span>(Level)</span> <span>(Rating)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card">
+                            <div class="card-body text-left">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <img src="https://www.fpaceforum.com/media/100x100.4555/full" alt="" />
+                                    </div>
+                                    <div class="col-sm-9 align-self-center">
+                                        <h5 class="mb-4 font-weight-bold"><a href="class/details">(Nama Kelas D)</a></h5>
+                                        <span>(Nama Kategori)</span> <span>(Level)</span> <span>(Rating)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-sm">
+                        <div class="card">
+                            <div class="card-body text-left">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <img src="https://www.fpaceforum.com/media/100x100.4555/full" alt="" />
+                                    </div>
+                                    <div class="col-sm-9 align-self-center">
+                                        <h5 class="mb-4 font-weight-bold"><a href="class/details">(Nama Kelas E)</a></h5>
+                                        <span>(Nama Kategori)</span> <span>(Level)</span> <span>(Rating)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="card">
+                            <div class="card-body text-left">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <img src="https://www.fpaceforum.com/media/100x100.4555/full" alt="" />
+                                    </div>
+                                    <div class="col-sm-9 align-self-center">
+                                        <h5 class="mb-4 font-weight-bold"><a href="class/details">(Nama Kelas F)</a></h5>
+                                        <span>(Nama Kategori)</span> <span>(Level)</span> <span>(Rating)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
