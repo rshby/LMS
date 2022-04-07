@@ -114,6 +114,5 @@ namespace LMS.Repository.Data
                 return -200;
             }
         }
-
     }
 }

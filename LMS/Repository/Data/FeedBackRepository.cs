@@ -53,14 +53,15 @@ namespace LMS.Repository.Data
                 .Join(myContext.FeedBacks, ct => ct.t.Id, f => f.TakenClass_Id, (ct, f) => new { ct, f })
                 .Select(data => new AllFeedBackVM()
                 {
+                    FeedBack_Id = data.f.Id,
+                    FeedBack_Rating = data.f.Rating,
+                    FeedBack_Review = data.f.Review,
                     Class_Id = data.ct.c.Id,
                     Class_Name = data.ct.c.Name,
                     Class_Desc = data.ct.c.Desc,
                     Class_Rating = data.ct.c.Rating,
                     TakenClass_Id = data.ct.t.Id,
-                    TakenClass_Email = data.ct.t.Email,
-                    FeedBack_Id = data.f.Id,
-                    FeedBack_Rating = data.f.Rating
+                    TakenClass_Email = data.ct.t.Email
                 }).ToList();
 
             return data;
@@ -76,57 +77,73 @@ namespace LMS.Repository.Data
             //Ambil data class yang diikuti berdasarkan dataTC
             var dataClass = myContext.Classes.SingleOrDefault(x => x.Id == dataTC.Class_Id);
 
-            //Siapkan variabel untuk menampung data feedback yang akan diinsert
-            FeedBack dataFeedBack = new FeedBack()
+            //Cek Apakah feedBack pada kelas tersebut sudah pernah diinput
+            var cekData = GetAllFeedBackByClass(inputData.Class_Id).SingleOrDefault(x => x.TakenClass_Email == inputData.Email);
+            if (cekData == null)
             {
-                Rating = Convert.ToDouble(inputData.Rating),
-                Review = inputData.Review,
-                TakenClass_Id = dataTC.Id
-            };
+                //Siapkan variabel untuk menampung data feedback yang akan diinsert
+                FeedBack dataFeedBack = new FeedBack()
+                {
+                    Rating = Convert.ToDouble(inputData.Rating),
+                    Review = inputData.Review,
+                    TakenClass_Id = dataTC.Id
+                };
 
-            //insert ke tabel feedback
-            myContext.FeedBacks.Add(dataFeedBack);
-            myContext.SaveChanges();
+                //insert ke tabel feedback
+                myContext.FeedBacks.Add(dataFeedBack);
+                myContext.SaveChanges();
 
-            // Ambil semua data feddback yang ada pada Class ini
-            var dataFeedBackByClass = GetAllFeedBackByClass(dataClass.Id);
+                // Ambil semua data feddback yang ada pada Class ini
+                var dataFeedBackByClass = GetAllFeedBackByClass(dataClass.Id);
 
-            //hitung jumlah data feedback pada class yang diikuti (pembagi)
-            var jumlahDataFeedBack = dataFeedBackByClass.Count();
+                //hitung jumlah data feedback pada class yang diikuti (pembagi)
+                var jumlahDataFeedBack = dataFeedBackByClass.Count();
 
-            //Ambil Data yang digunakan untuk pembilang
-            var jumlahTotalFeedBack = dataFeedBackByClass.Select(d => d.FeedBack_Rating).Sum();
+                //Ambil Data yang digunakan untuk pembilang
+                var jumlahTotalFeedBack = dataFeedBackByClass.Select(d => d.FeedBack_Rating).Sum();
 
-            //Siapkan variabel untuk menampung data class yang akan diupdate
-            Class updateClass = new Class()
+                //Siapkan variabel untuk menampung data class yang akan diupdate
+                Class updateClass = new Class()
+                {
+                    Id = dataClass.Id,
+                    Name = dataClass.Name,
+                    UrlPic = dataClass.UrlPic,
+                    Desc = dataClass.Desc,
+                    TotalChapter = dataClass.TotalChapter,
+                    Price = dataClass.Price,
+                    Rating = jumlahTotalFeedBack / jumlahDataFeedBack,
+                    Level_Id = dataClass.Level_Id,
+                    Category_Id = dataClass.Category_Id
+                };
+
+                //Proses update data class ke tabel
+                myContext.Entry(dataClass).CurrentValues.SetValues(updateClass);
+                myContext.SaveChanges();
+
+                //Siapkan variabel untuk menampung data certificat yang akan diinsert
+                Certificate dataSertif = new Certificate()
+                {
+                    Code = new Random().Next(111111, 999999).ToString(),
+                    TakenClass_Id = dataTC.Id
+                };
+
+                //Proses Insert data certificate ke database
+                myContext.Certificates.Add(dataSertif);
+                myContext.SaveChanges();
+
+                return 1;
+            }
+            else
             {
-                Id = dataClass.Id,
-                Name = dataClass.Name,
-                UrlPic = dataClass.UrlPic,
-                Desc = dataClass.Desc,
-                TotalChapter = dataClass.TotalChapter,
-                Price = dataClass.Price,
-                Rating = jumlahTotalFeedBack/jumlahDataFeedBack,
-                Level_Id = dataClass.Level_Id,
-                Category_Id = dataClass.Category_Id
-            };
+                return 0;
+            }
+        }
 
-            //Proses update data class ke tabel
-            myContext.Entry(dataClass).CurrentValues.SetValues(updateClass);
-            myContext.SaveChanges();
-
-            //Siapkan variabel untuk menampung data certificat yang akan diinsert
-            Certificate dataSertif = new Certificate()
-            {
-                Code = new Random().Next(111111, 999999).ToString(),
-                TakenClass_Id = dataTC.Id
-            };
-
-            //Proses Insert data certificate ke database
-            myContext.Certificates.Add(dataSertif);
-            myContext.SaveChanges();
-
-            return 1;
+        // Get FeedBack Data berdasarkan Email dan Class_Id yang diinputkan -> hasil 1 data saja
+        public AllFeedBackVM GetFeedBackByEmailClassId(TakenClassVM inputData)
+        {
+            var data = GetAllFeedBackByClass(inputData.Class_Id).SingleOrDefault(x => x.TakenClass_Email == inputData.Email);
+            return data;
         }
     }
 }

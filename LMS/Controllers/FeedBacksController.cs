@@ -48,7 +48,7 @@ namespace LMS.Controllers
                         return BadRequest(new
                         {
                             status = 400,
-                            message = "gagal menambahkan feedback, periksa lagi!"
+                            message = "Data feedback pada kelas ini sudah pernah diinput"
                         });
                     }
                 }
@@ -67,6 +67,54 @@ namespace LMS.Controllers
                 return BadRequest(new
                 {
                     message = "gagal menambahkan feedback",
+                    error = e.Message
+                });
+            }
+        }
+
+        //Get Feedback berdasarkan parameter Email dan Class_Id -> hasil 1 data aja
+        [HttpGet("byemailclassid")]
+        public ActionResult GetFeedBackByEmailClassId(TakenClassVM inputData)
+        {
+            try
+            {
+                //Cek Email dan Class_Id apakah ada di database
+                if (feedBackRepo.CekEmail(inputData.Email) && feedBackRepo.CekClass(inputData.Class_Id))
+                {
+                    var data = feedBackRepo.GetFeedBackByEmailClassId(inputData);
+                    if (data != null)
+                    {
+                        return Ok(new
+                        {
+                            status = 200,
+                            message = "data ditemukan",
+                            data = data
+                        });
+                    }
+                    else
+                    {
+                        return NotFound(new
+                        {
+                            status = 404,
+                            error = "data tidak ditemukan"
+                        });
+                    }
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        status = 404,
+                        message = "data Email dan Class_Id tidak ada di database"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal get data",
                     error = e.Message
                 });
             }
