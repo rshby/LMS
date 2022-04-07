@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "_ViewGeneralAdmin";
+}
+
+<dev>
+    <head>
+        <p class="shadow text-center" style="margin : auto;">
+            <center>
+                <h1>Create Section</h1>
+            </center>
+            <hr>
+        </p>
+        <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
+    </head>
+    <body>
+        <content>
+            <form class="canvas shadow">
+
+                <div class="form-group">
+                    <label for="class">Choose Class</label>
+                    <select name="class" class="form-control" id="">
+                        <option value="" disabled selected>~Choose Class~</option>
+                        <option value="1">Phyton</option>
+                        <option value="2">Java</option>
+                        <option value="3">Sesuai Kelas yang di daftarkan</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="chapter">Chapter</label>
+                    <select name="chapter" class="form-control" id="">
+                        <option value="" disabled selected>~Choose Chapter~</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">Sesuai Chapter yang dibuat pada kelas</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Title Section</label>
+                    <input type="text" name="title" class="form-control" placeholder="Input Header" id="">
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <input type="text" name="content" placeholder="Input Content" class="form-control" id="content">
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Class Price</label>
+                    <input type="text" name="price" placeholder="Input Price Class" class="form-control" id="">
+                </div>
+
+                <script>
+                    ClassicEditor
+                        .create( document.querySelector( '#content' ) )
+                        .catch( error => {
+                            console.error( error );
+                        } );
+                </script>
+            </form>
+        </content>
+        <p></p>
+    </body>
+</dev>
+

@@ -1,0 +1,73 @@
+﻿@{
+    Layout = "_ViewGeneralAdmin";
+}
+
+<dev>
+    <head>
+        <p class="shadow text-center" style="margin : auto;">
+            <center>
+                <h1>Create Class</h1>
+            </center>
+        </p>
+        <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
+    </head>
+    <body>
+        <content>
+            <form class="canvas shadow">
+
+                <div class="form-group">
+                    <label for="header">Tittle Class</label>
+                    <input type="text" name="header" class="form-control" placeholder="Input Header" id="">
+                </div>
+
+                <div class="form-group">
+                    <label for="Desc">Description</label>
+                    <input type="text" name="Desc" placeholder="Input Description" class="form-control" id="desc">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="TotalChapter">Total Chapter</label>
+                    <input type="text" name="TotalChapter" placeholder="Input Total Chapter" class="form-control" id="">
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Class Price</label>
+                    <input type="text" name="price" placeholder="Input Price Class" class="form-control" id="">
+                </div>
+
+                <div class="form-group">
+                    <label for="level">Level Class</label>
+                    <select name="level" class="form-control" id="">
+                        <option value="" disabled selected>~Choose Level Class~</option>
+                        <option value="1">Basic</option>
+                        <option value="2">Intermediate</option>
+                        <option value="3">Advance</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category Class</label>
+                    <select name="category" class="form-control" id="">
+                        <option value="" disabled selected>~Choose Category~</option>
+                        <option value="1">Frontend</option>
+                        <option value="2">Backend</option>
+                        <option value="3">Fullstack</option>
+                    </select>
+                </div>
+
+                
+                <script>
+                    ClassicEditor
+                        .create( document.querySelector( '#desc' ) )
+                        .catch( error => {
+                            console.error( error );
+                        } );
+                </script>
+            </form>
+        </content>
+
+        <p></p>
+    </body>
+</dev>
+
