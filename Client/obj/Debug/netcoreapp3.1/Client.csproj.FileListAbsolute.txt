@@ -22,7 +22,6 @@ P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\scopedcss\bundle\Client.styl
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.TagHelpers.input.cache
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.TagHelpers.output.cache
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.RazorCoreGenerate.cache
-P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -224,7 +223,6 @@ C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Privacy.cshtml.g.cs
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Class\Details.cshtml.g.cs
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs
-P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Privacy.cshtml.g.cs
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\bin\Debug\netcoreapp3.1\Client.StaticWebAssets.xml
@@ -339,3 +337,6 @@ C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Client.cspr
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Client.dll
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Client.pdb
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Client.genruntimeconfig.cache
+P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\AdminHome\Index.cshtml.g.cs
+P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutAdmin.cshtml.g.cs
+P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ViewGeneralAdmin.cshtml.g.cs
