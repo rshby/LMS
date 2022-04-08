@@ -25,7 +25,7 @@ namespace LMS.Repository.Data
                 Desc = register.Desc,
                 TotalChapter = register.TotalChapter,
                 Price = register.Price,
-                Rating = 0,
+                Rating = 0.0,
                 Level_Id = register.Level_Id,
                 Category_Id = register.Category_Id
             };
@@ -114,6 +114,5 @@ namespace LMS.Repository.Data
                 return -200;
             }
         }
-
     }
 }

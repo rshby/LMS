@@ -32,9 +32,9 @@ namespace LMS.Repository.Data
         }
 
         //Cek Id Class Apakah Ada di Database
-        public bool CekClassId(int id)
+        public bool CekClassId(int inputId)
         {
-            var cek = myContext.Classes.SingleOrDefault(x => x.Id == id);
+            var cek = myContext.Classes.Where(x => x.Id == inputId);
             if (cek != null)
             {
                 return true;
@@ -61,7 +61,7 @@ namespace LMS.Repository.Data
                     IsDone = false,
                     OrderId =  inputData.OrderId,
                     Expired = DateTime.Now.AddDays(1),
-                    IsPaid = false,
+                    IsPaid = true,  // Nanti diganti false
                     Class_Id = inputData.Class_Id
                 };
 
@@ -87,21 +87,21 @@ namespace LMS.Repository.Data
                 .Join(myContext.Categories, tcl => tcl.tc.c.Category_Id, ct => ct.Id, (tcl, ct) => new { tcl, ct })
                 .Select(dt => new TakenClassVM()
                 {
-                    Id = dt.tcl.tc.t.Id,
+                    TakenClass_Id = dt.tcl.tc.t.Id,
                     Email = dt.tcl.tc.t.Email,
-                    ProgressChapter = dt.tcl.tc.t.ProgressChapter,
-                    TotalChapter = dt.tcl.tc.c.TotalChapter,
-                    IsDone = dt.tcl.tc.t.IsDone,
+                    TakenClass_ProgressChapter = dt.tcl.tc.t.ProgressChapter,
+                    TakenClass_IsDone = dt.tcl.tc.t.IsDone,
+                    TakenClass_OrderId = dt.tcl.tc.t.OrderId,
+                    TakenCLass_IsPaid = dt.tcl.tc.t.IsPaid,
+                    TakenClass_Expired = dt.tcl.tc.t.Expired,
                     Class_Id = dt.tcl.tc.t.Class_Id,
-                    ClassName = dt.tcl.tc.c.Name,
-                    Desc = dt.tcl.tc.c.Desc,
-                    Level = dt.tcl.l.Name,
-                    Category = dt.ct.Name,
-                    Price = dt.tcl.tc.c.Price,
-                    Rating = dt.tcl.tc.c.Rating,
-                    OrderId = dt.tcl.tc.t.OrderId,
-                    Expired = dt.tcl.tc.t.Expired,
-                    IsPaid = dt.tcl.tc.t.IsPaid
+                    Class_Name = dt.tcl.tc.c.Name,
+                    Class_Desc = dt.tcl.tc.c.Desc,
+                    Class_Rating = dt.tcl.tc.c.Rating,
+                    Class_TotalChapter = dt.tcl.tc.c.TotalChapter,
+                    Class_Level = dt.tcl.l.Name,
+                    Class_Category = dt.ct.Name,
+                    Class_Price = dt.tcl.tc.c.Price
                 }).ToList();
             return data;
         }
@@ -109,14 +109,14 @@ namespace LMS.Repository.Data
         //Get TakenClass By Email
         public List<TakenClassVM> GetTakenClassByEmail(string inputEmail)
         {
-            var data = GetTakenClassLengkap().Where(d => (d.Email == inputEmail) && (d.IsPaid == true)).ToList();
+            var data = GetTakenClassLengkap().Where(d => (d.Email == inputEmail) && (d.TakenCLass_IsPaid == true)).ToList();
             return data;
         }
 
         //Get Taken Class By Email and IsDone
         public List<TakenClassVM> GetTakenClassByIsDone(TakenClassIsDoneVM inputData)
         {
-            var data = GetTakenClassByEmail(inputData.Email).Where(d => d.IsDone == Convert.ToBoolean(inputData.IsDone) && (d.IsPaid == true)).ToList();
+            var data = GetTakenClassByEmail(inputData.Email).Where(d => d.TakenClass_IsDone == Convert.ToBoolean(inputData.IsDone) && (d.TakenCLass_IsPaid == true)).ToList();
             return data;
         }
 
@@ -139,22 +139,22 @@ namespace LMS.Repository.Data
         {
             //Ambil data TakenClass By Email dan ClassId
             var dataTakenClass = GetTakenClassByEmail(inputData.Email).Where(x => x.Class_Id == inputData.Class_Id).FirstOrDefault();
-            //var dataClass = myContext.Classes.FirstOrDefault(x => x.Id == dataTakenClass.Class_Id);
-            var dataTC = myContext.TakenClasses.SingleOrDefault(x => x.Id == dataTakenClass.Id);
+            
+            var dataTC = myContext.TakenClasses.SingleOrDefault(x => x.Id == dataTakenClass.TakenClass_Id);
 
             //Cek Apakah ProgressChapter < TotalChapter
-            if (dataTakenClass.ProgressChapter < dataTakenClass.TotalChapter) 
+            if (dataTakenClass.TakenClass_ProgressChapter < dataTakenClass.Class_TotalChapter) 
             {
                 //Siapkan Object Untuk Menampung Data Update TakenClass
                 TakenClass updateTakenClass = new TakenClass()
                 {
-                    Id = dataTakenClass.Id,
+                    Id = dataTakenClass.TakenClass_Id,
                     Email = inputData.Email,
-                    ProgressChapter = dataTakenClass.ProgressChapter + 1,
+                    ProgressChapter = dataTakenClass.TakenClass_ProgressChapter + 1,
                     IsDone = false,
-                    OrderId = dataTakenClass.OrderId,
-                    Expired = dataTakenClass.Expired,
-                    IsPaid = dataTakenClass.IsPaid,
+                    OrderId = dataTakenClass.TakenClass_OrderId,
+                    Expired = dataTakenClass.TakenClass_Expired,
+                    IsPaid = dataTakenClass.TakenCLass_IsPaid,
                     Class_Id = dataTakenClass.Class_Id
                 };
 
@@ -170,13 +170,13 @@ namespace LMS.Repository.Data
                 //Siapkan Object Untuk Update Data TakenClass
                 TakenClass updateTakenClass = new TakenClass()
                 {
-                    Id = dataTakenClass.Id,
+                    Id = dataTakenClass.TakenClass_Id,
                     Email = inputData.Email,
-                    ProgressChapter = dataTakenClass.ProgressChapter,
+                    ProgressChapter = dataTakenClass.TakenClass_ProgressChapter,
                     IsDone = true,
-                    OrderId = dataTakenClass.OrderId,
-                    Expired = dataTakenClass.Expired,
-                    IsPaid = dataTakenClass.IsPaid,
+                    OrderId = dataTakenClass.TakenClass_OrderId,
+                    Expired = dataTakenClass.TakenClass_Expired,
+                    IsPaid = dataTakenClass.TakenCLass_IsPaid,
                     Class_Id = dataTakenClass.Class_Id,
                 };
 
@@ -194,7 +194,7 @@ namespace LMS.Repository.Data
         public List<TakenClassVM> GetTakenClassByIsPaidFalse(TakenClassVM inputData)
         {
             //Ambil Data
-            var data = GetTakenClassLengkap().Where(d => (d.Email == inputData.Email) && (d.IsPaid == false)).ToList();
+            var data = GetTakenClassLengkap().Where(d => (d.Email == inputData.Email) && (d.TakenCLass_IsPaid == false)).ToList();
             return data;
         }
 
@@ -203,7 +203,7 @@ namespace LMS.Repository.Data
         public TakenClassVM GetTakenClassByOrderId(TakenClassVM inputData)
         {
             //Ambil Data
-            var data = GetTakenClassLengkap().FirstOrDefault(d => d.OrderId == inputData.OrderId);
+            var data = GetTakenClassLengkap().FirstOrDefault(d => d.TakenClass_OrderId == inputData.TakenClass_OrderId);
             return data;
         }
     }

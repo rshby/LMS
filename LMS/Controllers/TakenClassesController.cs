@@ -33,7 +33,7 @@ namespace LMS.Controllers
                 if (takenClassRepo.CekEmail(inputData.Email) == 1)
                 {
                     //Cek Apakah Kelas dengan Id tersebut ada di database
-                    if (takenClassRepo.CekClassId(inputData.Class_Id))
+                    if (takenClassRepo.CekClassId(inputData.Class_Id)) // if(true)
                     {
                         //Cek Hasil Register
                         var hasilRegisterTakenClass = takenClassRepo.RegisterTakenClass(inputData);
