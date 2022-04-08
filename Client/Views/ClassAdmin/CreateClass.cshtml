@@ -56,7 +56,11 @@
                     </select>
                 </div>
 
-                
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" onclick="">Create</button>
+                    <button type="reset" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
                 <script>
                     ClassicEditor
                         .create( document.querySelector( '#desc' ) )
@@ -64,6 +68,8 @@
                             console.error( error );
                         } );
                 </script>
+
+
             </form>
         </content>
 
