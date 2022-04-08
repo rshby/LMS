@@ -32,21 +32,33 @@ namespace LMS.Controllers
                 //cek inputData tidak kosong
                 if (inputData != null)
                 {
-                    var hasilRegister = accountRepo.Register(inputData);
-                    if (hasilRegister == 1)
+                    //Cek Email Apakah sudah pernah didaftarkan di database
+                    if (accountRepo.CekEmail(inputData.Email) == 0)
                     {
-                        return Ok(new
+                        var hasilRegister = accountRepo.Register(inputData);
+                        if (hasilRegister == 1)
                         {
-                            status = 200,
-                            message = "Sukses Register Berhasil"
-                        }); 
+                            return Ok(new
+                            {
+                                status = 200,
+                                message = "Sukses Register Berhasil"
+                            });
+                        }
+                        else
+                        {
+                            return BadRequest(new
+                            {
+                                status = 400,
+                                message = "maaf, nomor telepon sudah ada"
+                            });
+                        }
                     }
                     else
                     {
                         return BadRequest(new
                         {
                             status = 400,
-                            message = "maaf, nomor telepon sudah ada"
+                            message = "email yang digunakan sudah pernah mendaftar"
                         });
                     }
                 }

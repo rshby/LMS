@@ -27,7 +27,7 @@ namespace LMS.Models
         public int Price { get; set; }
 
         [Required]
-        public int Rating { get; set; }
+        public double Rating { get; set; }
 
         [Required]
         [ForeignKey("Level")]
