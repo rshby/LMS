@@ -1,6 +1,7 @@
 ﻿using LMS.Context;
 using LMS.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LMS.Repository.Data
 {
@@ -13,6 +14,13 @@ namespace LMS.Repository.Data
         public CityRepository(MyContext myContext) : base(myContext)
         {
             this.myContext = myContext;
+        }
+
+        //Get City berdasarkan Province_Id yang diinputkan
+        public List<City> CityByProvinceId(int inputProvinceId)
+        {
+            var data = myContext.Cities.Where(x => x.Province_Id == inputProvinceId).ToList();  
+            return data;
         }
     }
 }
