@@ -2,6 +2,7 @@
 using LMS.Models;
 using LMS.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LMS.Repository.Data
@@ -113,6 +114,36 @@ namespace LMS.Repository.Data
             {
                 return -200;
             }
+        }
+
+        //Get Semua Master Class
+        public List<ClassVM> AllMasterClass()
+        {
+            var data = myContext.Classes
+                .Join(myContext.Levels, c => c.Level_Id, l => l.Id, (c, l) => new { c, l })
+                .Join(myContext.Categories, cl => cl.c.Category_Id, ct => ct.Id, (cl, ct) => new { cl, ct })
+                .Select(data => new ClassVM()
+                {
+                    Class_Id = data.cl.c.Id,
+                    Class_Name = data.cl.c.Name,
+                    Class_UrlPic = data.cl.c.UrlPic,
+                    Class_Desc = data.cl.c.Desc,
+                    Class_TotalChapter = data.cl.c.TotalChapter,
+                    Class_Price = data.cl.c.Price,
+                    Class_Rating = data.cl.c.Rating,
+                    Level_Id = data.cl.l.Id,
+                    Level_Name = data.cl.l.Name,
+                    Category_Id = data.ct.Id,
+                    Category_Name = data.ct.Name
+                }).ToList();
+            return data;
+        }
+
+        // Get Semua Master Class by Id
+        public ClassVM MasterClassById(int inputClassId)
+        {
+            var data = AllMasterClass().SingleOrDefault(x => x.Class_Id == inputClassId);
+            return data;
         }
     }
 }

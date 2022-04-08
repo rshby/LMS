@@ -171,6 +171,77 @@ namespace LMS.Controllers
             }
         }
 
+        //Get Semua Master Class
+        [HttpGet("master")]
+        public ActionResult AllMasterClass()
+        {
+            try
+            {
+                var data = repository.AllMasterClass();
+                if (data.Count != 0)
+                {
+                    return Ok(new
+                    {
+                        status = 200,
+                        message = "data ditemukan",
+                        data = data
+                    });
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        status = 404,
+                        message = "data tidak ditemukan"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal get data",
+                    error = e.Message
+                });
+            }
+        }
+
+        //Get Master Class berdasarkan Class_Id yang diinput
+        [HttpGet("masterbyid")]
+        public ActionResult MasterClassById(ClassVM inputData)
+        {
+            try
+            {
+                var data = repository.MasterClassById(inputData.Class_Id);
+                if (data != null)
+                {
+                    return Ok(new
+                    {
+                        status = 200,
+                        message = "data ditemukan",
+                        data = data
+                    });
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        status = 404,
+                        message = "data tidak ditemukan"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal get data",
+                    error = e.Message
+                });
+            }
+        }
     }
 
 }
