@@ -325,7 +325,6 @@ C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
-C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutAdmin.cshtml.g.cs
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ViewGeneralAdmin.cshtml.g.cs
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
@@ -340,3 +339,5 @@ C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Client.genr
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\AdminHome\Index.cshtml.g.cs
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutAdmin.cshtml.g.cs
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ViewGeneralAdmin.cshtml.g.cs
+C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Account\Index.cshtml.g.cs
+C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs

@@ -120,6 +120,15 @@ namespace LMS.Repository.Data
             }
         }
 
+        //Get Role Name dari data akun berdasarkan email yang diinputkan
+        public string GetRoleName(string inputEmail)
+        {
+            var roleName = myContext.Accounts.Where(x => x.Email == inputEmail)
+                .Join(myContext.Roles, a => a.Role_Id, r => r.Id, (a, r) => new { a, r })
+                .Select(data => data.r.Name).SingleOrDefault();
+            return roleName;
+        }
+
         //Login
         public int Login(LoginVM inputData)
         {

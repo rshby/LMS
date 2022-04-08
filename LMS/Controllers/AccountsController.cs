@@ -5,7 +5,12 @@ using LMS.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace LMS.Controllers
 {
@@ -94,10 +99,33 @@ namespace LMS.Controllers
                     var hasilLogin = accountRepo.Login(inputData);
                     if (hasilLogin == 1)
                     {
+                        var roleName = accountRepo.GetRoleName(inputData.Email);
+
+                        var claims = new List<Claim>
+                        {
+                            new Claim("Email", inputData.Email),
+                            new Claim("roles", roleName)
+                        };
+
+                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
+                        var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                        var token = new JwtSecurityToken(
+                            configuration["Jwt:Issuer"],
+                            configuration["Jwt:Audience"],
+                            claims,
+                            expires: DateTime.UtcNow.AddMinutes(10),
+                            signingCredentials: signIn
+                            );
+
+                        var idToken = new JwtSecurityTokenHandler().WriteToken(token);
+
+                        claims.Add(new Claim("TokenSecurity", idToken.ToString()));
+
                         return Ok(new
                         {
                             status = 200,
-                            message = "login berhasil"
+                            message = "login berhasil",
+                            token = idToken
                         });
                     }
                     else

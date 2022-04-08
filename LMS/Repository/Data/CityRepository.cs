@@ -22,5 +22,19 @@ namespace LMS.Repository.Data
             var data = myContext.Cities.Where(x => x.Province_Id == inputProvinceId).ToList();  
             return data;
         }
+
+        //Cek Province Id apakah ada di database
+        public bool CekProvinceId(int inputProvinceId)
+        {
+            var dataCek = myContext.Provinces.SingleOrDefault(x => x.Id == inputProvinceId);
+            if (dataCek != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
