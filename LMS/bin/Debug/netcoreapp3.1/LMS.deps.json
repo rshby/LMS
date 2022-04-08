@@ -2356,6 +2356,9 @@
       "System.Text.Encoding.CodePages/4.7.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {}
         }
       },
       "System.Text.Encoding.Extensions/4.3.0": {
@@ -2476,6 +2479,7 @@
       },
       "Client/1.0.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.9",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.5"
         },
         "runtime": {

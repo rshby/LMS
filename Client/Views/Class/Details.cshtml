@@ -50,8 +50,9 @@
                     <div class="tab-pane fade show active" id="sect1">
                         <h4>(Nama Section 1)</h4>
                         <br />
+                        
                         <div id="vidSect1" class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" allowfullscreen></iframe>
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/uHyfQV0kbgo?rel=0" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="sect2">
@@ -134,73 +135,6 @@
                 "transaction_details": {
                     "order_id": `PAY-CLASS-A-${timestamp}`,
                     "gross_amount": 2000000
-                },
-                "credit_card": {
-                    "secure": true
-                },
-                "customer_details": {
-                    "first_name": "Dari",
-                    "last_name": "Client",
-                    "email": "Daclint@mail.com",
-                    "phone": "08110000000"
-                }
-            })
-        }).done((result) => {
-            snap.pay(result.token);
-        }).fail((error) => {
-            console.log(error);
-        });
-    });
-
-    var genButton = document.getElementById('gen-b-button');
-    genButton.addEventListener('click', function () {
-        let timestamp = Math.round(Date.now() / 1000);
-        console.log(timestamp);
-        $.ajax({
-            url: "https://app.sandbox.midtrans.com/snap/v1/transactions",
-            type: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": "Basic " + "U0ItTWlkLXNlcnZlci1sdHhEaS1iQ3hMSGV6Z281MlRHa183cXA6"
-            },
-            data: JSON.stringify({
-                "transaction_details": {
-                    "order_id": `PAY-CLASS-B-${timestamp}`,
-                    "gross_amount": 3000000
-                },
-                "credit_card": {
-                    "secure": true
-                },
-                "customer_details": {
-                    "first_name": "Dari",
-                    "last_name": "Client",
-                    "email": "Daclint@mail.com",
-                    "phone": "08110000000"
-                }
-            })
-        }).done((result) => {
-            snap.pay(result.token);
-        }).fail((error) => {
-            console.log(error);
-        });
-    });
-
-    var genButton = document.getElementById('gen-c-button');
-    genButton.addEventListener('click', function () {
-        let timestamp = Math.round(Date.now() / 1000);
-        $.ajax({
-            url: "https://app.sandbox.midtrans.com/snap/v1/transactions",
-            type: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": "Basic " + "U0ItTWlkLXNlcnZlci1sdHhEaS1iQ3hMSGV6Z281MlRHa183cXA6"
-            },
-            data: JSON.stringify({
-                "transaction_details": {
-                    "order_id": `PAY-CLASS-C-${timestamp}`,
-                    "gross_amount": 2500000
                 },
                 "credit_card": {
                     "secure": true
