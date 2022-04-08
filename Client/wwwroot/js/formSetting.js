@@ -1,4 +1,22 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
 
-// Write your JavaScript code.
+// Call CKEditor
+CKEDITOR.replace('content');
+
+var data = CKEDITOR.instances.content.getData();
+
+//let editor;
+//ClassicEditor
+//    .create(document.querySelector('#content'), {
+//        plugins: [MediaEmbed]
+//    })
+//    .then(newEditor => {
+//        editor = newEditor;
+//    })
+//    .catch(error => {
+//        console.error(error);
+//    });
+
+//Assuming there is a <button id="submit">Submit</button> in your application.
+
+
