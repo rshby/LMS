@@ -13,8 +13,10 @@ namespace Client.Controllers
             return View();
         }
 
-        public IActionResult Details()
+        [HttpGet]
+        public IActionResult Details(int classId) //Details/1
         {
+            ViewBag.ClassId = classId;
             return View();
         }
     }

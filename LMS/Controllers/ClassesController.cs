@@ -208,12 +208,12 @@ namespace LMS.Controllers
         }
 
         //Get Master Class berdasarkan Class_Id yang diinput
-        [HttpGet("masterbyid")]
-        public ActionResult MasterClassById(ClassVM inputData)
+        [HttpGet("masterbyid/{id}")]
+        public ActionResult MasterClassById(int id)
         {
             try
             {
-                var data = repository.MasterClassById(inputData.Class_Id);
+                var data = repository.MasterClassById(id);
                 if (data != null)
                 {
                     return Ok(new

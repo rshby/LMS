@@ -377,6 +377,7 @@ C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\Newtonsoft.Jso
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\RestSharp.dll
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\System.Composition.AttributedModel.dll
@@ -389,6 +390,7 @@ C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\System.Diagnos
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\System.Text.Json.dll
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.resources.dll
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.resources.dll
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.resources.dll

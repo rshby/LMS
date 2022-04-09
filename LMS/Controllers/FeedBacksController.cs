@@ -96,7 +96,7 @@ namespace LMS.Controllers
                         return NotFound(new
                         {
                             status = 404,
-                            error = "data tidak ditemukan"
+                            message = "data tidak ditemukan"
                         });
                     }
                 }
