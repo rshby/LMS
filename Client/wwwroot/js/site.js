@@ -6,7 +6,7 @@
 function GetAllClasses() {
     let data = {};
     $.ajax({
-        url: "https://localhost:44376/api/classes/",
+        url: "https://localhost:44376/api/classes/master",
         async: false
     }).done((result) => {
         data = result.data;
@@ -15,7 +15,6 @@ function GetAllClasses() {
     })
     return data;
 }
-
 function BetterPriceView(price) {
     bpv = "";
     let priceStr = price.toString();
@@ -31,65 +30,27 @@ function BetterPriceView(price) {
     }
     return bpv
 }
-
 function FillClassesView() {
+    let classes = GetAllClasses();
+    let classesContent = "";
 
-}
-let classes = GetAllClasses();
-let classesContent = "";
-/*
-   <div class="row mb-3">
-        <div class="col-sm">
-            <div class="card">
-                <div class="card-body text-left">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <img src="https://www.fpaceforum.com/media/100x100.4555/full" alt="" />
-                        </div>
-                        <div class="col-sm-9 align-self-center">
-                            <h5 class="mb-4 font-weight-bold"><a href="class/details">(Nama Kelas A)</a></h5>
-                            <span>(Nama Kategori)</span> <span>(Level)</span> <span>(Rating)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm">
-            <div class="card">
-                <div class="card-body text-left">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <img src="https://www.fpaceforum.com/media/100x100.4555/full" alt="" />
-                        </div>
-                        <div class="col-sm-9 align-self-center">
-                            <h5 class="mb-4 font-weight-bold"><a href="class/details">(Nama Kelas B)</a></h5>
-                            <span>(Nama Kategori)</span> <span>(Level)</span> <span>(Rating)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
- */
+    $.each(classes, function (idx, val) {
+        bPrice = BetterPriceView(val.class_Price)
 
-$.each(classes, function (idx, val) {
+        if ((idx + 1) % 2 != 0) {
+            classesContent += `<div class="row mb-3">`
+        }
 
-    bPrice = BetterPriceView(val.price)
-
-    if ((idx + 1) % 2 != 0) {
-        classesContent += `<div class="row mb-3">`
-    }
-
-    classesContent += `<div class="col-sm">
+        classesContent += `<div class="col-sm">
                             <div class="card">
                                 <div class="card-body text-left">
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <img src="${val.urlPic}" alt="" style="width: 100px; height:100px"/>
+                                            <img src="${val.class_UrlPic}" alt="" style="width: 100px; height:100px"/>
                                         </div>
                                         <div class="col-sm-9 align-self-center">
-                                            <h5 class="mb-4 font-weight-bold"><a href="class/details">${val.name}</a></h5>
-                                            <span>(Nama Kategori)</span> <span>(Level)</span> <span>☆${val.rating}</span>
+                                            <h5 class="mb-3 font-weight-bold"><a href="../class/details/${idx+1}">${val.class_Name}</a></h5>
+                                            <span>${val.category_Name}&nbsp</span> <span>&nbsp⁎${val.level_Name}⁎&nbsp</span> <span>&nbsp★${val.class_Rating}</span>
                                             <p>${bPrice}</p>
                                         </div>
                                     </div>
@@ -97,8 +58,45 @@ $.each(classes, function (idx, val) {
                             </div>
                        </div>`
 
-    if ((idx + 1) % 2 == 0) {
-        classesContent += `</div>`
-    }
-})
-$('#classes').html(classesContent);
+        if ((idx + 1) % 2 == 0) {
+            classesContent += `</div>`
+        }
+    })
+    $('#classes').html(classesContent);
+}
+
+FillClassesView();
+
+function GetClassById(id) {
+    let data = {};
+    $.ajax({
+        url: "https://localhost:44376/api/classes/masterbyid/" + id,
+        async: false
+    }).done((result) => {
+        data = result.data;
+    }).fail((error) => {
+        console.log(error);
+    })
+    return data;
+}
+function FillClassDetView() {
+    let cDet = GetClassById(classId);
+    let classDetCont = `<div class="container mt-5 mb-5">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img src="${cDet.class_UrlPic}" alt="" style="width: 250px; height: 250px;" />
+                            </div>
+                            <div class="col-sm-8 align-self-center">
+                                <h5 class="mb-3 font-weight-bold">${cDet.class_Name}</h5>
+                                <p>${cDet.class_Desc}</p>
+                                <p><span>${cDet.category_Name}</span> <span>${cDet.level_Name}</span> <span>${cDet.class_Rating}</span></p>
+                                <button id="enroll" type="button" class="btn btn-primary">Take Class</button>
+                                <button id="feedback" type="button" class="btn btn-info" data-toggle="modal" data-target="#formFb">Give Feedback</button>
+                                <button id="viewCert" type="button" class="btn btn-success">View Certificate</button>
+                            </div>
+                        </div>
+                   </div>`;
+    $('#classDetail').html(classDetCont);
+}
+
+FillClassDetView();
