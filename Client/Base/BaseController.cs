@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Client.Repositories.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,10 @@ namespace Client.Base
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BaseController : ControllerBase
+    public class BaseController<TEntity, TRepository, TId> : ControllerBase
+        where TEntity : class
+        where TRepository : IRepository<TEntity, TId>
     {
+        
     }
 }

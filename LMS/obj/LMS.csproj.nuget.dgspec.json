@@ -166,6 +166,10 @@
             "NETCore.MailKit": {
               "target": "Package",
               "version": "[2.0.3, )"
+            },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[107.3.0, )"
             }
           },
           "imports": [

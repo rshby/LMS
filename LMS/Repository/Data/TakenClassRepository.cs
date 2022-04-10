@@ -4,6 +4,9 @@ using LMS.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RestSharp;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace LMS.Repository.Data
 {
@@ -59,9 +62,9 @@ namespace LMS.Repository.Data
                     Email = inputData.Email,
                     ProgressChapter = 0,
                     IsDone = false,
-                    OrderId =  inputData.OrderId,
+                    OrderId =  $"Pay_{inputData.Email}_{inputData.Class_Id}_{DateTime.Now.ToString("MM-dd-yyyyHH:mm")}",
                     Expired = DateTime.Now.AddDays(1),
-                    IsPaid = true,  // Nanti diganti false
+                    IsPaid = false,  // Nanti diganti false
                     Class_Id = inputData.Class_Id
                 };
 
@@ -205,6 +208,120 @@ namespace LMS.Repository.Data
             //Ambil Data
             var data = GetTakenClassLengkap().FirstOrDefault(d => d.TakenClass_OrderId == inputData.TakenClass_OrderId);
             return data;
+        }
+
+        //Bayar Menggunakan Midtrans
+        public async Task<object> Bayar(string inputEmail, string inputOrderId, int inputClassId)
+        {
+            //Ambil data class sesuai dengan inputClassId
+            var dataClass = myContext.Classes.SingleOrDefault(x => x.Id == inputClassId);
+            var dataUser = myContext.Users.SingleOrDefault(x => x.Email == inputEmail);
+
+            //Call Post API MidTrans
+            string url = "https://app.sandbox.midtrans.com/snap/v1/transactions";
+            var client = new RestClient(url);
+            var request = new RestRequest();
+            request.AddHeader("Accept", "application/json");
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Authorization", "Basic U0ItTWlkLXNlcnZlci1sdHhEaS1iQ3hMSGV6Z281MlRHa183cXA6");
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new
+            {
+                transaction_details = new {
+                    order_id = inputOrderId,
+                    gross_amount = dataClass.Price
+                },
+                credit_card = new
+                {
+                    secure = true
+                },
+                item_details = new
+                {
+                    id = dataClass.Id,
+                    price = dataClass.Price,
+                    quantity = 1,
+                    name = dataClass.Name
+                },
+                customer_details = new
+                {
+                    first_name = dataUser.FirstName,
+                    last_name = dataUser.LastName,
+                    email = dataUser.Email,
+                    phone = dataUser.Phone
+                }
+            });
+
+            var response = await client.PostAsync(request);
+            var result = JsonConvert.DeserializeObject(response.Content);
+            return result;
+        }
+
+        // Konfirmasi Pembayaran Midtrans
+        public async Task<int> KonfirmasiBayar(string inputEmail, int inputClassId)
+        {
+            //Ambil data takenclass berdasarkan email dan class_id
+            var dataTC = GetTakenClassLengkap().SingleOrDefault(x => x.Email == inputEmail && x.Class_Id == inputClassId);
+            var dataTakenClass = myContext.TakenClasses.SingleOrDefault(x => x.Email == inputEmail && x.Class_Id == inputClassId);
+            if (dataTC != null)
+            {
+                //Ambil data dari midtrans
+                var dataStatus = await StatusPembayaran(dataTC.TakenClass_OrderId);
+
+                //Cek Status
+                if (dataStatus == "settlement") // -> sudah dibayar (sebelum batas waktu)
+                {
+                    //Siapkan variabel object untuk menampung data TakenClass yang akan diupdate
+                    TakenClass updateTC = new TakenClass()
+                    {
+                        Id = dataTC.TakenClass_Id,
+                        Email = dataTC.Email,
+                        ProgressChapter = dataTC.TakenClass_ProgressChapter,
+                        IsDone = dataTC.TakenClass_IsDone,
+                        OrderId = dataTC.TakenClass_OrderId,
+                        Expired = dataTC.TakenClass_Expired,
+                        IsPaid = true,
+                        Class_Id = dataTC.Class_Id
+                    };
+
+                    //karena sudah bayar -> update data TakenClass IsPaid menjadi true
+                    myContext.Entry(dataTakenClass).CurrentValues.SetValues(updateTC);
+                    myContext.SaveChanges();
+
+                    return 1; //pembayaran berhasil
+                }
+                else if (dataStatus == "pending") // -> belum bayar tapi belum melewati batas waktu
+                {
+                    //karena belum bayar tapi masih belom lewat batas waktu ya tidak diapa-apain
+                    return -1;
+                }
+                else // -> sudah expired atau belum bayar dan sudah lewat batas waktu
+                {
+                    //hapus data TakenClass
+                    myContext.TakenClasses.Remove(dataTakenClass);
+                    myContext.SaveChanges();
+
+                    return 0;
+                }
+            }
+            else
+            {
+                return -2; // -> data takenclass tidak ada (belum mendaftar)
+            }
+        }
+
+        // Get API Status order_id ke Midtrans
+        public async Task<string> StatusPembayaran(string orderId)
+        {
+            string url = $"https://api.sandbox.midtrans.com/v2/{orderId}/status";
+            var client = new RestClient(url);
+            var request = new RestRequest();
+            request.AddHeader("Accept", "application/json");
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Authorization", "Basic U0ItTWlkLXNlcnZlci1sdHhEaS1iQ3hMSGV6Z281MlRHa183cXA6");
+
+            var response = await client.GetAsync(request);
+            var status = JsonConvert.DeserializeObject<KonfirmasiMidtransVM>(response.Content);
+            return status.transaction_status.ToString();
         }
     }
 }
