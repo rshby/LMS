@@ -148,7 +148,6 @@ namespace LMS.Repository.Data
             return data;
         }
 
-<<<<<<< HEAD
         // Get Sections by Class Id
         public IEnumerable GetSectionByClassId(int inputClass)
         {
@@ -157,20 +156,4 @@ namespace LMS.Repository.Data
             return data;
         }
     }
-=======
-        //Get Semua data Master Class yang paling populer -> sorting jumlah_peserta descending
-        public List<ClassVM> MasterPopuler()
-        {
-            var data = AllMasterClass().OrderByDescending(x => x.Jumlah_Peserta).ToList();
-            return data;
-        }
-
-        //get semua data Master Clas by rating paling tinggi
-        public List<ClassVM> MasterRating()
-        {
-            var data = AllMasterClass().OrderByDescending(x => x.Class_Rating).ToList();
-            return data;
-        }
-     }
->>>>>>> master
 }
