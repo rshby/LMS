@@ -241,6 +241,55 @@ namespace LMS.Controllers
                 });
             }
         }
+
+        // Mster Class By Populer
+        [HttpGet("master/populer")]
+        public ActionResult MasterbyPopuler()
+        {
+            try
+            {
+                var data = repository.MasterPopuler();
+                return Ok(new
+                {
+                    status = 200,
+                    message = "data ditemukan",
+                    data = data
+                }); ;
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new {
+                    message = "gagal get data",
+                    error = e.Message
+                });
+            }
+        }
+
+        // Mster Class By rating
+        [HttpGet("master/rating")]
+        public ActionResult MasterbyRating()
+        {
+            try
+            {
+                var data = repository.MasterRating();
+                return Ok(new
+                {
+                    status = 200,
+                    message = "data ditemukan",
+                    data = data
+                }); ;
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal get data",
+                    error = e.Message
+                });
+            }
+        }
     }
 
 }
