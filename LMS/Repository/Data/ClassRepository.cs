@@ -2,6 +2,7 @@
 using LMS.Models;
 using LMS.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -143,6 +144,14 @@ namespace LMS.Repository.Data
         public ClassVM MasterClassById(int inputClassId)
         {
             var data = AllMasterClass().SingleOrDefault(x => x.Class_Id == inputClassId);
+            return data;
+        }
+
+        // Get Sections by Class Id
+        public IEnumerable GetSectionByClassId(int inputClass)
+        {
+            var data = myContext.Sections.Where(s => s.Class_Id == inputClass).ToList();
+
             return data;
         }
     }
