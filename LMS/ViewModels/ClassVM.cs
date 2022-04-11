@@ -13,5 +13,6 @@
         public string Level_Name { get; set; }
         public int Category_Id { get; set; }
         public string Category_Name { get; set; }
+        public int Jumlah_Peserta { get; set; }
     }
 }
