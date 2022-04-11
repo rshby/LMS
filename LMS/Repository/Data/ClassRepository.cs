@@ -135,7 +135,8 @@ namespace LMS.Repository.Data
                     Level_Id = data.cl.l.Id,
                     Level_Name = data.cl.l.Name,
                     Category_Id = data.ct.Id,
-                    Category_Name = data.ct.Name
+                    Category_Name = data.ct.Name,
+                    Jumlah_Peserta = myContext.TakenClasses.Where(x => x.Class_Id == data.cl.c.Id && x.IsPaid == true).Count()
                 }).ToList();
             return data;
         }
@@ -147,6 +148,7 @@ namespace LMS.Repository.Data
             return data;
         }
 
+<<<<<<< HEAD
         // Get Sections by Class Id
         public IEnumerable GetSectionByClassId(int inputClass)
         {
@@ -155,4 +157,20 @@ namespace LMS.Repository.Data
             return data;
         }
     }
+=======
+        //Get Semua data Master Class yang paling populer -> sorting jumlah_peserta descending
+        public List<ClassVM> MasterPopuler()
+        {
+            var data = AllMasterClass().OrderByDescending(x => x.Jumlah_Peserta).ToList();
+            return data;
+        }
+
+        //get semua data Master Clas by rating paling tinggi
+        public List<ClassVM> MasterRating()
+        {
+            var data = AllMasterClass().OrderByDescending(x => x.Class_Rating).ToList();
+            return data;
+        }
+     }
+>>>>>>> master
 }
