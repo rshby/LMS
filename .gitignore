@@ -1,0 +1,7 @@
+LMS/bin/
+LMS/obj/
+LMS/appsettings.json
+Client/bin/
+Client/obj/
+Client/appsettings.json
+.vs/
