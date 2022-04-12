@@ -1,7 +1,11 @@
 is_global = true
 build_property.RootNamespace = Client
 <<<<<<< HEAD
+<<<<<<< HEAD
 build_property.ProjectDir = c:\Users\ASUS\Documents\Metrodata\LMS\Client\
 =======
 build_property.ProjectDir = C:\Users\A S U S\Documents\GitHub\LMS\Client\
 >>>>>>> Vincen
+=======
+build_property.ProjectDir = P:\MCC\Tugas\Git\LMS\Client\
+>>>>>>> Denny
