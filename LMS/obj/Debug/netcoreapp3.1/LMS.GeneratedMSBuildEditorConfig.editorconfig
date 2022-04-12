@@ -1,3 +1,11 @@
 is_global = true
 build_property.RootNamespace = LMS
+<<<<<<< HEAD
+<<<<<<< HEAD
+build_property.ProjectDir = c:\Users\ASUS\Documents\Metrodata\LMS\LMS\
+=======
+build_property.ProjectDir = C:\Users\A S U S\Documents\GitHub\LMS\LMS\
+>>>>>>> Vincen
+=======
 build_property.ProjectDir = P:\MCC\Tugas\Git\LMS\LMS\
+>>>>>>> Denny

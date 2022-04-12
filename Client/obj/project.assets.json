@@ -6658,11 +6658,25 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
+    "C:\\Users\\A S U S\\.nuget\\packages\\": {}
+=======
     "C:\\Users\\inede\\.nuget\\packages\\": {}
+>>>>>>> Denny
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
+      "projectUniqueName": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj",
+      "projectName": "Client",
+      "projectPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj",
+      "packagesPath": "C:\\Users\\A S U S\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\A S U S\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
       "projectUniqueName": "P:\\MCC\\Tugas\\Git\\LMS\\Client\\Client.csproj",
       "projectName": "Client",
       "projectPath": "P:\\MCC\\Tugas\\Git\\LMS\\Client\\Client.csproj",
@@ -6671,6 +6685,7 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\inede\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> Denny
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6735,16 +6750,12 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+=======
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+>>>>>>> Denny
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file P:\\MCC\\Tugas\\Git\\LMS\\Client\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
