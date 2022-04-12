@@ -169,6 +169,29 @@ namespace LMS.Controllers
                     e.Message
                 });
             }
+        } 
+        
+        [HttpGet("section/{key}")]
+        public ActionResult UpdateClass(int key)
+        {
+            try
+            {
+                var result = repository.GetSectionByClassId(key);
+                return Ok(new
+                {
+                    status = 200,
+                    message = "data ditemukan",
+                    data = result
+                });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new
+                {
+                    message = "Gagal Method Update Class",
+                    e.Message
+                });
+            }
         }
 
     }

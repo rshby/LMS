@@ -37,6 +37,7 @@ namespace LMS.Models
         [ForeignKey("Category")]
         public int Category_Id { get; set; }
 
+
         //Relation
         [JsonIgnore]
         public virtual ICollection<TakenClass> TakenClasses { get; set; }

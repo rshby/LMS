@@ -40,6 +40,10 @@ namespace LMS
             services.AddScoped<TakenClassRepository>();
             services.AddScoped<FeedBackRepository>();
             services.AddScoped<CertificateRepository>();
+            services.AddScoped<UniversityRepository>();
+            services.AddScoped<SectionRepository>();
+            services.AddScoped<LevelRepository>();
+            services.AddScoped<CategoryRepository>();
 
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

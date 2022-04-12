@@ -10,13 +10,13 @@ namespace LMS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LevelsController : BaseController<Level, LevelRepository, int>
+    public class SectionsController : BaseController<Section, SectionRepository, int>
     {
-        private readonly LevelRepository repository;
+        private readonly SectionRepository repository;
         public IConfiguration configuration;
 
         //Constructor
-        public LevelsController(LevelRepository repository, IConfiguration configuration) : base(repository)
+        public SectionsController(SectionRepository repository, IConfiguration configuration) : base(repository)
         {
             this.repository = repository;
             this.configuration = configuration;

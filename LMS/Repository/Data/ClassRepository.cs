@@ -2,6 +2,7 @@
 using LMS.Models;
 using LMS.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 using System.Linq;
 
 namespace LMS.Repository.Data
@@ -22,6 +23,7 @@ namespace LMS.Repository.Data
             Class cls = new Class()
             {
                 Name = register.Name,
+                UrlPic = register.UrlPic,
                 Desc = register.Desc,
                 TotalChapter = register.TotalChapter,
                 Price = register.Price,
@@ -39,16 +41,19 @@ namespace LMS.Repository.Data
         public int UpdateClass(UpdateRegClassVM updateRegis)
         {
             var data = myContext.Classes.SingleOrDefault(e => e.Id == updateRegis.Id);
+
             Class cls = new Class()
             {
-                Id = updateRegis.Id,
+                Id = data.Id,
                 Name = updateRegis.Name,
+                UrlPic = updateRegis.UrlPic,
                 Desc = updateRegis.Desc,
                 TotalChapter = updateRegis.TotalChapter,
                 Price = updateRegis.Price,
-                Rating = updateRegis.Rating,
+                Rating = data.Rating,
                 Level_Id = updateRegis.Level_Id,
                 Category_Id = updateRegis.Category_Id
+                
             };
 
             myContext.Entry(cls).State = EntityState.Modified;
@@ -113,6 +118,13 @@ namespace LMS.Repository.Data
             {
                 return -200;
             }
+        }
+
+        public IEnumerable GetSectionByClassId(int inputClass)
+        {
+            var data = myContext.Sections.Where(s => s.Class_Id == inputClass).ToList();
+
+            return data;  
         }
     }
 }
