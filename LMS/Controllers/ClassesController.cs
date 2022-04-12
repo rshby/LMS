@@ -246,6 +246,7 @@ namespace LMS.Controllers
                 });
             }
         }
+<<<<<<< HEAD
 
 <<<<<<< HEAD
         // Mster Class By Populer
@@ -298,6 +299,8 @@ namespace LMS.Controllers
         }
 =======
 >>>>>>> Vincen
+=======
+>>>>>>> parent of 628358d (Update ClassesController.cs)
     }
 
 }
