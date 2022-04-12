@@ -314,6 +314,7 @@ C:\Users\ASUS\Documents\Metrodata\LMS\LMS\obj\Debug\netcoreapp3.1\LMS.csproj.Cop
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\obj\Debug\netcoreapp3.1\LMS.dll
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\obj\Debug\netcoreapp3.1\LMS.pdb
 C:\Users\ASUS\Documents\Metrodata\LMS\LMS\obj\Debug\netcoreapp3.1\LMS.genruntimeconfig.cache
+<<<<<<< HEAD
 C:\Users\A S U S\Documents\GitHub\LMS\LMS\bin\Debug\netcoreapp3.1\Client.Views.dll
 C:\Users\A S U S\Documents\GitHub\LMS\LMS\bin\Debug\netcoreapp3.1\Client.Views.pdb
 C:\Users\A S U S\Documents\GitHub\LMS\LMS\bin\Debug\netcoreapp3.1\Client.deps.json
@@ -471,3 +472,7 @@ C:\Users\A S U S\Documents\GitHub\LMS\LMS\obj\Debug\netcoreapp3.1\LMS.csproj.Cop
 C:\Users\A S U S\Documents\GitHub\LMS\LMS\obj\Debug\netcoreapp3.1\LMS.dll
 C:\Users\A S U S\Documents\GitHub\LMS\LMS\obj\Debug\netcoreapp3.1\LMS.pdb
 C:\Users\A S U S\Documents\GitHub\LMS\LMS\obj\Debug\netcoreapp3.1\LMS.genruntimeconfig.cache
+=======
+P:\MCC\Tugas\Git\LMS\LMS\bin\Debug\netcoreapp3.1\RestSharp.dll
+P:\MCC\Tugas\Git\LMS\LMS\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+>>>>>>> Denny

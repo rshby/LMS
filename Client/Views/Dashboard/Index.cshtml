@@ -2,6 +2,10 @@
     ViewData["Title"] = "Home Page";
 }
 
+<div id="dashboard">
+
+</div>
+
 <div class="mb-5 mt-5">
     <div class="ml-3">
         <h3>Selamat datang (Nama Lengkap)!</h3>
@@ -15,38 +19,16 @@
             <h5>Kelas yang Sedang Diproses Pembayaran</h5>
         </div>
         <div class="card-body">
-            <table class="table table-borderless table-striped">
+            <table id="unpaidClasses" class="table table-borderless table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Class Name</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Date Requested</th>
                         <th scope="col">Date Expired</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td><a href="Class">(Nama Kelas A)</a></td>
-                        <td>Rp. (xxxxxxxxx),00</td>
-                        <td>(xx xxxxxxx xxxx)</td>
-                        <td>(xx xxxxxxx xxxx)</td>
-                        <td><button type="button" class="btn btn-outline-dark">Konfirmasi Pembayaran</button></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">(Nama Kelas B)</a></td>
-                        <td>Rp. (xxxxxxxxx),00</td>
-                        <td>(xx xxxxxxx xxxx)</td>
-                        <td>(xx xxxxxxx xxxx)</td>
-                        <td><button type="button" class="btn btn-outline-dark">Konfirmasi Pembayaran</button></td>
-                    </tr>
-                    <tr>
-                        <td><a href="#">(Nama Kelas C)</a></td>
-                        <td>Rp. (xxxxxxxxx),00</td>
-                        <td>(xx xxxxxxx xxxx)</td>
-                        <td>(xx xxxxxxx xxxx)</td>
-                        <td><button type="button" class="btn btn-outline-dark">Konfirmasi Pembayaran</button></td>
-                    </tr>
+                <tbody id="unpaidClass">
                 </tbody>
             </table>
         </div>
@@ -67,19 +49,8 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td><a href="Class">(Nama Kelas A)</a></td>
-                            <td><button type="button" class="btn btn-outline-primary">Continue Class</button></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">(Nama Kelas B)</a></td>
-                            <td><button type="button" class="btn btn-outline-primary">Continue Class</button></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">(Nama Kelas C)</a></td>
-                            <td><button type="button" class="btn btn-outline-primary">Continue Class</button></td>
-                        </tr>
+                    <tbody id="undoneClass">
+
                     </tbody>
                 </table>
             </div>
@@ -98,8 +69,8 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
+                    <tbody id="doneClass">
+                        @*<tr>
                             <td><a href="#">(Nama Kelas A)</a></td>
                             <td><button type="button" class="btn btn-outline-info">Feedback</button><button type="button" class="btn btn-outline-success  ml-2">Certificate</button></td>
                         </tr>
@@ -110,7 +81,7 @@
                         <tr>
                             <td><a href="#">(Nama Kelas C)</a></td>
                             <td><button type="button" class="btn btn-outline-info">Feedback</button><button type="button" class="btn btn-outline-success  ml-2">Certificate</button></td>
-                        </tr>
+                        </tr>*@
                     </tbody>
                 </table>
             </div>
