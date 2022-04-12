@@ -73,7 +73,7 @@ namespace LMS.Controllers
         }
 
         //Get Feedback berdasarkan parameter Email dan Class_Id -> hasil 1 data aja
-        [HttpGet("byemailclassid")]
+        [HttpPost("byemailclassid")]
         public ActionResult GetFeedBackByEmailClassId(TakenClassVM inputData)
         {
             try
