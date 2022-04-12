@@ -95,7 +95,7 @@ namespace LMS.Repository.Data
                     TakenClass_ProgressChapter = dt.tcl.tc.t.ProgressChapter,
                     TakenClass_IsDone = dt.tcl.tc.t.IsDone,
                     TakenClass_OrderId = dt.tcl.tc.t.OrderId,
-                    TakenCLass_IsPaid = dt.tcl.tc.t.IsPaid,
+                    TakenClass_IsPaid = dt.tcl.tc.t.IsPaid,
                     TakenClass_Expired = dt.tcl.tc.t.Expired,
                     Class_Id = dt.tcl.tc.t.Class_Id,
                     Class_Name = dt.tcl.tc.c.Name,
@@ -112,14 +112,14 @@ namespace LMS.Repository.Data
         //Get TakenClass By Email
         public List<TakenClassVM> GetTakenClassByEmail(string inputEmail)
         {
-            var data = GetTakenClassLengkap().Where(d => (d.Email == inputEmail) && (d.TakenCLass_IsPaid == true)).ToList();
+            var data = GetTakenClassLengkap().Where(d => (d.Email == inputEmail) && (d.TakenClass_IsPaid == true)).ToList();
             return data;
         }
 
         //Get Taken Class By Email and IsDone
         public List<TakenClassVM> GetTakenClassByIsDone(TakenClassIsDoneVM inputData)
         {
-            var data = GetTakenClassByEmail(inputData.Email).Where(d => d.TakenClass_IsDone == Convert.ToBoolean(inputData.IsDone) && (d.TakenCLass_IsPaid == true)).ToList();
+            var data = GetTakenClassByEmail(inputData.Email).Where(d => d.TakenClass_IsDone == Convert.ToBoolean(inputData.IsDone) && (d.TakenClass_IsPaid == true)).ToList();
             return data;
         }
 
@@ -157,7 +157,7 @@ namespace LMS.Repository.Data
                     IsDone = false,
                     OrderId = dataTakenClass.TakenClass_OrderId,
                     Expired = dataTakenClass.TakenClass_Expired,
-                    IsPaid = dataTakenClass.TakenCLass_IsPaid,
+                    IsPaid = dataTakenClass.TakenClass_IsPaid,
                     Class_Id = dataTakenClass.Class_Id
                 };
 
@@ -179,7 +179,7 @@ namespace LMS.Repository.Data
                     IsDone = true,
                     OrderId = dataTakenClass.TakenClass_OrderId,
                     Expired = dataTakenClass.TakenClass_Expired,
-                    IsPaid = dataTakenClass.TakenCLass_IsPaid,
+                    IsPaid = dataTakenClass.TakenClass_IsPaid,
                     Class_Id = dataTakenClass.Class_Id,
                 };
 
@@ -197,7 +197,7 @@ namespace LMS.Repository.Data
         public List<TakenClassVM> GetTakenClassByIsPaidFalse(TakenClassVM inputData)
         {
             //Ambil Data
-            var data = GetTakenClassLengkap().Where(d => (d.Email == inputData.Email) && (d.TakenCLass_IsPaid == false)).ToList();
+            var data = GetTakenClassLengkap().Where(d => (d.Email == inputData.Email) && (d.TakenClass_IsPaid == false)).ToList();
             return data;
         }
 
