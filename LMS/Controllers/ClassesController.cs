@@ -168,42 +168,22 @@ namespace LMS.Controllers
                     e.Message
                 });
             }
-        }
-
-        //Get Semua Master Class
-        [HttpGet("master")]
-        public ActionResult AllMasterClass()
+        } 
+        
+        [HttpGet("section/{key}")]
+        public ActionResult UpdateClass(int key)
         {
             try
             {
-                var data = repository.AllMasterClass();
-                if (data.Count != 0)
+                var result = repository.GetSectionByClassId(key);
+                return Ok(new
                 {
-                    return Ok(new
-                    {
-                        status = 200,
-                        message = "data ditemukan",
-                        data = data
-                    });
-                }
-                else
-                {
-                    return NotFound(new
-                    {
-                        status = 404,
-                        message = "data tidak ditemukan"
-                    });
-                }
-            }
-            catch (Exception e)
-            {
-
-                return BadRequest(new
-                {
-                    message = "gagal get data",
-                    error = e.Message
+                    status = 200,
+                    message = "data ditemukan",
+                    data = result
                 });
             }
+<<<<<<< HEAD
         }
 
         //Get Master Class berdasarkan Class_Id yang diinput
@@ -231,17 +211,19 @@ namespace LMS.Controllers
                     });
                 }
             }
+=======
+>>>>>>> Vincen
             catch (Exception e)
             {
-
                 return BadRequest(new
                 {
-                    message = "gagal get data",
-                    error = e.Message
+                    message = "Gagal Method Update Class",
+                    e.Message
                 });
             }
         }
 
+<<<<<<< HEAD
         // Mster Class By Populer
         [HttpGet("master/populer")]
         public ActionResult MasterbyPopuler()
@@ -290,6 +272,8 @@ namespace LMS.Controllers
                 });
             }
         }
+=======
+>>>>>>> Vincen
     }
 
 }

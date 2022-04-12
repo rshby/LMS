@@ -2,7 +2,8 @@
 using LMS.Models;
 using LMS.ViewModels;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using System;
+using System.Collections;
 using System.Linq;
 
 namespace LMS.Repository.Data
@@ -23,6 +24,7 @@ namespace LMS.Repository.Data
             Class cls = new Class()
             {
                 Name = register.Name,
+                UrlPic = register.UrlPic,
                 Desc = register.Desc,
                 TotalChapter = register.TotalChapter,
                 Price = register.Price,
@@ -40,21 +42,23 @@ namespace LMS.Repository.Data
         public int UpdateClass(UpdateRegClassVM updateRegis)
         {
             var data = myContext.Classes.SingleOrDefault(e => e.Id == updateRegis.Id);
+
             Class cls = new Class()
             {
-                Id = updateRegis.Id,
+                Id = data.Id,
                 Name = updateRegis.Name,
+                UrlPic = updateRegis.UrlPic,
                 Desc = updateRegis.Desc,
                 TotalChapter = updateRegis.TotalChapter,
                 Price = updateRegis.Price,
-                Rating = updateRegis.Rating,
+                Rating = Convert.ToDouble(data.Rating),
                 Level_Id = updateRegis.Level_Id,
                 Category_Id = updateRegis.Category_Id
             };
 
-            myContext.Entry(cls).State = EntityState.Modified;
-            var result = myContext.SaveChanges();
-            return result;
+            myContext.Entry(data).CurrentValues.SetValues(cls);
+            myContext.SaveChanges();
+            return 1;
         }
 
         //Content input
@@ -116,9 +120,9 @@ namespace LMS.Repository.Data
             }
         }
 
-        //Get Semua Master Class
-        public List<ClassVM> AllMasterClass()
+        public IEnumerable GetSectionByClassId(int inputClass)
         {
+<<<<<<< HEAD
             var data = myContext.Classes
                 .Join(myContext.Levels, c => c.Level_Id, l => l.Id, (c, l) => new { c, l })
                 .Join(myContext.Categories, cl => cl.c.Category_Id, ct => ct.Id, (cl, ct) => new { cl, ct })
@@ -139,12 +143,11 @@ namespace LMS.Repository.Data
                 }).ToList();
             return data;
         }
+=======
+            var data = myContext.Sections.Where(s => s.Class_Id == inputClass).ToList();
+>>>>>>> Vincen
 
-        // Get Semua Master Class by Id
-        public ClassVM MasterClassById(int inputClassId)
-        {
-            var data = AllMasterClass().SingleOrDefault(x => x.Class_Id == inputClassId);
-            return data;
+            return data;  
         }
 
         //Get Semua data Master Class yang paling populer -> sorting jumlah_peserta descending

@@ -3,6 +3,7 @@
     public class RegisterClassVM
     {
         public string Name { get; set; }
+        public string UrlPic { get; set; }
         public string Desc { get; set; }
         public int TotalChapter { get; set; }
         public int Price { get; set; }

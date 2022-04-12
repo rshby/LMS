@@ -5,11 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Client</title>
 
+    <link rel="stylesheet" href="~/css/formSetting.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+    <!-- SweetAleret -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.8/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.8/sweetalert2.min.css">
+
+    <!--CKEditor CDN-->
+    <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script>
+    @*<script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>*@
+
+    <!--JS Data table-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -21,10 +36,13 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="bi bi-list-task"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="https://localhost:44332/" class="nav-link">Home</a>
+                    <a asp-controller="AdminHome" asp-action="Index" class="nav-link">Home</a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="https://localhost:44332/admin" class="nav-link">AdminAcc</a>
+                <li class="nav-item d-none d-sm-inline-block border-left">
+                    <a href="https://localhost:44332/admin" class="nav-link">Progres</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block border-left">
+                    <a href="https://dashboard.midtrans.com/" target="_blank" class="nav-link">Midtrans</a>
                 </li>
             </ul>
 
@@ -67,8 +85,8 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="https://localhost:44332/" class="brand-link">
-                <img src="https://i.pinimg.com/564x/b9/cc/64/b9cc6475537bc5c3e93ea5db1929ca65.jpg" width="40" height="40">
+            <a asp-controller="AdminHome" asp-action="index" class="brand-link">
+                <img src="~/lib/bootstrap/dist/img/admin.png" class="shadow" width="40" height="40">
                 <span class="brand-text font-weight-light"> Controller Admin</span>
             </a>
 
@@ -91,7 +109,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <!-- add Menu Data User-->
-                        <li class="nav-item">
+                        <li class="nav-item menu-open">
                             <a class="nav-link active">
                                 <i class="nav-icon bi bi-table"></i>
                                 <p style="margin : auto;">
@@ -101,16 +119,16 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-area="" asp-controller="" asp-action="" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                    <a href="https://localhost:44329/data" class="nav-link">
+                                        <i class="bi bi-cash-coin nav-icon"></i>
                                         <p>Daftar Pembayaran</p>
                                     </a>
                                 </li>
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-area="" asp-controller="" asp-action="" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                    <a asp-area="" asp-controller="ClassAdmin" asp-action="Index" class="nav-link">
+                                        <i class="bi bi-people-fill nav-icon"></i>
                                         <p>Data User</p>
                                     </a>
                                 </li>
@@ -118,7 +136,7 @@
                         </li>
 
                         <!-- add Menu Content-->
-                        <li class="nav-item">
+                        <li class="nav-item menu-open">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon bi bi-pencil-square"></i>
                                 <p>
@@ -128,7 +146,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-area="" asp-controller="TestCors" asp-action="Index" class="nav-link">
+                                    <a href="https://localhost:44329/regclass" class="nav-link">
                                         <i class="bi bi-file-earmark-plus nav-icon"></i>
                                         <p>Create Class</p>
                                     </a>
@@ -136,7 +154,7 @@
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-area="" asp-controller="TestCors" asp-action="Index" class="nav-link">
+                                    <a href="https://localhost:44329/dataclass" class="nav-link">
                                         <i class="bi bi-file-ruled nav-icon"></i>
                                         <p>Table Class</p>
                                     </a>
@@ -145,7 +163,7 @@
                         </li>
 
                         <!-- add Menu Content-->
-                        <li class="nav-item">
+                        <li class="nav-item menu-open">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon bi bi-pencil-square"></i>
                                 <p>
@@ -155,15 +173,15 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-area="" asp-controller="TestCors" asp-action="Index" class="nav-link">
+                                    <a href="https://localhost:44329/regsection" class="nav-link">
                                         <i class="bi bi-file-earmark-plus nav-icon"></i>
-                                        <p>Create Class</p>
+                                        <p>Create Section</p>
                                     </a>
                                 </li>
                             </ul>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-area="" asp-controller="TestCors" asp-action="Index" class="nav-link">
+                                    <a href="https://localhost:44329/datasection" class="nav-link">
                                         <i class="bi bi-file-ruled nav-icon"></i>
                                         <p>Table Content</p>
                                     </a>
@@ -184,12 +202,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Start Page</h1>
+                            <h1 class="m-0"> </h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Start Page</li>
+                                <li class="breadcrumb-item active">Page</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -202,9 +220,7 @@
                     <div class="row">
                         <!-- /.col-md-2 -->
                         <div class="col-lg-12">
-                            <div class="card">
-                                @RenderBody()
-                            </div>
+                            @RenderBody()
                         </div>
                     </div>
                     <!-- /.row -->
@@ -236,14 +252,29 @@
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- Bootstrap 4 -->
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/dataTable.js"></script>
+
+
     <!-- AdminLTE App -->
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"></script>
+
+    <!--Data Table-->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </html>

@@ -1,12 +1,6 @@
 ﻿using LMS.Context;
 using LMS.Models;
-using LMS.ViewModels;
-using MailKit.Net.Smtp;
-using Microsoft.EntityFrameworkCore;
-using MimeKit;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace LMS.Repository.Data
 {

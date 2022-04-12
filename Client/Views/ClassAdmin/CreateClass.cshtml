@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "_ViewGeneralAdmin";
+}
+
+<dev>
+    <head>
+        <p class="shadow text-center" style="margin : auto;">
+            <center>
+                <h1>Create Class</h1>
+            </center>
+        </p>
+    </head>
+    <body>
+        <content>
+            <form class="canvas shadow">
+
+                <div class="form-group">
+                    <label for="tittle">Tittle Class</label>
+                    <input type="text" name="tittle" class="form-control" placeholder="Input Title" id="judul">
+                </div>
+
+                <div class="form-group">
+                    <label for="url">URL Code</label>
+                    <input type="text" name="url" class="form-control" placeholder="Input Url Code" id="url">
+                </div>
+
+                <div class="form-group">
+                    <label for="Desc">Description</label>
+                    <textarea type="text" name="content" class="form-control" id="desc"> </textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="TotalChapter">Total Chapter</label>
+                    <input type="text" name="TotalChapter" placeholder="Input Total Chapter" class="form-control" id="totChapter">
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Class Price</label>
+                    <input type="text" name="price" placeholder="Input Price Class" class="form-control" id="price">
+                </div>
+
+                <div class="form-group">
+                    <label for="level">Level Class</label>
+                    <select name="level" data-target="" class="form-control" id="level">
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category Class</label>
+                    <select name="category" class="form-control" id="cate">
+                    </select>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="InsertClass()">Create</button>
+                </div>
+            </form>
+        </content>
+
+        <script>
+            let editor;
+            ClassicEditor
+                .create(document.querySelector('#desc'))
+                .then(newEditor => {
+                    editor = newEditor;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        </script>
+        <p></p>
+    </body>
+</dev>
+
