@@ -155,5 +155,18 @@ namespace LMS.Repository.Data
 
             return data;
         }
+
+        public List<ClassVM> MasterPopuler()
+        {
+            var data = AllMasterClass().OrderByDescending(x => x.Jumlah_Peserta).ToList();
+            return data;
+        }
+
+        //get semua data Master Clas by rating paling tinggi
+        public List<ClassVM> MasterRating()
+        {
+            var data = AllMasterClass().OrderByDescending(x => x.Class_Rating).ToList();
+            return data;
+        }
     }
 }

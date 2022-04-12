@@ -246,7 +246,7 @@ namespace LMS.Controllers
 
         //Get Taken Class By Email dan Class_Id -> hasil 1 data aja
         //Mendapatkan data taken classes spesifik siapa usernya dan kelas apa yang diambil
-        [HttpGet("byEmailAndClassId")]
+        [HttpPost("byEmailAndClassId")]
         public ActionResult ByEmailAndClassId(TakenClassVM inputData)
         {
             try
@@ -352,7 +352,7 @@ namespace LMS.Controllers
 
         //Get Taken Class By IsPaid = False
         //Mendapatkan Daftar TakenClass Berdasarkan Usernya siapa dan Belum Bayar
-        [HttpGet("ispaidfalse")]
+        [HttpPost("ispaidfalse")]
         public ActionResult GetTakenClassIsPaidFalse(TakenClassVM inputData)
         {
             try

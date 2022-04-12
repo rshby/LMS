@@ -2,6 +2,10 @@
     ViewData["Title"] = "Details";
 }
 
+<div id="codemyClassesDetail">
+
+</div>
+
 <script>
     let classId = @(ViewBag.ClassId);
 </script>
@@ -15,6 +19,31 @@
 </div>
 
 
+@* Pembayaran Midtrans *@
+<script>
+    function enroll() {
+        let token = "";
+        $.ajax({
+            url: "https://localhost:44376/api/takenclasses/register",
+            type: "post",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            data: JSON.stringify(
+                {
+                    "Email": "dennyfpr@gmail.com",
+                    "Class_Id": classId
+                }),
+            async: false
+        }).done((result) => {
+            token = result.dataToken.token;
+            snap.pay(token);
+        }).fail((error) => {
+            console.log(error);
+        })
+    }
+</script>
 
 @* Feedback Modal *@
 <div class="modal fade" id="formFb" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -50,42 +79,6 @@
         </div>
     </div>
 </div>
-
-@* Payment Midtrans JS *@
-<script type="text/javascript">
-    var genButton = document.getElementById('gen-a-button');
-    genButton.addEventListener('click', function () {
-        let timestamp = Math.round(Date.now() / 1000);
-        $.ajax({
-            url: "https://app.sandbox.midtrans.com/snap/v1/transactions",
-            type: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": "Basic " + "U0ItTWlkLXNlcnZlci1sdHhEaS1iQ3hMSGV6Z281MlRHa183cXA6"
-            },
-            data: JSON.stringify({
-                "transaction_details": {
-                    "order_id": `PAY-CLASS-A-${timestamp}`,
-                    "gross_amount": 2000000
-                },
-                "credit_card": {
-                    "secure": true
-                },
-                "customer_details": {
-                    "first_name": "Dari",
-                    "last_name": "Client",
-                    "email": "Daclint@mail.com",
-                    "phone": "08110000000"
-                }
-            })
-        }).done((result) => {
-            snap.pay(result.token);
-        }).fail((error) => {
-            console.log(error);
-        });
-    });
-</script>
 
 @* Getting Rating Value
     <button id="chk" type="button" class="btn btn-success">Check</button>
