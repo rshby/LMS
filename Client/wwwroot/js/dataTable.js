@@ -346,9 +346,11 @@ function EditClass(classId) {
 
     temp.Id = classId,
     temp.Name = $('#judul').val();
+    temp.UrlPic = $('#url').val();
     temp.Desc = $('#descEdit').val();
     temp.TotalChapter = $('#totChapter').val();
     temp.Price = $('#price').val();
+    temp.Rating = $('#rating').val();
     temp.Level_Id = $('#level-id').val();
     temp.Category_Id = $('#category-id').val();
 

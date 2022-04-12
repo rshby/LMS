@@ -2,6 +2,7 @@
 using LMS.Models;
 using LMS.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections;
 using System.Linq;
 
@@ -50,15 +51,14 @@ namespace LMS.Repository.Data
                 Desc = updateRegis.Desc,
                 TotalChapter = updateRegis.TotalChapter,
                 Price = updateRegis.Price,
-                Rating = data.Rating,
+                Rating = Convert.ToDouble(data.Rating),
                 Level_Id = updateRegis.Level_Id,
                 Category_Id = updateRegis.Category_Id
-                
             };
 
-            myContext.Entry(cls).State = EntityState.Modified;
-            var result = myContext.SaveChanges();
-            return result;
+            myContext.Entry(data).CurrentValues.SetValues(cls);
+            myContext.SaveChanges();
+            return 1;
         }
 
         //Content input
