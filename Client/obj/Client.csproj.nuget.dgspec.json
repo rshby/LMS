@@ -1,22 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj",
-        "projectName": "Client",
-        "projectPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj",
-        "packagesPath": "C:\\Users\\A S U S\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\A S U S\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
     "P:\\MCC\\Tugas\\Git\\LMS\\Client\\Client.csproj": {}
   },
   "projects": {
@@ -31,7 +15,6 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\inede\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> Denny
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -96,11 +79,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
-=======
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
->>>>>>> Denny
         }
       }
     }
