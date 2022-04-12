@@ -88,7 +88,7 @@ function TakenClassById(email) {
         dataType: "json",
         data: JSON.stringify(
             {
-                "Email": `dennyfpr@gmail.com`,
+                "Email": email,
                 "Class_Id": classId
             }),
         async: false
@@ -102,7 +102,7 @@ function TakenClassById(email) {
 function GetSectionsByClassId(id) {
     let data = {};
     $.ajax({
-        url: "https://localhost:44376/api/classes/section/" + id,
+        url: "https://localhost:44376/api/sections/byclassid/" + id,
         async: false
     }).done((result) => {
         data = result.data;
@@ -443,7 +443,7 @@ function FillClassDetView() {
                          </div>`;
 
         // Belum Bayar
-    } else if (takenClass.data.takenClass_IsPaid == false) {
+    } else if (takenClass.data.takenCLass_IsPaid == false) {
         classDetail += `       <button id="enroll" type="button" class="btn btn-secondary" disabled>Waiting For Payment</button>
                             </div>
                         </div>
@@ -531,7 +531,7 @@ function FillClassDetView() {
                                 </div>
                                 <br />
 
-                                <button id="viewCert" type="button" class="btn btn-outline-success rounded float-right" disabled>Progress Done</button>
+                                <button id="btnC${val.chapter}" type="button" class="btn btn-outline-success rounded float-right" disabled>Progress Done</button>
                          </div>`;
         });
         classDetail += `        <button id="feedback" type="button" class="btn btn-info" data-toggle="modal" data-target="#formFb">Give Feedback</button>
@@ -573,7 +573,7 @@ function FillClassDetView() {
                                 </div>
                                 <br />
 
-                                <button id="viewCert" type="button" class="btn btn-outline-success rounded float-right" disabled>Progress Done</button>
+                                <button id="btnC${val.chapter}" type="button" class="btn btn-outline-success rounded float-right" disabled>Progress Done</button>
                          </div>`;
         });
         classDetail += `        <button id="feedback" type="button" class="btn btn-info" data-toggle="modal" data-target="#formFb">View Feedback</button>
@@ -605,18 +605,20 @@ function FillClassDetView() {
     $('#classDetail').html(classDetail);
     $('#classSections').html(classSections);
 
-    $.each(cSects, function (idx, val) {
-        window[`continue${val.chapter}`] = document.getElementById(`btnC${val.chapter}`);
-        window[`continue${val.chapter}`].addEventListener('click', function () {
-            continueChap = ContinueProgressChap(`dennyfpr@gmail.com`);
-            if (continueChap.status == 200) {
-                alert(`Chapter ${val.chapter} telah diselesaikan`);
-                ContinueProgressChap(`dennyfpr@gmail.com`);
-            } else {
-                alert(`Terjadi kesalahan menyelesaikan Chapter ${val.chapter}`);
-            } 
+    if (takenClass.data.takenCLass_IsPaid == true) {
+        $.each(cSects, function (idx, val) {
+            window[`continue${val.chapter}`] = document.getElementById(`btnC${val.chapter}`);
+            window[`continue${val.chapter}`].addEventListener('click', function () {
+                continueChap = ContinueProgressChap(`dennyfpr@gmail.com`);
+                if (continueChap.status == 200) {
+                    alert(`Chapter ${val.chapter} telah diselesaikan`);
+                    ContinueProgressChap(`dennyfpr@gmail.com`);
+                } else {
+                    alert(`Terjadi kesalahan menyelesaikan Chapter ${val.chapter}`);
+                }
+            });
         });
-    });
+    }
 }
 
 if (codemyClassesDetail != null) {
