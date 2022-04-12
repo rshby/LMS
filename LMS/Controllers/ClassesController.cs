@@ -183,7 +183,14 @@ namespace LMS.Controllers
                     data = result
                 });
             }
-<<<<<<< HEAD
+            catch (Exception e)
+            {
+                return BadRequest(new
+                {
+                    message = "Gagal Method Update Class",
+                    e.Message
+                });
+            }
         }
 
         //Get Master Class berdasarkan Class_Id yang diinput
@@ -211,8 +218,6 @@ namespace LMS.Controllers
                     });
                 }
             }
-=======
->>>>>>> Vincen
             catch (Exception e)
             {
                 return BadRequest(new
@@ -223,7 +228,6 @@ namespace LMS.Controllers
             }
         }
 
-<<<<<<< HEAD
         // Mster Class By Populer
         [HttpGet("master/populer")]
         public ActionResult MasterbyPopuler()
@@ -272,8 +276,6 @@ namespace LMS.Controllers
                 });
             }
         }
-=======
->>>>>>> Vincen
     }
 
 }

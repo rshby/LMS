@@ -4,6 +4,7 @@ using LMS.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LMS.Repository.Data
@@ -122,7 +123,6 @@ namespace LMS.Repository.Data
 
         public IEnumerable GetSectionByClassId(int inputClass)
         {
-<<<<<<< HEAD
             var data = myContext.Classes
                 .Join(myContext.Levels, c => c.Level_Id, l => l.Id, (c, l) => new { c, l })
                 .Join(myContext.Categories, cl => cl.c.Category_Id, ct => ct.Id, (cl, ct) => new { cl, ct })
@@ -142,12 +142,6 @@ namespace LMS.Repository.Data
                     Jumlah_Peserta = myContext.TakenClasses.Where(x => x.Class_Id == data.cl.c.Id && x.IsPaid == true).Count()
                 }).ToList();
             return data;
-        }
-=======
-            var data = myContext.Sections.Where(s => s.Class_Id == inputClass).ToList();
->>>>>>> Vincen
-
-            return data;  
         }
 
         //Get Semua data Master Class yang paling populer -> sorting jumlah_peserta descending
