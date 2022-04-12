@@ -94,35 +94,12 @@ namespace LMS.Controllers
 
                 return BadRequest(new
                 {
-                    message = "Gagal Method Input", e.Message
-                });
-            }
-            
-        }
-
-        [HttpGet("section/{key}")]
-        public ActionResult UpdateClass(int key)
-        {
-            try
-            {
-                var result = repository.GetSectionByClassId(key);
-                return Ok(new
-                {
-                    status = 200,
-                    message = "data ditemukan",
-                    data = result
-                });
-            }
-            catch (Exception e)
-            {
-                return BadRequest(new
-                {
-                    message = "Gagal Method Update Class",
+                    message = "Gagal Method Input",
                     e.Message
                 });
             }
-        }
 
+        }
         [HttpPut("UpdateContent")]
         public ActionResult UpdateContent(InputContentVM input)
         {
@@ -192,22 +169,42 @@ namespace LMS.Controllers
                     e.Message
                 });
             }
-        } 
-        
-        [HttpGet("section/{key}")]
-        public ActionResult UpdateClass(int key)
+        }
+
+        //Get Semua Master Class
+        [HttpGet("master")]
+        public ActionResult AllMasterClass()
         {
             try
             {
-                var result = repository.GetSectionByClassId(key);
-                return Ok(new
+                var data = repository.AllMasterClass();
+                if (data.Count != 0)
                 {
-                    status = 200,
-                    message = "data ditemukan",
-                    data = result
+                    return Ok(new
+                    {
+                        status = 200,
+                        message = "data ditemukan",
+                        data = data
+                    });
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        status = 404,
+                        message = "data tidak ditemukan"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal get data",
+                    error = e.Message
                 });
             }
-<<<<<<< HEAD
         }
 
         //Get Master Class berdasarkan Class_Id yang diinput
@@ -235,19 +232,17 @@ namespace LMS.Controllers
                     });
                 }
             }
-=======
->>>>>>> Vincen
             catch (Exception e)
             {
+
                 return BadRequest(new
                 {
-                    message = "Gagal Method Update Class",
-                    e.Message
+                    message = "gagal get data",
+                    error = e.Message
                 });
             }
         }
 
-<<<<<<< HEAD
         // Mster Class By Populer
         [HttpGet("master/populer")]
         public ActionResult MasterbyPopuler()
@@ -265,7 +260,8 @@ namespace LMS.Controllers
             catch (Exception e)
             {
 
-                return BadRequest(new {
+                return BadRequest(new
+                {
                     message = "gagal get data",
                     error = e.Message
                 });
@@ -296,8 +292,6 @@ namespace LMS.Controllers
                 });
             }
         }
-=======
->>>>>>> Vincen
     }
 
 }

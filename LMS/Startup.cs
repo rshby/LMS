@@ -40,11 +40,8 @@ namespace LMS
             services.AddScoped<TakenClassRepository>();
             services.AddScoped<FeedBackRepository>();
             services.AddScoped<CertificateRepository>();
-<<<<<<< HEAD
             services.AddScoped<UniversityRepository>();
             services.AddScoped<SectionRepository>();
-=======
->>>>>>> Denny
             services.AddScoped<LevelRepository>();
             services.AddScoped<CategoryRepository>();
 
