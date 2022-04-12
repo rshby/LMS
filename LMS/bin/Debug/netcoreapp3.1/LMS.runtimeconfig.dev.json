@@ -1,13 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-<<<<<<< HEAD
       "C:\\Users\\A S U S\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\A S U S\\.nuget\\packages"
-=======
-      "C:\\Users\\inede\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\inede\\.nuget\\packages"
->>>>>>> Denny
     ]
   }
 }

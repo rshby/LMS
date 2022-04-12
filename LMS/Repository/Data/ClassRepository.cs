@@ -2,13 +2,8 @@
 using LMS.Models;
 using LMS.ViewModels;
 using Microsoft.EntityFrameworkCore;
-<<<<<<< HEAD
 using System;
 using System.Collections;
-=======
-using System.Collections;
-using System.Collections.Generic;
->>>>>>> Denny
 using System.Linq;
 
 namespace LMS.Repository.Data
@@ -155,14 +150,7 @@ namespace LMS.Repository.Data
             return data;  
         }
 
-        // Get Sections by Class Id
-        public IEnumerable GetSectionByClassId(int inputClass)
-        {
-            var data = myContext.Sections.Where(s => s.Class_Id == inputClass).ToList();
-
-            return data;
-        }
-
+        //Get Semua data Master Class yang paling populer -> sorting jumlah_peserta descending
         public List<ClassVM> MasterPopuler()
         {
             var data = AllMasterClass().OrderByDescending(x => x.Jumlah_Peserta).ToList();
@@ -175,5 +163,5 @@ namespace LMS.Repository.Data
             var data = AllMasterClass().OrderByDescending(x => x.Class_Rating).ToList();
             return data;
         }
-    }
+     }
 }

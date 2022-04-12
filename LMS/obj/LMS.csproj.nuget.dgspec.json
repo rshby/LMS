@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\LMS\\LMS.csproj": {}
   },
   "projects": {
@@ -16,22 +15,6 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\A S U S\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-    "P:\\MCC\\Tugas\\Git\\LMS\\LMS\\LMS.csproj": {}
-  },
-  "projects": {
-    "P:\\MCC\\Tugas\\Git\\LMS\\Client\\Client.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "P:\\MCC\\Tugas\\Git\\LMS\\Client\\Client.csproj",
-        "projectName": "Client",
-        "projectPath": "P:\\MCC\\Tugas\\Git\\LMS\\Client\\Client.csproj",
-        "packagesPath": "C:\\Users\\inede\\.nuget\\packages\\",
-        "outputPath": "P:\\MCC\\Tugas\\Git\\LMS\\Client\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\inede\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> Denny
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -57,22 +40,6 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
-            "Microsoft.CodeAnalysis.Analyzers": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.9.4, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[5.0.9, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[5.0.9, )"
-            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.5, )"
@@ -96,7 +63,6 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
@@ -112,23 +78,6 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\A S U S\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "P:\\MCC\\Tugas\\Git\\LMS\\LMS\\LMS.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "P:\\MCC\\Tugas\\Git\\LMS\\LMS\\LMS.csproj",
-        "projectName": "LMS",
-        "projectPath": "P:\\MCC\\Tugas\\Git\\LMS\\LMS\\LMS.csproj",
-        "packagesPath": "C:\\Users\\inede\\.nuget\\packages\\",
-        "outputPath": "P:\\MCC\\Tugas\\Git\\LMS\\LMS\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\inede\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> Denny
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -142,13 +91,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-<<<<<<< HEAD
               "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj": {
                 "projectPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj"
-=======
-              "P:\\MCC\\Tugas\\Git\\LMS\\Client\\Client.csproj": {
-                "projectPath": "P:\\MCC\\Tugas\\Git\\LMS\\Client\\Client.csproj"
->>>>>>> Denny
               }
             }
           }
@@ -179,19 +123,7 @@
               "target": "Package",
               "version": "[3.1.0, )"
             },
-            "Microsoft.CodeAnalysis.Analyzers": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.9.4, )"
-            },
             "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[5.0.9, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.9, )"
             },
@@ -236,11 +168,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
->>>>>>> Denny
         }
       }
     }

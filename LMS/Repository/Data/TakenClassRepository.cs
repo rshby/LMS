@@ -23,7 +23,7 @@ namespace LMS.Repository.Data
         //Cek Email Apakah Ada di Database
         public int CekEmail(string inputEmail)
         {
-            var cek = myContext.Accounts.FirstOrDefault(u => u.Email == inputEmail);
+            var cek = myContext.Accounts.SingleOrDefault(u => u.Email == inputEmail);
             if (cek != null)
             {
                 return 1;

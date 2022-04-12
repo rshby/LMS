@@ -36,9 +36,7 @@
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.8",
           "Microsoft.AspNetCore.JsonPatch": "5.0.9",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "3.1.0",
-          "Microsoft.CodeAnalysis.Analyzers": "2.9.4",
           "Microsoft.EntityFrameworkCore": "5.0.9",
-          "Microsoft.EntityFrameworkCore.Design": "5.0.9",
           "Microsoft.EntityFrameworkCore.Proxies": "5.0.9",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.9",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.9",
@@ -2372,9 +2370,6 @@
       "System.Text.Encoding.CodePages/4.7.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {}
         }
       },
       "System.Text.Encoding.Extensions/4.3.0": {
@@ -2506,7 +2501,6 @@
       },
       "Client/1.0.0": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "5.0.9",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.5"
         },
         "runtime": {
