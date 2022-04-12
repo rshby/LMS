@@ -2,18 +2,12 @@
 using LMS.Models;
 using LMS.ViewModels;
 using Microsoft.EntityFrameworkCore;
-<<<<<<< HEAD
-using System;
-using System.Collections;
-=======
-using System.Collections;
 using System.Collections.Generic;
->>>>>>> Denny
 using System.Linq;
 
 namespace LMS.Repository.Data
 {
-    public class ClassRepository : GeneralRepository<MyContext,Class, int>
+    public class ClassRepository : GeneralRepository<MyContext, Class, int>
     {
         private readonly MyContext myContext;
 
@@ -29,7 +23,6 @@ namespace LMS.Repository.Data
             Class cls = new Class()
             {
                 Name = register.Name,
-                UrlPic = register.UrlPic,
                 Desc = register.Desc,
                 TotalChapter = register.TotalChapter,
                 Price = register.Price,
@@ -47,23 +40,21 @@ namespace LMS.Repository.Data
         public int UpdateClass(UpdateRegClassVM updateRegis)
         {
             var data = myContext.Classes.SingleOrDefault(e => e.Id == updateRegis.Id);
-
             Class cls = new Class()
             {
-                Id = data.Id,
+                Id = updateRegis.Id,
                 Name = updateRegis.Name,
-                UrlPic = updateRegis.UrlPic,
                 Desc = updateRegis.Desc,
                 TotalChapter = updateRegis.TotalChapter,
                 Price = updateRegis.Price,
-                Rating = Convert.ToDouble(data.Rating),
+                Rating = data.Rating,
                 Level_Id = updateRegis.Level_Id,
                 Category_Id = updateRegis.Category_Id
             };
 
-            myContext.Entry(data).CurrentValues.SetValues(cls);
-            myContext.SaveChanges();
-            return 1;
+            myContext.Entry(cls).State = EntityState.Modified;
+            var result = myContext.SaveChanges();
+            return result;
         }
 
         //Content input
@@ -103,7 +94,7 @@ namespace LMS.Repository.Data
                     TotalChapter = c.TotalChapter
 
                 }).SingleOrDefault(e => (e.Class_Id == content.class_id) && (e.Chapter == content.chapter));
-            
+
             if (content.chapter <= getClass.TotalChapter)
             {
                 Section section = new Section()
@@ -125,9 +116,9 @@ namespace LMS.Repository.Data
             }
         }
 
-        public IEnumerable GetSectionByClassId(int inputClass)
+        //Get Semua Master Class
+        public List<ClassVM> AllMasterClass()
         {
-<<<<<<< HEAD
             var data = myContext.Classes
                 .Join(myContext.Levels, c => c.Level_Id, l => l.Id, (c, l) => new { c, l })
                 .Join(myContext.Categories, cl => cl.c.Category_Id, ct => ct.Id, (cl, ct) => new { cl, ct })
@@ -148,21 +139,15 @@ namespace LMS.Repository.Data
                 }).ToList();
             return data;
         }
-=======
-            var data = myContext.Sections.Where(s => s.Class_Id == inputClass).ToList();
->>>>>>> Vincen
 
-            return data;  
-        }
-
-        // Get Sections by Class Id
-        public IEnumerable GetSectionByClassId(int inputClass)
+        // Get Semua Master Class by Id
+        public ClassVM MasterClassById(int inputClassId)
         {
-            var data = myContext.Sections.Where(s => s.Class_Id == inputClass).ToList();
-
+            var data = AllMasterClass().SingleOrDefault(x => x.Class_Id == inputClassId);
             return data;
         }
 
+        //Get Semua data Master Class yang paling populer -> sorting jumlah_peserta descending
         public List<ClassVM> MasterPopuler()
         {
             var data = AllMasterClass().OrderByDescending(x => x.Jumlah_Peserta).ToList();
