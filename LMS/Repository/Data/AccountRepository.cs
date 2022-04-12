@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace LMS.Repository.Data
 {
-    public class AccountRepository : GeneralRepository<MyContext,Account, string>
+    public class AccountRepository : GeneralRepository<MyContext, Account, string>
     {
         private readonly MyContext myContext;
         public IEnumerable<Account> Account { get; set; }
@@ -120,6 +120,15 @@ namespace LMS.Repository.Data
             }
         }
 
+        //Get Role Name dari data akun berdasarkan email yang diinputkan
+        public string GetRoleName(string inputEmail)
+        {
+            var roleName = myContext.Accounts.Where(x => x.Email == inputEmail)
+                .Join(myContext.Roles, a => a.Role_Id, r => r.Id, (a, r) => new { a, r })
+                .Select(data => data.r.Name).SingleOrDefault();
+            return roleName;
+        }
+
         //Login
         public int Login(LoginVM inputData)
         {
@@ -155,21 +164,21 @@ namespace LMS.Repository.Data
             //Update ke database
             myContext.Entry(data).CurrentValues.SetValues(dataUpdate);
             myContext.SaveChanges();
-            
+
             // Kirim Kode OTP Ke Email
             var email = new MimeMessage();
             email.From.Add(new MailboxAddress("LMS System", "rshby99@gmail.com"));
             email.To.Add(MailboxAddress.Parse(inputEmail));
             email.Subject = "Kode OTP LMS";
             email.Body = new TextPart("Plain") { Text = $"Kode OTP : {dataUpdate.OTP}" };
-            
+
             SmtpClient smtp = new SmtpClient();
             smtp.Connect("smtp.gmail.com", 465, true);
             smtp.Authenticate("rshby99@gmail.com", "reo050299");
             smtp.Send(email);
             smtp.Disconnect(true);
             smtp.Dispose();
-            
+
             return 1; // Cek Email   
         }
 

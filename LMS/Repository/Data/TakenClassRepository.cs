@@ -23,7 +23,7 @@ namespace LMS.Repository.Data
         //Cek Email Apakah Ada di Database
         public int CekEmail(string inputEmail)
         {
-            var cek = myContext.Accounts.FirstOrDefault(u => u.Email == inputEmail);
+            var cek = myContext.Accounts.SingleOrDefault(u => u.Email == inputEmail);
             if (cek != null)
             {
                 return 1;
@@ -62,7 +62,7 @@ namespace LMS.Repository.Data
                     Email = inputData.Email,
                     ProgressChapter = 0,
                     IsDone = false,
-                    OrderId =  $"Pay_{inputData.Email}_{inputData.Class_Id}_{DateTime.Now.ToString("MM-dd-yyyyHH:mm")}",
+                    OrderId = $"Pay_{inputData.Email}_{inputData.Class_Id}_{DateTime.Now.ToString("MM-dd-yyyyHH:mm")}",
                     Expired = DateTime.Now.AddDays(1),
                     IsPaid = false,  // Nanti diganti false
                     Class_Id = inputData.Class_Id
@@ -142,11 +142,11 @@ namespace LMS.Repository.Data
         {
             //Ambil data TakenClass By Email dan ClassId
             var dataTakenClass = GetTakenClassByEmail(inputData.Email).Where(x => x.Class_Id == inputData.Class_Id).FirstOrDefault();
-            
+
             var dataTC = myContext.TakenClasses.SingleOrDefault(x => x.Id == dataTakenClass.TakenClass_Id);
 
             //Cek Apakah ProgressChapter < TotalChapter
-            if (dataTakenClass.TakenClass_ProgressChapter < dataTakenClass.Class_TotalChapter) 
+            if (dataTakenClass.TakenClass_ProgressChapter < dataTakenClass.Class_TotalChapter)
             {
                 //Siapkan Object Untuk Menampung Data Update TakenClass
                 TakenClass updateTakenClass = new TakenClass()
@@ -227,7 +227,8 @@ namespace LMS.Repository.Data
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(new
             {
-                transaction_details = new {
+                transaction_details = new
+                {
                     order_id = inputOrderId,
                     gross_amount = dataClass.Price
                 },
