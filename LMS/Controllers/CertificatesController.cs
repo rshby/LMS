@@ -60,7 +60,7 @@ namespace LMS.Controllers
         }
 
         // Get Certificate Berdasarkan Email dan Class_Id yang diinput -> hasil 1 data aja
-        [HttpPost("byemailclassid")]
+        [HttpGet("byemailclassid")]
         public ActionResult GetByEmailClassId(TakenClassVM inputData)
         {
             try

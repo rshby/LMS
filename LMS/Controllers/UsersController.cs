@@ -58,7 +58,7 @@ namespace LMS.Controllers
         }
 
         //Get Master Data By Email
-        [HttpPost("masterbyemail")]
+        [HttpGet("masterbyemail")]
         public ActionResult GetMasterUserByEmail(MasterUserVM inputData)
         {
             try
