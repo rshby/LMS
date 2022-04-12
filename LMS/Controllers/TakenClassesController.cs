@@ -145,7 +145,7 @@ namespace LMS.Controllers
         }
 
         //Get Taken Class by Email and IsDone
-        [HttpGet("isdone")]
+        [HttpPost("isdone")]
         public ActionResult GetTakenClassByIsDone(TakenClassIsDoneVM inputData)
         {
             try
@@ -246,7 +246,7 @@ namespace LMS.Controllers
 
         //Get Taken Class By Email dan Class_Id -> hasil 1 data aja
         //Mendapatkan data taken classes spesifik siapa usernya dan kelas apa yang diambil
-        [HttpGet("byEmailAndClassId")]
+        [HttpPost("byEmailAndClassId")]
         public ActionResult ByEmailAndClassId(TakenClassVM inputData)
         {
             try
@@ -314,9 +314,10 @@ namespace LMS.Controllers
                             data = data
                         });
                     }
-                    else if(hasilNextChapter == -1)
+                    else if (hasilNextChapter == -1)
                     {
-                        return Ok(new { 
+                        return Ok(new
+                        {
                             status = 200,
                             message = "semua chapter terselesaikan"
                         });
@@ -352,7 +353,7 @@ namespace LMS.Controllers
 
         //Get Taken Class By IsPaid = False
         //Mendapatkan Daftar TakenClass Berdasarkan Usernya siapa dan Belum Bayar
-        [HttpGet("ispaidfalse")]
+        [HttpPost("ispaidfalse")]
         public ActionResult GetTakenClassIsPaidFalse(TakenClassVM inputData)
         {
             try
@@ -403,7 +404,7 @@ namespace LMS.Controllers
 
         //Get Taken Class By OrderId
         //Melihat data TakenClass berdasarkan OrderId yang Diinput -> hasil 1 data
-        [HttpGet("byorderid")]
+        [HttpPost("byorderid")]
         public ActionResult GetTakenClassByOrderId(TakenClassVM inputData)
         {
             try
@@ -454,7 +455,7 @@ namespace LMS.Controllers
                 {
                     paid = "gagal";
                 }
-                else if(data == -1)
+                else if (data == -1)
                 {
                     paid = "pending";
                 }
