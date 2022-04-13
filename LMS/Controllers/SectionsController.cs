@@ -21,5 +21,53 @@ namespace LMS.Controllers
             this.repository = repository;
             this.configuration = configuration;
         }
+
+        // Menampilkan Section Berdasarkan Class_Id yang diinputkan
+        [HttpGet("byclassid/{inputClassId}")]
+        public ActionResult GetSectionByClassId(int inputClassId)
+        {
+            try
+            {
+                //Cek Data inputClassId, apakah ada di tabel class dengan id tersebut
+                if (repository.CekClassId(inputClassId))
+                {
+                    var data = repository.SectionByClassId(inputClassId);
+                    if (data.Count != 0)
+                    {
+                        return Ok(new
+                        {
+                            status = 200,
+                            message = "data ditemukan",
+                            data = data
+                        });
+                    }
+                    else
+                    {
+                        return NotFound(new
+                        {
+                            status = 404,
+                            message = "data tidak ditemukan"
+                        });
+                    }
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        status = 404,
+                        message = $"data class dengan id {inputClassId} tidak ada di database"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal get data",
+                    error = e.Message
+                });
+            }
+        }
     }
 }

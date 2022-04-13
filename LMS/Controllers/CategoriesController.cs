@@ -1,6 +1,7 @@
 ﻿using LMS.Base;
 using LMS.Models;
 using LMS.Repository.Data;
+using LMS.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -12,14 +13,12 @@ namespace LMS.Controllers
     [ApiController]
     public class CategoriesController : BaseController<Category, CategoryRepository, int>
     {
-        private readonly CategoryRepository repository;
-        public IConfiguration configuration;
-
-        //Constructor
-        public CategoriesController(CategoryRepository repository, IConfiguration configuration) : base(repository)
+        private readonly CategoryRepository categoryRepo;
+        public IConfiguration configuraion;
+        public CategoriesController(CategoryRepository categoryRepo, IConfiguration configuration) : base(categoryRepo)
         {
-            this.repository = repository;
-            this.configuration = configuration;
+            this.categoryRepo = categoryRepo;
+            this.configuraion = configuration;
         }
     }
 }

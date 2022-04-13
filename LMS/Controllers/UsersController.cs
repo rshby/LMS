@@ -50,7 +50,8 @@ namespace LMS.Controllers
             catch (Exception e)
             {
 
-                return BadRequest(new { 
+                return BadRequest(new
+                {
                     message = e.Message,
                     keterangan = "gagal get data"
                 });
@@ -58,7 +59,7 @@ namespace LMS.Controllers
         }
 
         //Get Master Data By Email
-        [HttpGet("masterbyemail")]
+        [HttpPost("masterbyemail")]
         public ActionResult GetMasterUserByEmail(MasterUserVM inputData)
         {
             try
@@ -101,7 +102,7 @@ namespace LMS.Controllers
                 if (userRepo.CekEmail(inputData.Email) == 1)
                 {
                     var hasilUpdate = userRepo.UpdateMasterUser(inputData);
-                    if (hasilUpdate ==1)
+                    if (hasilUpdate == 1)
                     {
                         //Sukses Update
                         return Ok(new
@@ -133,6 +134,42 @@ namespace LMS.Controllers
                 return BadRequest(new
                 {
                     message = "gagal update data master user",
+                    error = e.Message
+                });
+            }
+        }
+
+        // Get Semua Daftar Pembayaran User
+        [HttpGet("daftarpembayaran")]
+        public ActionResult GetDaftarPembayaran()
+        {
+            try
+            {
+                var data = userRepo.AllDaftarPembayaran();
+                if (data.Count != 0)
+                {
+                    return Ok(new
+                    {
+                        status = 200,
+                        message = "data ditemukan",
+                        data = data
+                    });
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        status = 404,
+                        message = "data pembayaran tidak ditemukan"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal get data",
                     error = e.Message
                 });
             }

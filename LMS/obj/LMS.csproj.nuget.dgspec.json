@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\LMS\\LMS.csproj": {}
+    "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\LMS\\LMS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj": {
+    "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\Client.csproj",
         "projectName": "Client",
-        "projectPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj",
-        "packagesPath": "C:\\Users\\A S U S\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\Client.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\A S U S\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,22 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.9.4, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.5, )"
@@ -63,21 +79,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\LMS\\LMS.csproj": {
+    "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\LMS\\LMS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\LMS\\LMS.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\LMS\\LMS.csproj",
         "projectName": "LMS",
-        "projectPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\LMS\\LMS.csproj",
-        "packagesPath": "C:\\Users\\A S U S\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\LMS\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\LMS\\LMS.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\LMS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\A S U S\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -91,8 +107,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj": {
-                "projectPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj"
+              "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\Client.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\Client.csproj"
               }
             }
           }
@@ -123,7 +139,19 @@
               "target": "Package",
               "version": "[3.1.0, )"
             },
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.9.4, )"
+            },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.9, )"
             },
@@ -144,6 +172,10 @@
             "NETCore.MailKit": {
               "target": "Package",
               "version": "[2.0.3, )"
+            },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[107.3.0, )"
             }
           },
           "imports": [
@@ -164,7 +196,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

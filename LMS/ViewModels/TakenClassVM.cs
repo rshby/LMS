@@ -8,7 +8,7 @@ namespace LMS.ViewModels
         public string Email { get; set; }
         public int TakenClass_ProgressChapter { get; set; }
         public bool TakenClass_IsDone { get; set; }
-        public bool TakenCLass_IsPaid { get; set; }
+        public bool TakenClass_IsPaid { get; set; }
         public string TakenClass_OrderId { get; set; }
         public DateTime TakenClass_Expired { get; set; }
         public int Class_Id { get; set; }

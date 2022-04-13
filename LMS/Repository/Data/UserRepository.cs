@@ -141,5 +141,39 @@ namespace LMS.Repository.Data
             //Sukses Update Data Master User
             return 1;
         }
+
+        public List<DaftarPembayaranVM> AllDaftarPembayaran()
+        {
+            var data = myContext.Users
+                .Join(myContext.TakenClasses, u => u.Email, t => t.Email, (u, t) => new { u, t })
+                .Join(myContext.Classes, ut => ut.t.Class_Id, c => c.Id, (ut, c) => new { ut, c })
+                .Join(myContext.Levels, utc => utc.c.Level_Id, l => l.Id, (utc, l) => new { utc, l })
+                .Join(myContext.Categories, utcl => utcl.utc.c.Category_Id, ct => ct.Id, (utcl, ct) => new { utcl, ct })
+                .Select(data => new DaftarPembayaranVM()
+                {
+                    User_Email = data.utcl.utc.ut.u.Email,
+                    User_FirstName = data.utcl.utc.ut.u.FirstName,
+                    User_LastName = data.utcl.utc.ut.u.LastName,
+                    User_FullName = $"{data.utcl.utc.ut.u.FirstName} {data.utcl.utc.ut.u.LastName}",
+                    User_Gender = data.utcl.utc.ut.u.LastName.ToString(),
+                    user_Phone = data.utcl.utc.ut.u.Phone,
+                    TakenCLass_Id = data.utcl.utc.ut.t.Id,
+                    TakenClass_ProgressChapter = data.utcl.utc.ut.t.ProgressChapter,
+                    TakenClass_IsDone = data.utcl.utc.ut.t.IsDone,
+                    TakenClass_OrderId = data.utcl.utc.ut.t.OrderId,
+                    TakenClass_Expired = data.utcl.utc.ut.t.Expired.ToString("dddd, dd MMMM yyyy HH:mm:ss"),
+                    TakenClass_IsPaid = data.utcl.utc.ut.t.IsPaid,
+                    Class_Id = data.utcl.utc.c.Id,
+                    Class_Name = data.utcl.utc.c.Name,
+                    Class_Desc = data.utcl.utc.c.Desc,
+                    Class_UrlPic = data.utcl.utc.c.UrlPic,
+                    Class_Price = data.utcl.utc.c.Price,
+                    Class_Rating = data.utcl.utc.c.Rating,
+                    Class_TotalChapter = data.utcl.utc.c.TotalChapter,
+                    Level_Name = data.utcl.l.Name,
+                    Category_Name = data.ct.Name
+                }).ToList();
+            return data;
+        }
     }
 }

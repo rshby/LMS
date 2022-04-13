@@ -1,5 +1,4 @@
-﻿using Client.Base;
-using LMS.Base;
+﻿using LMS.Base;
 using LMS.Models;
 using LMS.Repository.Data;
 using LMS.ViewModels;
@@ -95,10 +94,11 @@ namespace LMS.Controllers
 
                 return BadRequest(new
                 {
-                    message = "Gagal Method Input", e.Message
+                    message = "Gagal Method Input",
+                    e.Message
                 });
             }
-            
+
         }
         [HttpPut("UpdateContent")]
         public ActionResult UpdateContent(InputContentVM input)
@@ -169,31 +169,128 @@ namespace LMS.Controllers
                     e.Message
                 });
             }
-        } 
-        
-        [HttpGet("section/{key}")]
-        public ActionResult UpdateClass(int key)
+        }
+
+        //Get Semua Master Class
+        [HttpGet("master")]
+        public ActionResult AllMasterClass()
         {
             try
             {
-                var result = repository.GetSectionByClassId(key);
-                return Ok(new
+                var data = repository.AllMasterClass();
+                if (data.Count != 0)
                 {
-                    status = 200,
-                    message = "data ditemukan",
-                    data = result
-                });
+                    return Ok(new
+                    {
+                        status = 200,
+                        message = "data ditemukan",
+                        data = data
+                    });
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        status = 404,
+                        message = "data tidak ditemukan"
+                    });
+                }
             }
             catch (Exception e)
             {
+
                 return BadRequest(new
                 {
-                    message = "Gagal Method Update Class",
-                    e.Message
+                    message = "gagal get data",
+                    error = e.Message
                 });
             }
         }
 
-    }
+        //Get Master Class berdasarkan Class_Id yang diinput
+        [HttpGet("masterbyid/{id}")]
+        public ActionResult MasterClassById(int id)
+        {
+            try
+            {
+                var data = repository.MasterClassById(id);
+                if (data != null)
+                {
+                    return Ok(new
+                    {
+                        status = 200,
+                        message = "data ditemukan",
+                        data = data
+                    });
+                }
+                else
+                {
+                    return NotFound(new
+                    {
+                        status = 404,
+                        message = "data tidak ditemukan"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
 
+                return BadRequest(new
+                {
+                    message = "gagal get data",
+                    error = e.Message
+                });
+            }
+        }
+
+        // Mster Class By Populer
+        [HttpGet("master/populer")]
+        public ActionResult MasterbyPopuler()
+        {
+            try
+            {
+                var data = repository.MasterPopuler();
+                return Ok(new
+                {
+                    status = 200,
+                    message = "data ditemukan",
+                    data = data
+                }); ;
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal get data",
+                    error = e.Message
+                });
+            }
+        }
+
+        // Mster Class By rating
+        [HttpGet("master/rating")]
+        public ActionResult MasterbyRating()
+        {
+            try
+            {
+                var data = repository.MasterRating();
+                return Ok(new
+                {
+                    status = 200,
+                    message = "data ditemukan",
+                    data = data
+                }); ;
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal get data",
+                    error = e.Message
+                });
+            }
+        }
+    }
 }

@@ -42,7 +42,8 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new { 
+                    return NotFound(new
+                    {
                         status = 404,
                         message = "data tidak ditemukan"
                     });
@@ -60,7 +61,7 @@ namespace LMS.Controllers
         }
 
         // Get Certificate Berdasarkan Email dan Class_Id yang diinput -> hasil 1 data aja
-        [HttpGet("byemailclassid")]
+        [HttpPost("byemailclassid")]
         public ActionResult GetByEmailClassId(TakenClassVM inputData)
         {
             try

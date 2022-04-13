@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Threading.Tasks;
 
 namespace LMS.Controllers
 {
@@ -38,12 +39,19 @@ namespace LMS.Controllers
                         //Cek Hasil Register
                         var hasilRegisterTakenClass = takenClassRepo.RegisterTakenClass(inputData);
 
+                        //ambil data TakenClass berdasarkan email dan class_id -> untuk diambi order_id nya
+                        var dataTC = takenClassRepo.GetTakenClassByEmailClassId(inputData.Email, inputData.Class_Id);
+
                         if (hasilRegisterTakenClass == 1)
                         {
+                            // ambil data token
+                            var dataToken = takenClassRepo.Bayar(inputData.Email, dataTC.TakenClass_OrderId, inputData.Class_Id).Result;
+
                             return Ok(new
                             {
                                 status = 200,
-                                message = "sukses register taken class"
+                                message = "sukses register taken class",
+                                dataToken = dataToken
                             });
                         }
                         else
@@ -137,7 +145,7 @@ namespace LMS.Controllers
         }
 
         //Get Taken Class by Email and IsDone
-        [HttpGet("isdone")]
+        [HttpPost("isdone")]
         public ActionResult GetTakenClassByIsDone(TakenClassIsDoneVM inputData)
         {
             try
@@ -238,7 +246,7 @@ namespace LMS.Controllers
 
         //Get Taken Class By Email dan Class_Id -> hasil 1 data aja
         //Mendapatkan data taken classes spesifik siapa usernya dan kelas apa yang diambil
-        [HttpGet("byEmailAndClassId")]
+        [HttpPost("byEmailAndClassId")]
         public ActionResult ByEmailAndClassId(TakenClassVM inputData)
         {
             try
@@ -306,9 +314,10 @@ namespace LMS.Controllers
                             data = data
                         });
                     }
-                    else if(hasilNextChapter == -1)
+                    else if (hasilNextChapter == -1)
                     {
-                        return Ok(new { 
+                        return Ok(new
+                        {
                             status = 200,
                             message = "semua chapter terselesaikan"
                         });
@@ -344,7 +353,7 @@ namespace LMS.Controllers
 
         //Get Taken Class By IsPaid = False
         //Mendapatkan Daftar TakenClass Berdasarkan Usernya siapa dan Belum Bayar
-        [HttpGet("ispaidfalse")]
+        [HttpPost("ispaidfalse")]
         public ActionResult GetTakenClassIsPaidFalse(TakenClassVM inputData)
         {
             try
@@ -395,7 +404,7 @@ namespace LMS.Controllers
 
         //Get Taken Class By OrderId
         //Melihat data TakenClass berdasarkan OrderId yang Diinput -> hasil 1 data
-        [HttpGet("byorderid")]
+        [HttpPost("byorderid")]
         public ActionResult GetTakenClassByOrderId(TakenClassVM inputData)
         {
             try
@@ -425,6 +434,48 @@ namespace LMS.Controllers
                 return BadRequest(new
                 {
                     message = "gagal menampilkan data",
+                    error = e.Message
+                });
+            }
+        }
+
+        //Konfirmasi Pembayaran
+        [HttpPost("konfirmasibayar")]
+        public async Task<ActionResult> Status(TakenClassVM inputData)
+        {
+            try
+            {
+                var data = await takenClassRepo.KonfirmasiBayar(inputData.Email, inputData.Class_Id);
+                string paid;
+                if (data == 1)
+                {
+                    paid = "sukses";
+                }
+                else if (data == 0)
+                {
+                    paid = "gagal";
+                }
+                else if (data == -1)
+                {
+                    paid = "pending";
+                }
+                else
+                {
+                    paid = "belum mendaftar kelas";
+                }
+
+                return Ok(new
+                {
+                    Status = 200,
+                    paid = paid
+                });
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal konfirmasi pembayaran",
                     error = e.Message
                 });
             }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj": {}
+    "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj": {
+    "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\Client.csproj",
         "projectName": "Client",
-        "projectPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj",
-        "packagesPath": "C:\\Users\\A S U S\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\Client.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\A S U S\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,22 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.9.4, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.5, )"
@@ -63,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }
