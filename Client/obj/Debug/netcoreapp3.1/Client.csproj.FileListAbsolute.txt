@@ -278,3 +278,4 @@ P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.csproj.CopyComplete
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.dll
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.pdb
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.genruntimeconfig.cache
+C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
