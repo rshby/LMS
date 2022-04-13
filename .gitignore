@@ -560,3 +560,4 @@ FodyWeavers.xsd
 .vs/LMS/DesignTimeBuild/.dtbcache.v2
 LMS/obj/Debug/netcoreapp3.1/LMS.csproj.AssemblyReference.cache
 *.cache
+.vs/LMS/v17/.suo
