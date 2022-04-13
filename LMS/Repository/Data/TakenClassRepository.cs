@@ -146,7 +146,7 @@ namespace LMS.Repository.Data
             var dataTC = myContext.TakenClasses.SingleOrDefault(x => x.Id == dataTakenClass.TakenClass_Id);
 
             //Cek Apakah ProgressChapter < TotalChapter
-            if (dataTakenClass.TakenClass_ProgressChapter < dataTakenClass.Class_TotalChapter)
+            if (dataTakenClass.TakenClass_ProgressChapter < dataTakenClass.Class_TotalChapter-1)
             {
                 //Siapkan Object Untuk Menampung Data Update TakenClass
                 TakenClass updateTakenClass = new TakenClass()
@@ -175,7 +175,7 @@ namespace LMS.Repository.Data
                 {
                     Id = dataTakenClass.TakenClass_Id,
                     Email = inputData.Email,
-                    ProgressChapter = dataTakenClass.TakenClass_ProgressChapter,
+                    ProgressChapter = dataTakenClass.TakenClass_ProgressChapter + 1,
                     IsDone = true,
                     OrderId = dataTakenClass.TakenClass_OrderId,
                     Expired = dataTakenClass.TakenClass_Expired,

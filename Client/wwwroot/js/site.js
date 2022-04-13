@@ -173,7 +173,7 @@ function TakenPaidClass(email) {
 function ContinueProgressChap(email) {
     let data = {};
     $.ajax({
-        url: `https://localhost:44376/api/takenclasses/konfirmasibayar`,
+        url: `https://localhost:44376/api/takenclasses/nextchapter`,
         type: `POST`,
         headers: {
             "Content-Type": "application/json",
@@ -195,6 +195,56 @@ function ContinueProgressChap(email) {
     })
     return data;
 }
+function AddFeddback(email, rating, review) {
+    let data = {};
+    $.ajax({
+        url: `https://localhost:44376/api/feedbacks/add`,
+        type: `POST`,
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(
+            {
+                "Email": email,
+                "Class_Id": classId,
+                "Rating": rating,
+                "Review": review
+            }),
+        async: false
+    }).done((result) => {
+        data = result;
+    }).fail((error) => {
+        console.log(error);
+    })
+    return data;
+}
+function feedbackStatus(email) {
+    let data = {};
+    $.ajax({
+        url: `https://localhost:44376/api/feedbacks/byemailclassid`,
+        type: `POST`,
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(
+            {
+                "Email": email,
+                "Class_Id": classId
+            }),
+        async: false
+    }).done((result) => {
+        data = result.status;
+    }).fail((error) => {
+        console.log(error);
+    })
+    return data;
+}
 
 function FillDashboard() {
     let unpaidTb = TakenUnpaidClass(`dennyfpr@gmail.com`);
@@ -203,7 +253,7 @@ function FillDashboard() {
         bPrice = BetterPriceView(val.class_Price)
         bDate = BetterDateView(`${val.takenClass_Expired}`);
         unpaidCont += `<tr>
-                            <td><a href="Class">${val.class_Name}</a></td>
+                            <td><a href="class/details/${val.class_Id}">${val.class_Name}</a></td>
                             <td>${bPrice}</td>
                             <td>${bDate}</td>
                             <td><button id="btnP${val.class_Id}" type="button" class="btn btn-outline-dark" onclick="payClass${val.class_Id}()">Konfirmasi Pembayaran</button></td>
@@ -212,6 +262,7 @@ function FillDashboard() {
     $('#unpaidClass').html(unpaidCont);
 
     $.each(unpaidTb, function (idx, val) {
+        console.log(val.class_Id);
         window[`payClass${val.class_Id}`] = document.getElementById(`btnP${val.class_Id}`);
         window[`payClass${val.class_Id}`].addEventListener('click', function () {
             pStatus = payStatus(`${val.class_Id}`);
@@ -228,15 +279,19 @@ function FillDashboard() {
     let doneCont = ``;
     console.log(paidTb);
     $.each(paidTb, function (idx, val) {
-        if (paidTb.takenClass_IsDone == false) {
+        if (val.takenClass_IsDone == false) {
             onGoingCont += `<tr>
-                            <td><a href="Class">${val.class_Name}</a></td>
-                            <td><button id="btnC${val.class_Id}" type="button" class="btn btn-outline-primary">Continue Class</button></td>
+                            <td><a href="class/details/${val.class_Id}">${val.class_Name}</a></td>
+                            <td>
+                                <form action="https://localhost:44329/class/details/${val.class_Id}">
+                                    <button id="btnCt${val.class_Id}" type="submit" class="btn btn-outline-primary">Continue Class</button>
+                                </form>
+                            </td>
                         </tr>`;
         } else {
             doneCont += `<tr>
-                            <td><a href="#">${val.class_Name}</a></td>
-                            <td><button id="btnFb${val.class_Id}" type="button" class="btn btn-outline-info">Feedback</button><button id="btnCf${val.class_Id}" type="button" class="btn btn-outline-success  ml-2">Certificate</button></td>
+                            <td><a href="class/details/${val.class_Id}">${val.class_Name}</a></td>
+                            <td><button id="btnCf${val.class_Id}" type="button" class="btn btn-outline-success  ml-2">Certificate</button></td>
                         </tr>`;
         }
     });
@@ -244,16 +299,12 @@ function FillDashboard() {
     $('#doneClass').html(doneCont);
 
     $.each(paidTb, function (idx, val) {
-        if (paidTb.takenClass_IsDone == false) {
+        if (val.takenClass_IsDone == false) {
             window[`continue${val.class_Id}`] = document.getElementById(`btnC${val.class_Id}`);
             window[`continue${val.class_Id}`].addEventListener('click', function () {
                 alert('Pindah ke current chapter');
             });
         } else {
-            window[`feedback${val.class_Id}`] = document.getElementById(`btnFb${val.class_Id}`);
-            window[`feedback${val.class_Id}`].addEventListener('click', function () {
-                alert('Lihat Feedback');
-            });
             window[`certificate${val.class_Id}`] = document.getElementById(`btnCf${val.class_Id}`);
             window[`certificate${val.class_Id}`].addEventListener('click', function () {
                 alert('Lihat Certificate');
@@ -419,6 +470,7 @@ function FillClassDetView() {
     let cDet = GetClassById(classId);
     let cSects = GetSectionsByClassId(classId);
     let takenClass = TakenClassById(`dennyfpr@gmail.com`);
+    let fbStatus = feedbackStatus(`dennyfpr@gmail.com`);
     let classDetail = `<div class="container mt-5 mb-5">
                         <div class="row">
                             <div class="col-sm-4">
@@ -432,8 +484,8 @@ function FillClassDetView() {
     let sectsHead = `<div class="list-group" id="list-tab" role="tablist" style="height: 33rem; overflow: scroll;">`;
     let sectsBody = ``;
 
-    // Belum Daftar
-    if (takenClass.status != 200) {
+        // Belum Daftar
+    if (takenClass.status == 404) {
         classDetail += `       <button type="button" class="btn btn-primary" onclick="enroll()">Take Class</button>
                             </div>
                         </div>
@@ -443,7 +495,7 @@ function FillClassDetView() {
                          </div>`;
 
         // Belum Bayar
-    } else if (takenClass.data.takenCLass_IsPaid == false) {
+    } else if (takenClass.data.takenClass_IsPaid == false) {
         classDetail += `       <button id="enroll" type="button" class="btn btn-secondary" disabled>Waiting For Payment</button>
                             </div>
                         </div>
@@ -453,7 +505,7 @@ function FillClassDetView() {
                          </div>`;
 
         // Belum Selesai
-    } else if (takenClass.data.takenCLass_IsPaid == true && takenClass.data.takenClass_IsDone == false) {
+    } else if (takenClass.data.takenClass_IsPaid == true && takenClass.data.takenClass_IsDone == false) {
         $.each(cSects, function (idx, val) {
             let chap = idx + 1;
             let prog = takenClass.data.takenClass_ProgressChapter +1;
@@ -519,7 +571,8 @@ function FillClassDetView() {
                          </div>`;
 
         // Belum Ulas
-    } else if (takenClass.data.takenClass_IsDone == true) {
+    } else if (takenClass.data.takenClass_IsDone == true && fbStatus != 200) {
+        console.log(fbStatus);
         $.each(cSects, function (idx, val) {
             sectsHead += `<a class="list-group-item list-group-item-action" data-toggle="list" href="#body${val.chapter}"><div class="row"><div class="col-sm-2">✔</div><div class="col-sm-10"><h6>${val.name}</h6></div></div></a>`;
             sectsBody += `<div class="tab-pane fade" id="body${val.chapter}">
@@ -534,8 +587,8 @@ function FillClassDetView() {
                                 <button id="btnC${val.chapter}" type="button" class="btn btn-outline-success rounded float-right" disabled>Progress Done</button>
                          </div>`;
         });
-        classDetail += `        <button id="feedback" type="button" class="btn btn-info" data-toggle="modal" data-target="#formFb">Give Feedback</button>
-                                <button id="viewCert" type="button" class="btn btn-success" disabled>View Certificate</button>
+        classDetail += `        <button id="btnfeedback" type="button" class="btn btn-info" data-toggle="modal" data-target="#formFb">Give Feedback</button>
+                                <button id="btnviewCert" type="button" class="btn btn-success" disabled>View Certificate</button>
                             </div>
                         </div>
                    </div>`;
@@ -561,7 +614,8 @@ function FillClassDetView() {
                          </div>`;
 
         // Sudah Semua
-    } else if (false) {
+    } else if (fbStatus == 200) {
+        console.log(fbStatus);
         $.each(cSects, function (idx, val) {
             sectsHead += `<a class="list-group-item list-group-item-action" data-toggle="list" href="#body${val.chapter}"><div class="row"><div class="col-sm-2">✔</div><div class="col-sm-10"><h6>${val.name}</h6></div></div></a>`;
             sectsBody += `<div class="tab-pane fade" id="body${val.chapter}">
@@ -605,19 +659,32 @@ function FillClassDetView() {
     $('#classDetail').html(classDetail);
     $('#classSections').html(classSections);
 
-    if (takenClass.data.takenCLass_IsPaid == true) {
-        $.each(cSects, function (idx, val) {
-            window[`continue${val.chapter}`] = document.getElementById(`btnC${val.chapter}`);
-            window[`continue${val.chapter}`].addEventListener('click', function () {
-                continueChap = ContinueProgressChap(`dennyfpr@gmail.com`);
-                if (continueChap.status == 200) {
-                    alert(`Chapter ${val.chapter} telah diselesaikan`);
-                    ContinueProgressChap(`dennyfpr@gmail.com`);
-                } else {
-                    alert(`Terjadi kesalahan menyelesaikan Chapter ${val.chapter}`);
+    if (takenClass.status == '200') {
+        if (takenClass.data.takenClass_IsPaid == true && takenClass.data.takenClass_IsDone == false) {
+            $.each(cSects, function (idx, val) {
+                window[`continue${val.chapter}`] = document.getElementById(`btnC${val.chapter}`);
+                window[`continue${val.chapter}`].addEventListener('click', function () {
+                    continueChap = ContinueProgressChap(`dennyfpr@gmail.com`);
+                    if (continueChap.status == 200) {
+                        alert(`Chapter ${val.chapter} telah diselesaikan`);
+                    } else {
+                        alert(`Terjadi kesalahan menyelesaikan Chapter ${val.chapter}`);
+                    }
+                });
+            });
+        } else if (takenClass.data.takenClass_IsDone == true && fbStatus != 200) {
+            let feeedback = document.getElementById(`btnSendFb`);
+            feeedback.addEventListener('click', function () {
+                let star = document.getElementsByName('rating');
+                let selected = Array.from(star).find(radio => radio.checked);
+
+                let review = $("#reviewText").val();
+                let rating = parseInt(selected.value);
+                if (review != null && rating != null) {
+                    AddFeddback(`dennyfpr@gmail.com`, rating, review);
                 }
             });
-        });
+        }
     }
 }
 
