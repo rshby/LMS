@@ -286,9 +286,9 @@ function FillDashboard() {
             }
             else {
                 Swal.fire({
-                    icon = 'error',
-                    title = 'Pembayaran Gagal',
-                    text = 'Batas Waktu Pembayaran Telah Habis'
+                    icon : 'error',
+                    title : 'Pembayaran Gagal',
+                    text : 'Batas Waktu Pembayaran Telah Habis'
                 }).then(function () {
                     location.reload();
                 });
