@@ -1,9 +1,14 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
+
 // Ini punya denny
 
 // Ini punya denny
 // Ini punya denny
+
+// Ini Punya Reo
+// Write your JavaScript code.
+
 
 let dashboard = document.getElementById("dashboard");
 let codemyClasses = document.getElementById("codemyClasses");
@@ -261,6 +266,7 @@ function FillDashboard() {
                             <td><button id="btnP${val.class_Id}" type="button" class="btn btn-outline-dark" onclick="payClass${val.class_Id}()">Konfirmasi Pembayaran</button></td>
                         </tr>`;
     });
+
     $('#unpaidClass').html(unpaidCont);
 
     $.each(unpaidTb, function (idx, val) {
@@ -269,9 +275,30 @@ function FillDashboard() {
         window[`payClass${val.class_Id}`].addEventListener('click', function () {
             pStatus = payStatus(`${val.class_Id}`);
             if (pStatus == "pending") {
-                alert(`Harap melakuukan pembayaran untuk Kelas ${val.class_Name} terlebih dahulu.`);
-            } else if (pStatus == "settlement") {
-                alert(`Pembayaran Kelas ${val.class_Name} berhasil dikonfirmasi!`)
+                Swal.fire({
+                    icon : 'warning',
+                    title : 'Pembayaran Tertunda',
+                    text : 'Mohon Selesaikan Pembayaran'
+                }).then(function () {
+                    location.reload();
+                });
+            } else if (pStatus == "sukses") {
+                Swal.fire({
+                    icon : 'success',
+                    title : 'Pembayaran Sukses',
+                    text : 'Pembayaran Berhasil Dikonfirmasi'
+                }).then(function () {
+                    location.reload();
+                });
+            }
+            else {
+                Swal.fire({
+                    icon = 'error',
+                    title = 'Pembayaran Gagal',
+                    text = 'Batas Waktu Pembayaran Telah Habis'
+                }).then(function () {
+                    location.reload();
+                });
             }
         });
     });
@@ -668,9 +695,19 @@ function FillClassDetView() {
                 window[`continue${val.chapter}`].addEventListener('click', function () {
                     continueChap = ContinueProgressChap(`dennyfpr@gmail.com`);
                     if (continueChap.status == 200) {
-                        alert(`Chapter ${val.chapter} telah diselesaikan`);
+                        Swal.fire({
+                            icon: 'success',
+                            text: `Chapter ${val.chapter} Telah Diselesaikan`
+                        }).then(function () {
+                            location.reload();
+                        });
                     } else {
-                        alert(`Terjadi kesalahan menyelesaikan Chapter ${val.chapter}`);
+                        Swal.fire({
+                            icon: 'error',
+                            text: `Terjadi Kesalahan Dalam Menyelesaikan Chapter ${val.chapter}`
+                        }).then(function () {
+                            location.reload();
+                        });
                     }
                 });
             });
