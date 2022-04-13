@@ -370,7 +370,7 @@ function FillClassesView() {
     let levels = GetAllLevels();
     let lvFilter = ``;
     let ctgFilter = ``;
-    let classesContent = ``;
+    let classesContent = `<div id="class-list"><ul class="list" style="list-style: none; margin: 0; padding: 0;">`;
     let i = 0;
 
     $.each(categories, function (idx, val) {
@@ -398,10 +398,10 @@ function FillClassesView() {
         bPrice = BetterPriceView(val.class_Price)
 
         if ((idx + 1) % 2 != 0) {
-            classesContent += `<div class="row mb-3">`
+            classesContent += `<div class="row mb-3 mx-2">`
         }
 
-        classesContent += `<div class="col-sm">
+        classesContent += `<li><div class="col-sm">
                             <div class="card">
                                 <div class="card-body text-left">
                                     <div class="row">
@@ -417,19 +417,26 @@ function FillClassesView() {
                                     </div>
                                 </div>
                             </div>
-                       </div>`
+                       </div></li>`
 
         if ((idx + 1) % 2 == 0) {
             classesContent += `</div>`
         }
     });
+    classesContent += `</ul><ul class="pagination justify-content-center"></ul></div>`;
     $('#classes').html(classesContent);
     $('#filters').html(filters);
+
+    var classList = new List('class-list', {
+        valueNames: ['name'],
+        page: 2,
+        pagination: true
+    });
 }
 function updLv() {
     let updated = $('#lv').val();
     let classes = GetAllClasses();
-    let cList = ``;
+    let cList = `<div id="class-list"><ul class="list" style="list-style: none; margin: 0; padding: 0;">`;
     let i = 1;
     let ii = 0;
     updated.forEach
@@ -440,7 +447,7 @@ function updLv() {
                     i++;
                 }
                 if (elm == val.level_Name) {
-                    cList += `<div class="col-sm mb-3">
+                    cList += `<li><div class="col-sm mb-3">
                             <div class="card">
                                 <div class="card-body text-left">
                                     <div class="row">
@@ -456,7 +463,7 @@ function updLv() {
                                     </div>
                                 </div>
                             </div>
-                       </div>`;
+                       </div></li>`;
                     ii++;
                 }
                 if (i % 2 != 0) {
@@ -465,7 +472,7 @@ function updLv() {
             })
         );
     if (ii % 2 != 0) {
-        cList += `<div class="col-sm mb-3 invisible">
+        cList += `<li><div class="col-sm mb-3 invisible">
                             <div class="card">
                                 <div class="card-body text-left">
                                     <div class="row">
@@ -473,17 +480,23 @@ function updLv() {
                                     </div>
                                 </div>
                             </div>
-                       </div>`;
+                       </div></li>`;
     }
     if (updated.length != 0) {
+        cList += `</ul><ul class="pagination justify-content-center"></ul></div>`;
         $('#classes').html(cList);
+        var classList = new List('class-list', {
+            valueNames: ['name'],
+            page: 2,
+            pagination: true
+        });
     } else {
         $.each(classes, function (idx, val) {
             if (i % 2 != 0) {
                 cList += `<div class="row mb-3">`;
                 i++;
             }
-            cList += `<div class="col-sm mb-3">
+            cList += `<li><div class="col-sm mb-3">
                             <div class="card">
                                 <div class="card-body text-left">
                                     <div class="row">
@@ -499,13 +512,19 @@ function updLv() {
                                     </div>
                                 </div>
                             </div>
-                       </div>`;
+                       </div></li>`;
             ii++;
             if (i % 2 != 0) {
                 cList += `</div>`;
             }
         })
+        cList += `</ul><ul class="pagination justify-content-center"></ul></div>`;
         $('#classes').html(cList);
+        var classList = new List('class-list', {
+            valueNames: ['name'],
+            page: 2,
+            pagination: true
+        });
     }
 }
 
