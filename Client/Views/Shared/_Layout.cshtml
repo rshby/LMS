@@ -87,7 +87,7 @@
                                 <div class="text-right">
                                     <small><a href="#registerModal" class="text-dark font-italic" data-target="#registerModal" data-toggle="modal" data-dismiss="modal">Belum memiliki akun?</a></small>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block mt-1 mb-4 font-weight-bold">Register</button>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block mt-1 mb-4 font-weight-bold">Login</button>
                             </form>
                         </div>
                     </div>
@@ -107,69 +107,58 @@
                     <div class="modal-body">
                         <div class="container">
                             <form class="mx-2">
-                                <div class="form-row">
+                                <div class="form-row mb-4">
                                     <div class="form-group col-md-6">
                                         <label for="inEmail">Email</label>
-                                        <input type="email" class="form-control" id="inEmail" placeholder="Email">
+                                        <input type="email" class="form-control" id="inEmail" placeholder="address@mail.com">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inPass">Password</label>
                                         <input type="password" class="form-control" id="inPass" placeholder="********">
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inFName">Nama</label>
+                                <div class="form-row mb-4">
+                                    <div class="form-group col-md-3">
+                                        <label for="inFName">Nama Depan</label>
                                         <input type="text" class="form-control" id="inFName" placeholder="John">
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inLName" class="invisible">L</label>
+                                    <div class="form-group col-md-3">
+                                        <label for="inLName" class="">Nama Belakang</label>
                                         <input type="text" class="form-control" id="inLName" placeholder="Doe">
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-3">
+                                        <label for="inBDate">Tanggal Lahir</label>
+                                        <input type="date" class="form-control" id="inBDate">
+                                        <span class="input-group-append"></span>
+                                    </div>
+                                    <div class="form-group col-md-3">
                                         <label for="inGender">Kelamin</label>
                                         <select class="form-control" id="inGender">
                                             <option>Male</option>
                                             <option>Female</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-6 mb-0">
-                                        <label for="inBDate">Tanggal Lahir</label>
-                                        <div class="form-group">
-                                            <div class="datepicker date input-group">
-                                                <input type="text" placeholder="cth: 2012-12-21" class="form-control" id="inBDate">
-                                                <span class="input-group-append"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="inProv">Provinsi</label>
-                                        <select id="inProv" class="form-control">
-                                            <option selected>Choose...</option>
-                                            <option>Ab</option>
-                                            <option>Bc</option>
-                                            <option>Cd</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="inCity">Kota</label>
-                                        <select id="inCity" class="form-control">
-                                            <option selected>Choose...</option>
-                                            <option>Ab</option>
-                                            <option>Bc</option>
-                                            <option>Cd</option>
-                                        </select>
-                                    </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
+                                        <label for="inProv">Provinsi</label>
+                                        <select id="inProv" class="form-control">
+                                            <option>Ab</option>
+                                            <option>Bc</option>
+                                            <option>Cd</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="inCity">Kota</label>
+                                        <select id="inCity" class="form-control">
+                                            <option>Ab</option>
+                                            <option>Bc</option>
+                                            <option>Cd</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-3">
                                         <label for="inDis">Kecamatan</label>
                                         <select id="inDis" class="form-control">
-                                            <option selected>Choose...</option>
                                             <option>Ab</option>
                                             <option>Bc</option>
                                             <option>Cd</option>
@@ -178,21 +167,26 @@
                                     <div class="form-group col-md-3">
                                         <label for="inSubDis">Kelurahan</label>
                                         <select id="inSubDis" class="form-control">
-                                            <option selected>Choose...</option>
                                             <option>Ab</option>
                                             <option>Bc</option>
                                             <option>Cd</option>
                                         </select>
                                     </div>
+                                </div>
+                                <div class="form-row mb-4">
                                     <div class="form-group col-md-6">
                                         <label for="inAddress">Alamat</label>
-                                        <input type="text" class="form-control" id="inAddress">
+                                        <input type="text" class="form-control" id="inAddress" placeholder="Jl. Menuju Grade A">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inPhone">Nomor Handphone</label>
+                                        <input type="text" class="form-control" id="inPhone" placeholder="081974658394">
                                     </div>
                                 </div>
-                                <div class="form-row">
+                                <div class="form-row mb-3">
                                     <div class="form-group col-md-6">
                                         <label for="inMajor">Jurusan</label>
-                                        <input type="text" class="form-control" id="inMajor">
+                                        <input type="text" class="form-control" id="inMajor" placeholder="Teknik Komputer">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inUniv">Universitas</label>
@@ -204,7 +198,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block mt-1 mb-4 font-weight-bold">Login</button>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block mt-1 mb-4 font-weight-bold">Register</button>
                             </form>
                         </div>
                     </div>
@@ -218,6 +212,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 
     <!-- Script JS Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
