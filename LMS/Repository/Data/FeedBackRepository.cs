@@ -121,9 +121,10 @@ namespace LMS.Repository.Data
                 myContext.SaveChanges();
 
                 //Siapkan variabel untuk menampung data certificat yang akan diinsert
+                var codeSertif = new Random().Next(111111, 999999).ToString();
                 Certificate dataSertif = new Certificate()
                 {
-                    Code = new Random().Next(111111, 999999).ToString(),
+                    Code = $"{dataTC.Email}_{dataTC.Id}_{dataTC.Class_Id}_{codeSertif}",
                     TakenClass_Id = dataTC.Id
                 };
 
