@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Client</title>
 
-    <link rel="stylesheet" href="~/css/formSetting.css" />
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/formSetting.css">
 
     <!-- SweetAleret -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -167,7 +168,7 @@
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon bi bi-pencil-square"></i>
                                 <p>
-                                    Content Management
+                                    Section Management
                                     <i class="right bi bi-caret-down"></i>
                                 </p>
                             </a>
@@ -183,7 +184,7 @@
                                 <li class="nav-item">
                                     <a href="https://localhost:44329/datasection" class="nav-link">
                                         <i class="bi bi-file-ruled nav-icon"></i>
-                                        <p>Table Content</p>
+                                        <p>Table Section</p>
                                     </a>
                                 </li>
                             </ul>
@@ -249,15 +250,22 @@
         </footer>
     </div>
     <!-- ./wrapper -->
+
     <!-- REQUIRED SCRIPTS -->
+
     <!-- jQuery -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!--Validation CDN-->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
     <!-- Bootstrap 4 -->
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/js/dataTable.js"></script>
-
+    <script src="~/js/Validate.js"></script>
 
     <!-- AdminLTE App -->
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
@@ -271,6 +279,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.colVis.min.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

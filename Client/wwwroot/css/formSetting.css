@@ -5,3 +5,9 @@
     padding : 60px;
 }
 
+label.error {
+    color: red;
+    font-style: italic;
+    width: 100%;
+    padding-left: 5px;
+}

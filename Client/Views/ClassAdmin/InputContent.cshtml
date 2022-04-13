@@ -13,12 +13,11 @@
     </head>
     <body>
         <content>
-            <form class="canvas shadow">
+            <form class="canvas shadow needs-validation" onsubmit="return false" novalidate id ="formSection">
 
                 <div class="form-group">
                     <label for="class">Choose Class</label>
                     <select name="class" class="form-control" id="class-id">
-                        
                     </select>
                 </div>
 
@@ -39,7 +38,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="InsertContent()">Create</button>
+                    <button type="button" class="btn btn-primary" onclick="InsertSection()">Create</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </form>

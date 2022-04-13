@@ -116,6 +116,8 @@ namespace LMS.Repository.Data
             }
         }
 
+
+
         //Get Semua Master Class
         public List<ClassVM> AllMasterClass()
         {
