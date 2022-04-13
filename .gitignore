@@ -561,3 +561,5 @@ FodyWeavers.xsd
 LMS/obj/Debug/netcoreapp3.1/LMS.csproj.AssemblyReference.cache
 *.cache
 .vs/LMS/v17/.suo
+.vs/LMS/v17/.suo
+*.v1
