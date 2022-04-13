@@ -41,8 +41,9 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
+                        status = 404,
                         message = "data tidak ditemukan"
                     });
                 }
@@ -75,8 +76,9 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
+                        status = 404,
                         message = "data tidak ditemukan"
                     });
                 }
@@ -121,7 +123,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = $"data dengan email {inputData.Email} tidak ada di database"
@@ -157,7 +159,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = "data pembayaran tidak ditemukan"

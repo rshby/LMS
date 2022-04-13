@@ -556,3 +556,10 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudio,aspnetcore
+.vs/LMS/v17/.suo
+.vs/LMS/DesignTimeBuild/.dtbcache.v2
+LMS/obj/Debug/netcoreapp3.1/LMS.csproj.AssemblyReference.cache
+*.cache
+.vs/LMS/v17/.suo
+.vs/LMS/v17/.suo
+*.v1

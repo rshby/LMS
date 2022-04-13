@@ -45,7 +45,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return BadRequest(new
+                        return Ok(new
                         {
                             status = 400,
                             message = "Data feedback pada kelas ini sudah pernah diinput"
@@ -54,7 +54,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = "data email dan kelas yang dimaksud tidak ada di database"
@@ -93,7 +93,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return NotFound(new
+                        return Ok(new
                         {
                             status = 404,
                             message = "data tidak ditemukan"
@@ -102,7 +102,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = "data Email dan Class_Id tidak ada di database"
