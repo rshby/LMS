@@ -82,7 +82,7 @@ $(document).ready(function () {
                     return `<div class = "row">
                                 <div style = "margin: auto;">
                                 <button type="button" id="" class="btn btn-primary" data-toggle="modal" data-target="#modalUpdate" onclick = "ReadClass(${data.id})"><span class="bi bi-pencil-fill"> </span> </button> &nbsp;
-                                <button type="button" class="btn btn-primary" onclick = "DeleteSection(${data.id})"><span class="bi bi-trash3-fill"> </span> </button> &nbsp;
+                                <button type="button" class="btn btn-primary" onclick = "DeleteClass(${data.id})"><span class="bi bi-trash3-fill"> </span> </button> &nbsp;
                                 </div>
                             </div>`
                 }
@@ -173,14 +173,14 @@ function LevelConv(levelId) {
 }
 
 function CategoryConv(cateId) {
-    var data;
+    var data = new Object();
     $.ajax({
         type: "GET",
         url: `https://localhost:44376/api/Categories/${cateId}`,
-        data: 'data',
         async: false
     }).done((result) => {
-        data = result.name;
+        data.name = result.name;
+        data.id = result.id;
         return data;
     }).fail((error) => {
         return error;
@@ -321,17 +321,19 @@ function DeleteSection(id) {
 }
 
 function ReadClass(key) {
+    
     $.ajax({
         type: "GET",
         url: `https://localhost:44376/api/classes/${key}`,
         dataType: "JSON",
-        data: 'data',
         async: false
     }).done((result) => {
         var text = "";
         var data = result;
         var level = data.level_Id;
         var category = data.category_Id;
+        var temp = CategoryConv(category);
+
         text += `
                     <div class="form-group">
                         <label for="rating">Rating</label>
@@ -382,7 +384,7 @@ function ReadClass(key) {
                                 <input type="text" name="category" value="${data.category_Id}" disabled class="form-control" id="category-id">
                             </div>
                             <div class = "col">
-                                <input type="text" name="category" value="${CategoryConv(category)}" disabled class="form-control" id="category">
+                                <input type="text" name="category" value="${temp.id}" disabled class="form-control" id="category">
                             </div>
                         </div>
                     </div>
