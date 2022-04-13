@@ -45,7 +45,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return NotFound(new
+                        return Ok(new
                         {
                             status = 404,
                             message = "data City tidak ditemukan"
@@ -54,7 +54,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = "data Province dengan Id tersebut tidak ditemukan"

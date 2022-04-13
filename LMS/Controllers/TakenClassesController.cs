@@ -56,7 +56,7 @@ namespace LMS.Controllers
                         }
                         else
                         {
-                            return BadRequest(new
+                            return Ok(new
                             {
                                 status = 400,
                                 message = "Kelas sudah pernah didaftar"
@@ -65,7 +65,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return NotFound(new
+                        return Ok(new
                         {
                             status = 404,
                             message = $"Kelas dengan Id {inputData.Class_Id} tidak ada di database"
@@ -74,7 +74,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = $"data dengan email {inputData.Email} tidak ditemukan"
@@ -84,7 +84,7 @@ namespace LMS.Controllers
             catch (Exception e)
             {
 
-                return BadRequest(new
+                return Ok(new
                 {
                     message = "gagal register taken class",
                     error = e.Message
@@ -117,7 +117,7 @@ namespace LMS.Controllers
                     else
                     {
                         //Data Kosong
-                        return NotFound(new
+                        return Ok(new
                         {
                             status = 404,
                             message = "data tidak ditemukan"
@@ -126,7 +126,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = $"data dengan email {email} tidak ditemukan"
@@ -167,7 +167,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return NotFound(new
+                        return Ok(new
                         {
                             status = 404,
                             message = "data tidak ditemukan"
@@ -176,7 +176,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = $"data dengan email {inputData.Email} tidak ada di database"
@@ -216,7 +216,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return NotFound(new
+                        return Ok(new
                         {
                             status = 404,
                             message = "data tidak ditemukan"
@@ -225,7 +225,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = "data dengan id tersebut tidak ada"
@@ -266,7 +266,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return NotFound(new
+                        return Ok(new
                         {
                             status = 404,
                             message = "data tidak ditemukan"
@@ -275,7 +275,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = "data email dan class id tidak ditemukan di database"
@@ -324,7 +324,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return BadRequest(new
+                        return Ok(new
                         {
                             status = 400,
                             message = "gagal next chapter"
@@ -333,7 +333,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = "data email atau class id tidak ditemukan di database"
@@ -376,7 +376,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return NotFound(new
+                        return Ok(new
                         {
                             status = 404,
                             message = "data tidak ditemukan"
@@ -385,7 +385,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = $"data dengan email {inputData.Email} tidak ditemukan"
@@ -421,7 +421,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 400,
                         message = "data tidak ditemukan"
