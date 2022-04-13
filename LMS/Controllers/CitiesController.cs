@@ -10,15 +10,15 @@ namespace LMS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LevelsController : BaseController<Level, LevelRepository, int>
+    public class CitiesController : BaseController<City, CityRepository, int>
     {
-        private readonly LevelRepository repository;
+        private readonly CityRepository cityRepo;
         public IConfiguration configuration;
 
         //Constructor
-        public LevelsController(LevelRepository repository, IConfiguration configuration) : base(repository)
+        public CitiesController(CityRepository cityRepo, IConfiguration configuration) : base(cityRepo)
         {
-            this.repository = repository;
+            this.cityRepo = cityRepo;
             this.configuration = configuration;
         }
     }

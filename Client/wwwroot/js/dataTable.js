@@ -80,8 +80,10 @@ $(document).ready(function () {
                 "data": null,
                 render: function (data, type, row) {
                     return `<div class = "row">
-                                <button type="button" id="" class="btn btn-primary" data-toggle="modal" data-target="#modalUpdate" onclick = "update(${data.id})"><span class="bi bi-pencil-fill"> </span> </button> &nbsp;
-                                <button type="button" class="btn btn-primary" onclick = "DeleteClass(${data.id})"><span class="bi bi-trash3-fill"> </span> </button> &nbsp;
+                                <div style = "margin: auto;">
+                                <button type="button" id="" class="btn btn-primary" data-toggle="modal" data-target="#modalUpdate" onclick = "ReadClass(${data.id})"><span class="bi bi-pencil-fill"> </span> </button> &nbsp;
+                                <button type="button" class="btn btn-primary" onclick = "DeleteSection(${data.id})"><span class="bi bi-trash3-fill"> </span> </button> &nbsp;
+                                </div>
                             </div>`
                 }
             }
@@ -117,13 +119,24 @@ $(document).ready(function () {
             { "data": "chapter" },
             { "data": "content" },
             { "data": "class_Id" },
-            { "data": null }
+            {
+                "data": null,
+                render: function (data, type, row) {
+                    return `<div class = "row">
+                               <div style = "margin: auto;">
+                                <button type="button" id="" class="btn btn-primary" data-toggle="modal" data-target="#modalUpdate" onclick = "ReadSection(${data.id})"><span class="bi bi-pencil-fill"> </span> </button> &nbsp;
+                                <button type="button" class="btn btn-primary" onclick = "DeleteSection(${data.id})"><span class="bi bi-trash3-fill"> </span> </button> &nbsp;
+                                </div>
+                            </div>`
+                }
+            }
         ]
     })
 
     //Read Form
     ReadLevel();
     ReadCategory();
+    GetReadyClass();
 });
 
 function ReadLevel() {
@@ -175,6 +188,22 @@ function CategoryConv(cateId) {
     return data;
 }
 
+function ClassConv(classId) {
+    var data;
+    $.ajax({
+        type: "GET",
+        url: `https://localhost:44376/api/Classes/${classId}`,
+        async: false
+    }).done((result) => {
+        data = result.name;
+        return data;
+    }).fail((error) => {
+        return error;
+    })
+    return data;
+}
+
+
 function ReadCategory() {
     $.ajax({
         type: "GET",
@@ -203,7 +232,7 @@ function InsertClass() {
     inClass.Level_Id = Number($("#level").val());
     inClass.Category_Id = Number($("#cate").val());
 
-    console.log(inClass);
+    //console.log(inClass);
 
     Swal.fire({
         title: 'Insert Class',
@@ -262,12 +291,41 @@ function DeleteClass(id) {
     })
 }
 
-function update(key) {
+function DeleteSection(id) {
+    Swal.fire({
+        title: "Delete Section?",
+        text: "Sure Delete this Section?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: "#89CFF0",
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "DELETE",
+                url: `https://localhost:44376/api/sections/${id}`,
+                async: false
+            }).done((deleted => {
+                Swal.fire(
+                    'Deleted Section'
+                ).then((result) => {
+                    location.reload();
+                })
+            })
+            )
+        }
+    }).fail((error) => {
+        return error;
+    })
+}
+
+function ReadClass(key) {
     $.ajax({
         type: "GET",
         url: `https://localhost:44376/api/classes/${key}`,
         dataType: "JSON",
-        data : 'data',
+        data: 'data',
         async: false
     }).done((result) => {
         var text = "";
@@ -340,23 +398,78 @@ function update(key) {
     })
 }
 
+function ReadSection(sectionId) {
+    $.ajax({
+        type: "GET",
+        url: `https://localhost:44376/api/sections/${sectionId}`,
+        dataType: "JSON",
+        data: 'data',
+        async: false
+    }).done((section) => {
+        var text = "";
+        var data = section;
+        var tempClass = ClassConv(data.class_Id);
+        text += `
+
+                    <div class="form-group">
+                        <label for="class_Id">Id / Name Class</label>
+                        <div class = "row">
+                            <div class = "col">
+                                <input type="text" name="class_Id" value="${data.class_Id}" disabled class="form-control" id="class_id">
+                            </div>
+                            <div class = "col">
+                                <input type="text" name="class_Id" value="${tempClass}" disabled class="form-control" id="class">
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="tittlesection">Tittle Section</label>
+                        <input type="text" name="tittlesection"  value="${data.name}" class="form-control" id="tittlesection">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="chapter">Chapter</label>
+                        <input type="text" disabled name="chapter" class="form-control" value="${data.chapter}" id="chapter">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">Content Video Code URL</label>
+                        <input type="text" name="content" class="form-control" value="${data.content}" id="content">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="EditSection(${data.Id})">Edit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+        `;
+
+        $('#form-section').html(text);
+    })
+}
+
+
 function EditClass(classId) {
 
-    const temp = new Object();
+    let temp = new Object();
 
-    temp.Id = classId,
+    temp.Id = classId;
     temp.Name = $('#judul').val();
     temp.UrlPic = $('#url').val();
     temp.Desc = $('#descEdit').val();
-    temp.TotalChapter = $('#totChapter').val();
-    temp.Price = $('#price').val();
-    temp.Rating = $('#rating').val();
-    temp.Level_Id = $('#level-id').val();
-    temp.Category_Id = $('#category-id').val();
+    temp.TotalChapter = Number($('#totChapter').val());
+    temp.Price = Number($('#price').val());
+    temp.Level_Id = Number($('#level-id').val());
+    temp.Category_Id = Number($('#category-id').val());
 
+    //console.log(temp);
     $.ajax({
-        type: "PUT",
-        url: `https://localhost:44376/api/classes/updateclass`,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        type: 'PUT',
+        url: `https://localhost:44376/api/classes/UpdateClass`,
         dataType: 'JSON',
         data: JSON.stringify(temp)
     }).done((result) => {
@@ -369,4 +482,110 @@ function EditClass(classId) {
         )
     })
 }
+
+function EditSection(sectionId) {
+
+    let temp = new Object();
+
+    temp.class_id = Number($('#class_id').val());
+    temp.name = $('#tittlesection').val();
+    temp.chapter = Number($('#chapter').val());
+    temp.content = $('#content').val();
+
+    console.log(temp);
+    $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        type: 'PUT',
+        url: `https://localhost:44376/api/classes/UpdateContent`,
+        dataType: 'JSON',
+        data: JSON.stringify(temp)
+    }).done((result) => {
+        Swal.fire(
+            'Updated Section'
+        ).then((result) => {
+            location.reload();
+        })
+    }).fail((result) => {
+        Swal.fire(
+            'Failed Update Section'
+        )
+    })
+}
+
+
+
+function InsertContent() {
+    //insert value obj
+    const inContent = new Object();
+    inContent.class_id = Number($("#class-id").val());
+    inContent.chapter = Number($("#onSection").val());
+    inContent.name = $("#name").val();
+    inContent.content = $("#link-video").val();
+
+    console.log(inContent);
+
+    Swal.fire({
+        title: 'Insert Sectioin',
+        text: 'Insert New Section?',
+        showCancelButton: true,
+        confirmButtonColor: "#89CFF0",
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                type: "POST",
+                url: "https://localhost:44376/api/classes/InputContent",
+                dataType: "json",
+                data: JSON.stringify(inContent)
+            }).done((result) => {
+                location.reload();
+            }).fail((error) => {
+                Swal.fire
+                'Failed Insert'
+            })
+        }
+    })
+}
+
+function GetReadyClass() {
+    $.ajax({
+        type: 'GET',
+        url: 'https://localhost:44376/api/classes'
+    }).done((result) => {
+        var data = result.data
+        var text = `<option disabled selected> ~Choose Class~ </option>`;
+        $.each(data, function (key, val) {
+            text += `<option value = "${val.id}"> ${val.name}</option>`;
+        });
+        $('#class-id').html(text);
+    }).fail((error) => {
+        error.message(error)
+    })
+}
+
+
+$('#class-id').on('change', function () {
+    var valueSelected = this.value;
+    $.ajax({
+        type: 'GET',
+        url: `https://localhost:44376/api/classes/${valueSelected}`,
+        async: false
+    }).done((result) => {
+        var text = `<option disabled selected> ~Choose Contain Section~ </option>`;
+        //console.log(result.totalChapter);
+        for (var i = 0; i < result.totalChapter; i++) {
+            text += `<option value = "${i + 1}"> ${i + 1}</option>`;
+        }
+        $('#onSection').html(text);
+    })
+});
+
 
