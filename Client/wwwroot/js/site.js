@@ -1,18 +1,36 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Ini punya denny
-
-// Ini punya denny
-// Ini punya denny
-
-// Ini Punya Reo
-// Write your JavaScript code.
-
-
-let dashboard = document.getElementById("dashboard");
+﻿let dashboard = document.getElementById("dashboard");
 let codemyClasses = document.getElementById("codemyClasses");
 let codemyClassesDetail = document.getElementById("codemyClassesDetail");
+
+$(function () {
+    // INITIALIZE DATEPICKER PLUGIN
+    $('.datepicker').datepicker({
+        clearBtn: true,
+        format: "dd/mm/yyyy"
+    });
+});
+
+function readSession() {
+    let inOut = ``;
+    let Modal = ``;
+    if (false) {
+        inOut = `<a class="nav-item nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Account
+                 </a>
+                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                     <a class="dropdown-item" href="~/dashboard">My Classes</a>
+                     <a class="dropdown-item" href="~/account">My Account</a>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="#">Logout</a>
+                 </div>`;
+    } else {
+        inOut = `<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#loginModal">Login</button>`;
+        Modal = ``;
+    }
+    $('#loginLogout').html(inOut);
+    /*$('#navModal').html(Modal);*/
+}
+readSession();
 
 function GetAllClasses() {
     let data = {};
@@ -277,7 +295,7 @@ function FillDashboard() {
             if (pStatus == "pending") {
                 Swal.fire({
                     icon : 'warning',
-                    title : 'Pembayaran Tertunda',
+                    title : 'Pembayaran Belum Diterima',
                     text : 'Mohon Selesaikan Pembayaran'
                 }).then(function () {
                     location.reload();
@@ -293,9 +311,9 @@ function FillDashboard() {
             }
             else {
                 Swal.fire({
-                    icon = 'error',
-                    title = 'Pembayaran Gagal',
-                    text = 'Batas Waktu Pembayaran Telah Habis'
+                    icon : 'error',
+                    title : 'Pembayaran Gagal',
+                    text : 'Batas Waktu Pembayaran Telah Habis'
                 }).then(function () {
                     location.reload();
                 });
