@@ -39,6 +39,7 @@ namespace LMS.Controllers
                 {
                     return Ok(new
                     {
+                        status = 200,
                         message = "Input berhasil"
                     });
                 }
@@ -46,10 +47,10 @@ namespace LMS.Controllers
                 {
                     return Ok(new
                     {
+                        status = 200,
                         message = "Input berhasil"
                     });
                 }
-
             }
             catch (Exception e)
             {
@@ -71,35 +72,37 @@ namespace LMS.Controllers
                 {
                     return Ok(new
                     {
+                        status = 200,
                         message = "Penyimpanan Berhasil"
                     });
                 }
                 else if (result == -200)
                 {
-                    return BadRequest(new
+                    return Ok(new
                     {
+                        status = 400,
                         message = "Input Gagal Karena Jumlah melebihi chapter"
                     });
                 }
                 else
                 {
-                    return BadRequest(new
+                    return Ok(new
                     {
+                        status = 400,
                         message = "Gagal Input Content"
                     });
                 }
             }
             catch (Exception e)
             {
-
                 return BadRequest(new
                 {
                     message = "Gagal Method Input",
                     e.Message
                 });
             }
-
         }
+
         [HttpPut("UpdateContent")]
         public ActionResult UpdateContent(InputContentVM input)
         {
@@ -110,20 +113,23 @@ namespace LMS.Controllers
                 {
                     return Ok(new
                     {
+                        status = 200,
                         message = "Edit Berhasil"
                     });
                 }
                 else if (result == -200)
                 {
-                    return BadRequest(new
+                    return Ok(new
                     {
+                        status = 400,
                         message = "Edit Gagal Karena Jumlah melebihi chapter"
                     });
                 }
                 else
                 {
-                    return BadRequest(new
+                    return Ok(new
                     {
+                        status = 400,
                         message = "Gagal Edit Content"
                     });
                 }
@@ -137,7 +143,6 @@ namespace LMS.Controllers
                     e.Message
                 });
             }
-
         }
 
         [HttpPut("UpdateClass")]
@@ -150,13 +155,15 @@ namespace LMS.Controllers
                 {
                     return Ok(new
                     {
+                        status = 200,
                         message = "Update Class Berhasil"
                     });
                 }
                 else
                 {
-                    return BadRequest(new
+                    return Ok(new
                     {
+                        status = 400,
                         message = "Gagal Update Class"
                     });
                 }
@@ -189,7 +196,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = "data tidak ditemukan"
@@ -225,7 +232,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = "data tidak ditemukan"
@@ -250,16 +257,27 @@ namespace LMS.Controllers
             try
             {
                 var data = repository.MasterPopuler();
-                return Ok(new
+
+                if (data.Count != 0)
                 {
-                    status = 200,
-                    message = "data ditemukan",
-                    data = data
-                }); ;
+                    return Ok(new
+                    {
+                        status = 200,
+                        message = "data ditemukan",
+                        data = data
+                    });
+                }
+                else
+                {
+                    return Ok(new
+                    {
+                        status = 404,
+                        message = "data tidak ditemukan"
+                    });
+                }
             }
             catch (Exception e)
             {
-
                 return BadRequest(new
                 {
                     message = "gagal get data",
@@ -275,12 +293,24 @@ namespace LMS.Controllers
             try
             {
                 var data = repository.MasterRating();
-                return Ok(new
+
+                if (data.Count != 0)
                 {
-                    status = 200,
-                    message = "data ditemukan",
-                    data = data
-                }); ;
+                    return Ok(new
+                    {
+                        status = 200,
+                        message = "data ditemukan",
+                        data = data
+                    });
+                }
+                else
+                {
+                    return Ok(new
+                    {
+                        status = 404,
+                        message = "data tidak ditemukan"
+                    });
+                }
             }
             catch (Exception e)
             {

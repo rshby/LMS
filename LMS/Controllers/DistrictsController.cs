@@ -43,7 +43,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return NotFound(new
+                        return Ok(new
                         {
                             status = 404,
                             message = "data District tidak ditemukan"
@@ -52,7 +52,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = "data City dengan Id tersebut tidak ada"
@@ -61,7 +61,6 @@ namespace LMS.Controllers
             }
             catch (Exception e)
             {
-
                 return BadRequest(new
                 {
                     message = "gagal get data",

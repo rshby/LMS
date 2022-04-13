@@ -43,7 +43,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return NotFound(new
+                        return Ok(new
                         {
                             status = 404,
                             message = "data tidak ditemukan"
@@ -52,10 +52,84 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = $"data class dengan id {inputClassId} tidak ada di database"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new
+                {
+                    message = "gagal get data",
+                    error = e.Message
+                });
+            }
+        }
+
+        //Menampilkan Semua Master Section
+        [HttpGet("master")]
+        public ActionResult AllMasterSection()
+        {
+            try
+            {
+                var data = repository.AllMasterSectionVM();
+
+                if (data.Count != 0)
+                {
+                    return Ok(new
+                    {
+                        status = 200,
+                        message = "data ditemukan",
+                        data = data
+                    });
+                }
+                else
+                {
+                    return Ok(new
+                    {
+                        status = 404,
+                        message = "data tidak ditemukan"
+                    });
+                }
+            }
+            catch (Exception e) 
+            {
+
+                return BadRequest(new {
+                    message = "gagal get data",
+                    error = e.Message
+                });
+            }
+        }
+
+        // Menampilkan Semua Master Section by Class_Id
+        [HttpGet("master/{ClassId}")]
+        public ActionResult MasterSectionByClassId(int ClassId)
+        {
+            try
+            {
+                var data = repository.AllMasterSectionByClassId(ClassId);
+
+                if (data.Count != 0)
+                {
+                    return Ok(new
+                    {
+                        status = 200,
+                        message = "data ditemukan",
+                        data = data
+                    });
+                }
+                else
+                {
+                    return Ok(new
+                    {
+                        status = 404,
+                        message = "data tidak ditemukan",
+                        data = data
                     });
                 }
             }

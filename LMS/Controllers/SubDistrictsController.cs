@@ -43,7 +43,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return NotFound(new
+                        return Ok(new
                         {
                             status = 404,
                             message = "data SubDistrict tidak ditemukan"
@@ -52,7 +52,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = "data District dengan Id tersebut tidak ada di database"
