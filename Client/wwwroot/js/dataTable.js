@@ -154,7 +154,7 @@ $(document).ready(function () {
             { "data": "takenClass_OrderId" },
             {
                 "data": null,
-                render : function(data, type, row) {
+                render: function (data, type, row) {
                     var temp = "";
                     if (data.takenClass_IsPaid == true) {
                         temp = "Already Paid";
@@ -299,79 +299,79 @@ function InsertClass() {
     }
 }
 
-    function DeleteClass(id) {
-        Swal.fire({
-            title: "Delete Class?",
-            text: "Sure Delete this Class?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: "#89CFF0",
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: "DELETE",
-                    url: `https://localhost:44376/api/classes/${id}`,
-                    async: false
-                }).done((deleted => {
-                    Swal.fire(
-                        'Deleted Class'
-                    ).then((result) => {
-                        location.reload();
-                    })
+function DeleteClass(id) {
+    Swal.fire({
+        title: "Delete Class?",
+        text: "Sure Delete this Class?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: "#89CFF0",
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "DELETE",
+                url: `https://localhost:44376/api/classes/${id}`,
+                async: false
+            }).done((deleted => {
+                Swal.fire(
+                    'Deleted Class'
+                ).then((result) => {
+                    location.reload();
                 })
-                )
-            }
-        }).fail((error) => {
-            return error;
-        })
-    }
+            })
+            )
+        }
+    }).fail((error) => {
+        return error;
+    })
+}
 
-    function DeleteSection(id) {
-        Swal.fire({
-            title: "Delete Section?",
-            text: "Sure Delete this Section?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: "#89CFF0",
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: "DELETE",
-                    url: `https://localhost:44376/api/sections/${id}`,
-                    async: false
-                }).done((deleted => {
-                    Swal.fire(
-                        'Deleted Section'
-                    ).then((result) => {
-                        location.reload();
-                    })
+function DeleteSection(id) {
+    Swal.fire({
+        title: "Delete Section?",
+        text: "Sure Delete this Section?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: "#89CFF0",
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "DELETE",
+                url: `https://localhost:44376/api/sections/${id}`,
+                async: false
+            }).done((deleted => {
+                Swal.fire(
+                    'Deleted Section'
+                ).then((result) => {
+                    location.reload();
                 })
-                )
-            }
-        }).fail((error) => {
-            return error;
-        })
-    }
+            })
+            )
+        }
+    }).fail((error) => {
+        return error;
+    })
+}
 
-    function ReadClass(key) {
+function ReadClass(key) {
 
-        $.ajax({
-            type: "GET",
-            url: `https://localhost:44376/api/classes/${key}`,
-            dataType: "JSON",
-            async: false
-        }).done((result) => {
-            var text = "";
-            var data = result;
-            var level = data.level_Id;
-            var category = data.category_Id;
-            var temp = CategoryConv(category);
+    $.ajax({
+        type: "GET",
+        url: `https://localhost:44376/api/classes/${key}`,
+        dataType: "JSON",
+        async: false
+    }).done((result) => {
+        var text = "";
+        var data = result;
+        var level = data.level_Id;
+        var category = data.category_Id;
+        var temp = CategoryConv(category);
 
-            text += `
+        text += `
                     <div class="form-group">
                         <label for="rating">Rating</label>
                         <input type="text" name="rating" disabled value="${data.rating}" class="form-control" id="rating">
@@ -431,24 +431,23 @@ function InsertClass() {
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
         `
-            $('#form-class').html(text);
-        }).fail((error) => {
-            console.log(error);
-        })
-    }
+        $('#form-class').html(text);
+    }).fail((error) => {
+        console.log(error);
+    })
+}
 
-    function ReadSection(sectionId) {
-        $.ajax({
-            type: "GET",
-            url: `https://localhost:44376/api/sections/${sectionId}`,
-            dataType: "JSON",
-            data: 'data',
-            async: false
-        }).done((section) => {
-            var text = "";
-            var data = section;
-            var tempClass = ClassConv(data.class_Id);
-            text += `
+function ReadSection(sectionId) {
+    $.ajax({
+        type: "GET",
+        url: `https://localhost:44376/api/sections/${sectionId}`,
+        dataType: "JSON",
+        async: false
+    }).done((section) => {
+        var text = "";
+        var data = section;
+        var tempClass = ClassConv(data.class_Id);
+        text += `
 
                     <div class="form-group">
                         <label for="class_Id">Id / Name Class</label>
@@ -483,30 +482,31 @@ function InsertClass() {
                     </div>
         `;
 
-            $('#form-section').html(text);
-        })
-    }
+        $('#form-section').html(text);
+    })
+}
 
 
-    function EditClass(classId) {
+function EditClass(classId) {
 
-        let temp = new Object();
+    let temp = new Object();
 
-        temp.Id = classId;
-        temp.Name = $('#judul').val();
-        temp.UrlPic = $('#url').val();
-        temp.Desc = $('#descEdit').val();
-        temp.TotalChapter = Number($('#totChapter').val());
-        temp.Price = Number($('#price').val());
-        temp.Level_Id = Number($('#level-id').val());
-        temp.Category_Id = Number($('#category-id').val());
+    temp.Id = classId;
+    temp.Name = $('#judul').val();
+    temp.UrlPic = $('#url').val();
+    temp.Desc = $('#descEdit').val();
+    temp.TotalChapter = Number($('#totChapter').val());
+    temp.Price = Number($('#price').val());
+    temp.Level_Id = Number($('#level-id').val());
+    temp.Category_Id = Number($('#category-id').val());
 
-        $("#formClass").validate({
-            errorPlacement: function (error, element) {
-            }
-        });
+    $("#formClass").validate({
+        errorPlacement: function (error, element) {
+        }
+    });
 
-        //console.log(temp);
+    //console.log(temp);
+    if ($("#formClass").valid()) {
         $.ajax({
             headers: {
                 'Accept': 'application/json',
@@ -526,49 +526,55 @@ function InsertClass() {
             )
         })
     }
+}
 
-    function EditSection(sectionId) {
+function EditSection(sectionId) {
 
-        let temp = new Object();
+    let temp = new Object();
 
-        temp.class_id = Number($('#class_id').val());
-        temp.name = $('#tittlesection').val();
-        temp.chapter = Number($('#chapter').val());
-        temp.content = $('#content').val();
+    temp.class_id = Number($('#class_id').val());
+    temp.name = $('#tittlesection').val();
+    temp.chapter = Number($('#chapter').val());
+    temp.content = $('#content').val();
 
-        console.log(temp);
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            type: 'PUT',
-            url: `https://localhost:44376/api/classes/UpdateContent`,
-            dataType: 'JSON',
-            data: JSON.stringify(temp)
-        }).done((result) => {
-            Swal.fire(
-                'Updated Section'
-            ).then((result) => {
-                location.reload();
-            })
-        }).fail((result) => {
-            Swal.fire(
-                'Failed Update Section'
-            )
+    console.log(temp);
+    $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        type: 'PUT',
+        url: `https://localhost:44376/api/classes/UpdateContent`,
+        dataType: 'JSON',
+        data: JSON.stringify(temp)
+    }).done((result) => {
+        Swal.fire(
+            'Updated Section'
+        ).then((result) => {
+            location.reload();
         })
-    }
+    }).fail((result) => {
+        Swal.fire(
+            'Failed Update Section'
+        )
+    })
+}
 
-    function InsertSection() {
-        //insert value obj
-        const inContent = new Object();
-        inContent.class_id = Number($("#class-id").val());
-        inContent.chapter = Number($("#onSection").val());
-        inContent.name = $("#name").val();
-        inContent.content = $("#link-video").val();
+function InsertSection() {
+    //insert value obj
+    const inContent = new Object();
+    inContent.class_id = Number($("#class-id").val());
+    inContent.chapter = Number($("#onSection").val());
+    inContent.name = $("#name").val();
+    inContent.content = $("#link-video").val();
 
-        //console.log(inContent);
+    //console.log(inContent);
 
+    $("#formSection").validate({
+        errorPlacement: function (error, element) {
+        }
+    });
+    if ($("#formSection").valid()) {
         Swal.fire({
             title: 'Insert Sectioin',
             text: 'Insert New Section?',
@@ -596,38 +602,39 @@ function InsertClass() {
             }
         })
     }
+}
 
-    function GetReadyClass() {
-        $.ajax({
-            type: 'GET',
-            url: 'https://localhost:44376/api/classes'
-        }).done((result) => {
-            var data = result.data
-            var text = `<option disabled selected> ~Choose Class~ </option>`;
-            $.each(data, function (key, val) {
-                text += `<option value = "${val.id}"> ${val.name}</option>`;
-            });
-            $('#class-id').html(text);
-        }).fail((error) => {
-            error.message(error)
-        })
-    }
+function GetReadyClass() {
+    $.ajax({
+        type: 'GET',
+        url: 'https://localhost:44376/api/classes'
+    }).done((result) => {
+        var data = result.data
+        var text = `<option disabled selected> ~Choose Class~ </option>`;
+        $.each(data, function (key, val) {
+            text += `<option value = "${val.id}"> ${val.name}</option>`;
+        });
+        $('#class-id').html(text);
+    }).fail((error) => {
+        error.message(error)
+    })
+}
 
 
-    $('#class-id').on('change', function () {
-        var valueSelected = this.value;
-        $.ajax({
-            type: 'GET',
-            url: `https://localhost:44376/api/classes/${valueSelected}`,
-            async: false
-        }).done((result) => {
-            var text = `<option disabled selected> ~Choose Contain Section~ </option>`;
-            //console.log(result.totalChapter);
-            for (var i = 0; i < result.totalChapter; i++) {
-                text += `<option value = "${i + 1}"> ${i + 1}</option>`;
-            }
-            $('#onSection').html(text);
-        })
-    });
+$('#class-id').on('change', function () {
+    var valueSelected = this.value;
+    $.ajax({
+        type: 'GET',
+        url: `https://localhost:44376/api/classes/${valueSelected}`,
+        async: false
+    }).done((result) => {
+        var text = `<option disabled selected> ~Choose Contain Section~ </option>`;
+        //console.log(result.totalChapter);
+        for (var i = 0; i < result.totalChapter; i++) {
+            text += `<option value = "${i + 1}"> ${i + 1}</option>`;
+        }
+        $('#onSection').html(text);
+    })
+});
 
 

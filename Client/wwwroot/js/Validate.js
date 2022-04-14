@@ -10,7 +10,7 @@ $("#formClass").validate({
     wrapper: "div",
     debug: false,
     rules: {
-        tittle: {
+        tittleCls: {
             required: true,
             minlength: 3
         },
@@ -40,7 +40,7 @@ $("#formClass").validate({
         }
     },
     messages: {
-        tittle: {
+        tittleCls: {
             required: '<i class="bi bi-x-octagon-fill"></i> Please enter text',
             minlength: '<i class="bi bi-x-octagon-fill"></i> Min 3 Character'
         },
@@ -69,10 +69,6 @@ $("#formClass").validate({
     }
 });
 
-jQuery.validator.setDefaults({
-    debug: true,
-    success: "valid"
-});
 
 $("#formSection").validate({
     ignore: [],
@@ -99,7 +95,7 @@ $("#formSection").validate({
             required: '<i class="bi bi-x-octagon-fill"></i> Choose class required'
         },
         chapter: {
-            required: '<i class="bi bi-x-octagon-fill"></i> Please enter Url'
+            required: '<i class="bi bi-x-octagon-fill"></i> Please enter chapter'
         },
         title: {
             required: '<i class="bi bi-x-octagon-fill"></i> Please enter tittle',
