@@ -13,7 +13,8 @@ $(function () {
 function readSession() {
     let inOut = ``;
     let Modal = ``;
-    if (false) {
+    
+    if ($("#sessionEmail").val() != null) {
         inOut = `<a class="nav-item nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      Account
                  </a>
