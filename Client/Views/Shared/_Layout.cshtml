@@ -31,15 +31,6 @@
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <div id="loginLogout">
-                                @*<a class="nav-item nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Account
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="~/dashboard">My Classes</a>
-                                        <a class="dropdown-item" href="~/account">My Account</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Logout</a>
-                                    </div>*@
                             </div>
                         </li>
                     </ul>
@@ -56,7 +47,13 @@
     </div>
 
     @* Footer *@
-    <footer class="border-top text-muted mt-5 pt-3 pb-3">
+    <footer class="border-top text-muted mt-5 pt-3 pb-3 invisible">
+        <div class="container-fluid">
+            <span class="ml-5">&copy; 2022 - Codemy - MCC Project</span>
+        </div>
+    </footer>
+
+    <footer class="footer border-top text-muted mt-5">
         <div class="container-fluid">
             <span class="ml-5">&copy; 2022 - Codemy - MCC Project</span>
         </div>
@@ -82,7 +79,7 @@
                                 <div class="form-group mb-3">
                                     <label for="LogPass">Password</label>
                                     <input type="password" class="form-control" id="LogPass" placeholder="*******">
-                                    <small><a href="#" class="text-dark font-italic">Lupa password?</a></small>
+                                    <small><a href="#forgotPass1Modal" class="text-dark font-italic" data-target="#forgotPass1Modal" data-toggle="modal" data-dismiss="modal">Lupa password?</a></small>
                                 </div>
                                 <div class="text-right">
                                     <small><a href="#registerModal" class="text-dark font-italic" data-target="#registerModal" data-toggle="modal" data-dismiss="modal">Belum memiliki akun?</a></small>
@@ -205,6 +202,30 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="forgotPass1Modal">
+            <div class="modal-dialog modal-dialog-centered" role="document" style="width: 22rem;">
+                <div class="modal-content">
+                    <div class="modal-header border-0 mt-3 mx-3">
+                        <h5>Forgot Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <form class="mx-2">
+                                <div class="form-group">
+                                    <label for="LogEmail">Email</label>
+                                    <input type="email" class="form-control" id="LogEmail" placeholder="example@mail.com">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block mt-1 mb-4 font-weight-bold">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -218,7 +239,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/account.js" asp-append-version="true"></script>
 
     @* Class Filter *@
     <script>

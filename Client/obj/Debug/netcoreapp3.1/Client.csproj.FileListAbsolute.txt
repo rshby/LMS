@@ -279,3 +279,4 @@ P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.dll
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.pdb
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.genruntimeconfig.cache
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.csproj.AssemblyReference.cache
+P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Certificate\Index.cshtml.g.cs
