@@ -23,7 +23,7 @@
                         <div class="form-group col">
                             <label for="InputGd">Jenis Kelamin</label>
                             <select class="custom-select mr-sm-2" id="InputGd" required>
-                                <option selected value="">Pilih ...</option>
+                                <option value="">Pilih ...</option>
                                 <option value="0">Laki-laki</option>
                                 <option value="1">Perempuan</option>
                             </select>
@@ -34,7 +34,7 @@
                             <label for="InputBd">Tanggal Lahir</label>
                             <div class="form-group">
                                 <div class="datepicker date input-group">
-                                    <input type="text" placeholder="cth: 2012-12-21" class="form-control" id="InputBd" required>
+                                    <input type="date" placeholder="cth: 2012-12-21" class="form-control" id="InputBd" required>
                                     <span class="input-group-append"></span>
                                 </div>
                             </div>
@@ -46,12 +46,8 @@
                     </div>
                     <div class="row">
                         <div class="form-group col">
-                            <label for="InputGp">IPK</label>
-                            <input type="text" class="form-control" id="InputGp" aria-describedby="inputGp" placeholder="cth: 4.00" required>
-                        </div>
-                        <div class="form-group col">
-                            <label for="InputDg">Jenjang</label>
-                            <input type="text" class="form-control" id="InputDg" aria-describedby="inputDg" placeholder="cth: S3" required>
+                            <label for="InputDg">Major</label>
+                            <input type="text" class="form-control" id="InputMajor" aria-describedby="inputMajor" placeholder="cth: Teknik Informatika" required>
                         </div>
                         <div class="form-group col">
                             <label for="InputUn">Universitas</label>
@@ -61,88 +57,34 @@
                     </div>
                     <div class="row">
                         <div class="form-group col">
-                            <label for="InputEm">Email</label>
-                            <input type="text" class="form-control" id="InputEm" aria-describedby="inputEm" placeholder="cth: contoh@binama.com" required>
-                        </div>
-                        <div class="form-group col">
-                            <label for="InputPw">Kata Sandi</label>
-                            <input type="password" class="form-control" id="InputPw" aria-describedby="inputPw" placeholder="cth: Ser1buU$D" required>
-                        </div>
-                    </div>
-                    <br />
-                    <button type="submit" id="dataSubmit" class="btn btn-primary rounded float-right" style="width: 150px">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-body">
-            <h4>Change Password</h4>
-            <div class="dropdown-divider"></div>
-            <div class="modal-body" id="DetailEmp">
-                @*<form class="needs-validation" novalidate>*@
-                <form id="addDataForm" class="needs-validation" novalidate>
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="InputFN">Nama Depan</label>
-                            <input type="text" class="form-control" id="InputFN" aria-describedby="inputFN" placeholder="cth: Budi" required>
-                        </div>
-                        <div class="form-group col">
-                            <label for="InputLN">Nama Belakang</label>
-                            <input type="text" class="form-control" id="InputLN" aria-describedby="inputLN" placeholder="cth: Setiawan" required>
-                        </div>
-                        <div class="form-group col">
-                            <label for="InputGd">Jenis Kelamin</label>
-                            <select class="custom-select mr-sm-2" id="InputGd" required>
-                                <option selected value="">Pilih ...</option>
-                                <option value="0">Laki-laki</option>
-                                <option value="1">Perempuan</option>
+                            <label for="InputProvince">Province</label>
+                            <select class="custom-select mr-sm-2" id="InputProvince" required>
                             </select>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col mb-0">
-                            <label for="InputBd">Tanggal Lahir</label>
-                            <div class="form-group">
-                                <div class="datepicker date input-group">
-                                    <input type="text" placeholder="cth: 2012-12-21" class="form-control" id="InputBd" required>
-                                    <span class="input-group-append"></span>
-                                </div>
-                            </div>
+                        <div class="form-group col">
+                            <label for="InputCity">City</label>
+                            <select class="custom-select mr-sm-2" id="InputCity" required>
+                            </select>
                         </div>
                         <div class="form-group col">
-                            <label for="InputPh">Nomor Telepon</label>
-                            <input type="text" class="form-control" id="InputPh" aria-describedby="inputPh" placeholder="cth: 0812xxxxxxx" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="InputGp">IPK</label>
-                            <input type="text" class="form-control" id="InputGp" aria-describedby="inputGp" placeholder="cth: 4.00" required>
-                        </div>
-                        <div class="form-group col">
-                            <label for="InputDg">Jenjang</label>
-                            <input type="text" class="form-control" id="InputDg" aria-describedby="inputDg" placeholder="cth: S3" required>
-                        </div>
-                        <div class="form-group col">
-                            <label for="InputUn">Universitas</label>
-                            <select class="custom-select mr-sm-2" id="InputUn" required>
+                            <label for="InputDistrict">District</label>
+                            <select class="custom-select mr-sm-2" id="InputDistrict" required>
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col">
-                            <label for="InputEm">Email</label>
-                            <input type="text" class="form-control" id="InputEm" aria-describedby="inputEm" placeholder="cth: contoh@binama.com" required>
+                            <label for="InputSubDistrict">Sub District</label>
+                            <select class="custom-select mr-sm-2" id="InputSubDistrict" required>
+                            </select>
                         </div>
                         <div class="form-group col">
-                            <label for="InputPw">Kata Sandi</label>
-                            <input type="password" class="form-control" id="InputPw" aria-describedby="inputPw" placeholder="cth: Ser1buU$D" required>
+                            <label for="InputUn">Street</label>
+                            <input type="text" class="form-control" id="InputStreet" aria-describedby="inputStreet" placeholder="cth: Jl. Merdeka" required>
                         </div>
                     </div>
                     <br />
-                    <button type="submit" id="dataSubmit" class="btn btn-primary rounded float-right" style="width: 150px">Submit</button>
+                    <button type="button" id="dataSubmit" class="btn btn-primary rounded float-right" onclick="UpdateMasterUser()" style="width: 150px">Update</button>
                 </form>
             </div>
         </div>

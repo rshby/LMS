@@ -565,3 +565,17 @@ LMS/obj/Debug/netcoreapp3.1/LMS.csproj.AssemblyReference.cache
 *.v1
 *.v2
 .vs/LMS/v17/.suo
+*.config
+*.v2
+*.v1
+.vs/LMS/v17/.suo
+*.dll
+*.pdb
+*.json
+*.dll
+*.pdb
+*.cache
+*.dll
+*.pdb
+*.cache
+*.cache

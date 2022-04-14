@@ -1,11 +1,36 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-
-let dashboard = document.getElementById("dashboard");
+﻿let dashboard = document.getElementById("dashboard");
 let codemyClasses = document.getElementById("codemyClasses");
 let codemyClassesDetail = document.getElementById("codemyClassesDetail");
+
+$(function () {
+    // INITIALIZE DATEPICKER PLUGIN
+    $('.datepicker').datepicker({
+        clearBtn: true,
+        format: "dd/mm/yyyy"
+    });
+});
+
+function readSession() {
+    let inOut = ``;
+    let Modal = ``;
+    if (false) {
+        inOut = `<a class="nav-item nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Account
+                 </a>
+                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                     <a class="dropdown-item" href="~/dashboard">My Classes</a>
+                     <a class="dropdown-item" href="~/account">My Account</a>
+                     <div class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="#">Logout</a>
+                 </div>`;
+    } else {
+        inOut = `<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#loginModal">Login</button>`;
+        Modal = ``;
+    }
+    $('#loginLogout').html(inOut);
+    /*$('#navModal').html(Modal);*/
+}
+readSession();
 
 function GetAllClasses() {
     let data = {};
@@ -259,6 +284,7 @@ function FillDashboard() {
                             <td><button id="btnP${val.class_Id}" type="button" class="btn btn-outline-dark" onclick="payClass${val.class_Id}()">Konfirmasi Pembayaran</button></td>
                         </tr>`;
     });
+
     $('#unpaidClass').html(unpaidCont);
 
     $.each(unpaidTb, function (idx, val) {
@@ -267,9 +293,30 @@ function FillDashboard() {
         window[`payClass${val.class_Id}`].addEventListener('click', function () {
             pStatus = payStatus(`${val.class_Id}`);
             if (pStatus == "pending") {
-                alert(`Harap melakuukan pembayaran untuk Kelas ${val.class_Name} terlebih dahulu.`);
-            } else if (pStatus == "settlement") {
-                alert(`Pembayaran Kelas ${val.class_Name} berhasil dikonfirmasi!`)
+                Swal.fire({
+                    icon : 'warning',
+                    title : 'Pembayaran Belum Diterima',
+                    text : 'Mohon Selesaikan Pembayaran'
+                }).then(function () {
+                    location.reload();
+                });
+            } else if (pStatus == "sukses") {
+                Swal.fire({
+                    icon : 'success',
+                    title : 'Pembayaran Sukses',
+                    text : 'Pembayaran Berhasil Dikonfirmasi'
+                }).then(function () {
+                    location.reload();
+                });
+            }
+            else {
+                Swal.fire({
+                    icon : 'error',
+                    title : 'Pembayaran Gagal',
+                    text : 'Batas Waktu Pembayaran Telah Habis'
+                }).then(function () {
+                    location.reload();
+                });
             }
         });
     });
@@ -323,7 +370,7 @@ function FillClassesView() {
     let levels = GetAllLevels();
     let lvFilter = ``;
     let ctgFilter = ``;
-    let classesContent = ``;
+    let classesContent = `<div id="class-list"><ul class="list" style="list-style: none; margin: 0; padding: 0;">`;
     let i = 0;
 
     $.each(categories, function (idx, val) {
@@ -351,10 +398,10 @@ function FillClassesView() {
         bPrice = BetterPriceView(val.class_Price)
 
         if ((idx + 1) % 2 != 0) {
-            classesContent += `<div class="row mb-3">`
+            classesContent += `<div class="row mb-3 mx-2">`
         }
 
-        classesContent += `<div class="col-sm">
+        classesContent += `<li><div class="col-sm">
                             <div class="card">
                                 <div class="card-body text-left">
                                     <div class="row">
@@ -370,19 +417,26 @@ function FillClassesView() {
                                     </div>
                                 </div>
                             </div>
-                       </div>`
+                       </div></li>`
 
         if ((idx + 1) % 2 == 0) {
             classesContent += `</div>`
         }
     });
+    classesContent += `</ul><ul class="pagination justify-content-center"></ul></div>`;
     $('#classes').html(classesContent);
     $('#filters').html(filters);
+
+    var classList = new List('class-list', {
+        valueNames: ['name'],
+        page: 2,
+        pagination: true
+    });
 }
 function updLv() {
     let updated = $('#lv').val();
     let classes = GetAllClasses();
-    let cList = ``;
+    let cList = `<div id="class-list"><ul class="list" style="list-style: none; margin: 0; padding: 0;">`;
     let i = 1;
     let ii = 0;
     updated.forEach
@@ -393,7 +447,7 @@ function updLv() {
                     i++;
                 }
                 if (elm == val.level_Name) {
-                    cList += `<div class="col-sm mb-3">
+                    cList += `<li><div class="col-sm mb-3">
                             <div class="card">
                                 <div class="card-body text-left">
                                     <div class="row">
@@ -409,7 +463,7 @@ function updLv() {
                                     </div>
                                 </div>
                             </div>
-                       </div>`;
+                       </div></li>`;
                     ii++;
                 }
                 if (i % 2 != 0) {
@@ -418,7 +472,7 @@ function updLv() {
             })
         );
     if (ii % 2 != 0) {
-        cList += `<div class="col-sm mb-3 invisible">
+        cList += `<li><div class="col-sm mb-3 invisible">
                             <div class="card">
                                 <div class="card-body text-left">
                                     <div class="row">
@@ -426,17 +480,23 @@ function updLv() {
                                     </div>
                                 </div>
                             </div>
-                       </div>`;
+                       </div></li>`;
     }
     if (updated.length != 0) {
+        cList += `</ul><ul class="pagination justify-content-center"></ul></div>`;
         $('#classes').html(cList);
+        var classList = new List('class-list', {
+            valueNames: ['name'],
+            page: 2,
+            pagination: true
+        });
     } else {
         $.each(classes, function (idx, val) {
             if (i % 2 != 0) {
                 cList += `<div class="row mb-3">`;
                 i++;
             }
-            cList += `<div class="col-sm mb-3">
+            cList += `<li><div class="col-sm mb-3">
                             <div class="card">
                                 <div class="card-body text-left">
                                     <div class="row">
@@ -452,13 +512,19 @@ function updLv() {
                                     </div>
                                 </div>
                             </div>
-                       </div>`;
+                       </div></li>`;
             ii++;
             if (i % 2 != 0) {
                 cList += `</div>`;
             }
         })
+        cList += `</ul><ul class="pagination justify-content-center"></ul></div>`;
         $('#classes').html(cList);
+        var classList = new List('class-list', {
+            valueNames: ['name'],
+            page: 2,
+            pagination: true
+        });
     }
 }
 
@@ -666,9 +732,19 @@ function FillClassDetView() {
                 window[`continue${val.chapter}`].addEventListener('click', function () {
                     continueChap = ContinueProgressChap(`dennyfpr@gmail.com`);
                     if (continueChap.status == 200) {
-                        alert(`Chapter ${val.chapter} telah diselesaikan`);
+                        Swal.fire({
+                            icon: 'success',
+                            text: `Chapter ${val.chapter} Telah Diselesaikan`
+                        }).then(function () {
+                            location.reload();
+                        });
                     } else {
-                        alert(`Terjadi kesalahan menyelesaikan Chapter ${val.chapter}`);
+                        Swal.fire({
+                            icon: 'error',
+                            text: `Terjadi Kesalahan Dalam Menyelesaikan Chapter ${val.chapter}`
+                        }).then(function () {
+                            location.reload();
+                        });
                     }
                 });
             });
