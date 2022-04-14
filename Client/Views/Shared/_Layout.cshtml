@@ -207,7 +207,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document" style="width: 22rem;">
                 <div class="modal-content">
                     <div class="modal-header border-0 mt-3 mx-3">
-                        <h5>Forgot Password</h5>
+                        <h5>Forgot Password (Email)</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -215,11 +215,60 @@
                     <div class="modal-body">
                         <div class="container">
                             <form class="mx-2">
-                                <div class="form-group">
-                                    <label for="LogEmail">Email</label>
-                                    <input type="email" class="form-control" id="LogEmail" placeholder="example@mail.com">
+                                <div class="form-group" onsubmit="return false">
+                                    <label class="mb-3" style="text-align:justify" for="LogEmailFP1">Masukan Email kamu yang telah terdaftar di Codemy agar kami bisa mengirim kode OTP!</label>
+                                    <input type="email" class="form-control" id="LogEmailFP1" placeholder="emailkamu@disini.com">
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block mt-1 mb-4 font-weight-bold">Login</button>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block mt-4 mb-4 font-weight-bold" data-target="#forgotPass2Modal" data-toggle="modal" data-dismiss="modal">Send OTP</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="forgotPass2Modal">
+            <div class="modal-dialog modal-dialog-centered" role="document" style="width: 22rem;">
+                <div class="modal-content">
+                    <div class="modal-header border-0 mt-3 mx-3">
+                        <h5>Forgot Password (OTP)</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <form class="mx-2">
+                                <div class="form-group" onsubmit="return false">
+                                    <label class="mb-3" style="text-align:justify" for="LogEmailFP2">OTP telah dikirim! Silahkan masukkan di sini.</label>
+                                    <input type="email" class="form-control" id="LogEmailFP2" placeholder="KODEOTP">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block mt-4 mb-4 font-weight-bold" data-target="#changePassModal" data-toggle="modal" data-dismiss="modal">Confirm</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="changePassModal">
+            <div class="modal-dialog modal-dialog-centered" role="document" style="width: 22rem;">
+                <div class="modal-content">
+                    <div class="modal-header border-0 mt-3 mx-3">
+                        <h5>Change Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <form class="mx-2">
+                                <div class="form-group mb-3" onsubmit="return false">
+                                    <label for="LogPass">Silahkan masukkan password baru kamu.</label>
+                                    <input type="password" class="form-control mb-3" id="LogPass" placeholder="New Password">                                   
+                                    <input type="password" class="form-control" id="LogPass" placeholder="Confirm Password">                                   
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block mt-4 mb-4 font-weight-bold" data-dismiss="modal">Change</button>
                             </form>
                         </div>
                     </div>
@@ -227,6 +276,8 @@
             </div>
         </div>
     </div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

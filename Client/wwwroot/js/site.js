@@ -32,6 +32,8 @@ function readSession() {
 }
 readSession();
 
+
+
 function GetAllClasses() {
     let data = {};
     $.ajax({
@@ -673,10 +675,6 @@ function FillClassDetView() {
 if (codemyClassesDetail != null) {
     FillClassDetView();
 }
-
-
-
-
 
 
 
