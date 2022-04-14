@@ -340,6 +340,10 @@ function UpdateMasterUser() {
 $(document).ready(function () {
     //Dijalankan hanya jika link pada browser diakses
     if (window.location.href.indexOf("account") > 1) {
+
+        var sessionEmail = '<%= oSerializer.Serialize(HttpContext.Current.Session["email"]);%>';
+        console.log(sessionEmail);
+
         TampilkanUniv();
         TampilkanProvince();
         TampilkanSubDistrict();
