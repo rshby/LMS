@@ -1,4 +1,4 @@
-﻿let dashboard = document.getElementById("dashboard");
+let dashboard = document.getElementById("dashboard");
 let codemyClasses = document.getElementById("codemyClasses");
 let codemyClassesDetail = document.getElementById("codemyClassesDetail");
 
@@ -31,6 +31,8 @@ function readSession() {
     /*$('#navModal').html(Modal);*/
 }
 readSession();
+
+
 
 function GetAllClasses() {
     let data = {};
@@ -964,3 +966,99 @@ document.getElementById("buttonRegisterAccount").addEventListener("click", funct
         false
     );
 })();
+
+
+//function updLv() {
+//    let updated = $('#lv').val();
+//    let classes = GetAllClasses();
+//    let cList = `<div id="class-list"><ul class="list" style="list-style: none; margin: 0; padding: 0;">`;
+//    let i = 1;
+//    let ii = 0;
+//    updated.forEach
+//        (elm =>
+//            $.each(classes, function (idx, val) {
+//                if (i % 2 != 0) {
+//                    cList += `<div class="row mb-3">`;
+//                    i++;
+//                }
+//                if (elm == val.level_Name) {
+//                    cList += `<li><div class="col-sm mb-3">
+//                            <div class="card">
+//                                <div class="card-body text-left">
+//                                    <div class="row">
+//                                        <div class="col-sm-3">
+//                                            <img src="${val.class_UrlPic}" alt="" style="width: 100px; height:100px"/>
+//                                        </div>
+//                                        <div class="col-sm-9 align-self-center">
+//                                            <h5 class="mb-1 font-weight-bold"><a href="../class/details/${idx + 1}">${val.class_Name}</a></h5>
+//                                            <p class="mb-2 text-truncate" style="width: 20rem">${val.class_Desc}</p>
+//                                            <p class="mb-2"><button type="button" class="btn btn-outline-dark btn-sm disabled">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm disabled">${val.level_Name}</button> <button type="button" class="btn btn-outline-warning btn-sm disabled">★${val.class_Rating}</button></p>
+//                                            <p class="mb-0">${bPrice}</p>
+//                                        </div>
+//                                    </div>
+//                                </div>
+//                            </div>
+//                       </div></li>`;
+//                    ii++;
+//                }
+//                if (i % 2 != 0) {
+//                    cList += `</div>`;
+//                }
+//            })
+//        );
+//    if (ii % 2 != 0) {
+//        cList += `<li><div class="col-sm mb-3 invisible">
+//                            <div class="card">
+//                                <div class="card-body text-left">
+//                                    <div class="row">
+
+//                                    </div>
+//                                </div>
+//                            </div>
+//                       </div></li>`;
+//    }
+//    if (updated.length != 0) {
+//        cList += `</ul><ul class="pagination justify-content-center"></ul></div>`;
+//        $('#classes').html(cList);
+//        var classList = new List('class-list', {
+//            valueNames: ['name'],
+//            page: 2,
+//            pagination: true
+//        });
+//    } else {
+//        $.each(classes, function (idx, val) {
+//            if (i % 2 != 0) {
+//                cList += `<div class="row mb-3">`;
+//                i++;
+//            }
+//            cList += `<li><div class="col-sm mb-3">
+//                            <div class="card">
+//                                <div class="card-body text-left">
+//                                    <div class="row">
+//                                        <div class="col-sm-3">
+//                                            <img src="${val.class_UrlPic}" alt="" style="width: 100px; height:100px"/>
+//                                        </div>
+//                                        <div class="col-sm-9 align-self-center">
+//                                            <h5 class="mb-1 font-weight-bold"><a href="../class/details/${idx + 1}">${val.class_Name}</a></h5>
+//                                            <p class="mb-2 text-truncate" style="width: 20rem">${val.class_Desc}</p>
+//                                            <p class="mb-2"><button type="button" class="btn btn-outline-dark btn-sm disabled">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm disabled">${val.level_Name}</button> <button type="button" class="btn btn-outline-warning btn-sm disabled">★${val.class_Rating}</button></p>
+//                                            <p class="mb-0">${bPrice}</p>
+//                                        </div>
+//                                    </div>
+//                                </div>
+//                            </div>
+//                       </div></li>`;
+//            ii++;
+//            if (i % 2 != 0) {
+//                cList += `</div>`;
+//            }
+//        })
+//        cList += `</ul><ul class="pagination justify-content-center"></ul></div>`;
+//        $('#classes').html(cList);
+//        var classList = new List('class-list', {
+//            valueNames: ['name'],
+//            page: 2,
+//            pagination: true
+//        });
+//    }
+//}
