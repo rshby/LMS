@@ -345,7 +345,7 @@ function FillDashboard() {
     let paidTb = TakenPaidClass(`dennyfpr@gmail.com`);
     let onGoingCont = ``;
     let doneCont = ``;
-    console.log(paidTb);
+
     $.each(paidTb, function (idx, val) {
         if (val.takenClass_IsDone == false) {
             onGoingCont += `<tr>
