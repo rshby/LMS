@@ -574,3 +574,12 @@ LMS/obj/Debug/netcoreapp3.1/LMS.csproj.AssemblyReference.cache
 *.json
 *.dll
 *.pdb
+*.cache
+*.dll
+*.pdb
+*.cache
+*.cache
+.vs/LMS/v16/.suo
+*.cache
+LMS/appsettings.json
+*.cache
