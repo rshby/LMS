@@ -17,7 +17,7 @@ namespace Client.Repositories.Data
         private readonly IHttpContextAccessor contextAccessor;
 
         //Constructor
-        public LoginRepository(Address address, string request = "accouts/") : base(address, request)
+        public LoginRepository(Address address, string request = "accounts/") : base(address, request)
         {
             this.address = address;
             this.request = request;

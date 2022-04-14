@@ -51,7 +51,7 @@ namespace LMS.Controllers
                         }
                         else
                         {
-                            return BadRequest(new
+                            return Ok(new
                             {
                                 status = 400,
                                 message = "maaf, nomor telepon sudah ada"
@@ -60,7 +60,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return BadRequest(new
+                        return Ok(new
                         {
                             status = 400,
                             message = "email yang digunakan sudah pernah mendaftar"

@@ -28,7 +28,7 @@ namespace Client.Controllers
             }
             
             HttpContext.Session.SetString("jwt", token);
-            HttpContext.Session.SetString("email", token);
+            HttpContext.Session.SetString("email", inputData.Email);
             
             return RedirectToAction("index", "Dashboard");
         }
