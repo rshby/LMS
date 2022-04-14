@@ -337,44 +337,45 @@ function UpdateMasterUser() {
     });
 }
 
-
-// Tampilkan Isi Data Pada Form
 $(document).ready(function () {
-    TampilkanUniv();
-    TampilkanProvince();
-    TampilkanSubDistrict();
-    TampilkanDistrict();
-    TampilkanCity();
+    //Dijalankan hanya jika link pada browser diakses
+    if (window.location.href.indexOf("account") > 1) {
+        TampilkanUniv();
+        TampilkanProvince();
+        TampilkanSubDistrict();
+        TampilkanDistrict();
+        TampilkanCity();
 
-    let data = GetMasterUserByEmail("reoshby@gmail.com");
-    let dataUser = GetUserbyEmail("reoshby@gmail.com");
+        let data = GetMasterUserByEmail("reoshby@gmail.com");
+        let dataUser = GetUserbyEmail("reoshby@gmail.com");
 
-    document.getElementById("InputFN").value = data.firstName;
-    document.getElementById("InputLN").value = data.lastName;
-    $("#InputGd").val(dataUser.gender).change(); // -> jenis kelamin
-    document.getElementById("InputPh").value = data.phone;
-    $("#InputUn").val(GetEducationByid(dataUser.education_Id).university_Id).change(); // -> universitas
-    document.getElementById("InputMajor").value = data.major; // -> major
-    document.getElementById("InputBd").value = dataUser.birthDate.toString().substring(0, 10); // -> Birth Date
+        document.getElementById("InputFN").value = data.firstName;
+        document.getElementById("InputLN").value = data.lastName;
+        $("#InputGd").val(dataUser.gender).change(); // -> jenis kelamin
+        document.getElementById("InputPh").value = data.phone;
+        $("#InputUn").val(GetEducationByid(dataUser.education_Id).university_Id).change(); // -> universitas
+        document.getElementById("InputMajor").value = data.major; // -> major
+        document.getElementById("InputBd").value = dataUser.birthDate.toString().substring(0, 10); // -> Birth Date
 
-    document.getElementById("InputProvince").addEventListener("change", function () {
-        var pilihanProvince = this.options[this.selectedIndex].value;
-        TampilkanCityByProvinceId(pilihanProvince);
-    });
+        document.getElementById("InputProvince").addEventListener("change", function () {
+            var pilihanProvince = this.options[this.selectedIndex].value;
+            TampilkanCityByProvinceId(pilihanProvince);
+        });
 
-    document.getElementById("InputCity").addEventListener("change", function () {
-        var pilihanCity = this.options[this.selectedIndex].value;
-        TampilkanDistrictByCityId(pilihanCity);
-    });
+        document.getElementById("InputCity").addEventListener("change", function () {
+            var pilihanCity = this.options[this.selectedIndex].value;
+            TampilkanDistrictByCityId(pilihanCity);
+        });
 
-    document.getElementById("InputDistrict").addEventListener("change", function () {
-        var pilihanDistrict = this.options[this.selectedIndex].value;
-        TampilkanSubDistrictByDistrictId(pilihanDistrict);
-    });
+        document.getElementById("InputDistrict").addEventListener("change", function () {
+            var pilihanDistrict = this.options[this.selectedIndex].value;
+            TampilkanSubDistrictByDistrictId(pilihanDistrict);
+        });
 
-    document.getElementById("InputStreet").value = GetAddressById(dataUser.address_Id).street; // -> street
-    $("#InputSubDistrict").val(GetAddressById(dataUser.address_Id).subdistrict_Id).change(); // -> sub district
-    $("#InputDistrict").val(GetSubDistricyById(GetAddressById(dataUser.address_Id).subdistrict_Id).district_Id).change(); // -> district
-    $("#InputCity").val(GetDistrictById(GetSubDistricyById(GetAddressById(dataUser.address_Id).subdistrict_Id).district_Id).city_Id).change(); // -> city
-    $("#InputProvince").val(GetCityByid(GetDistrictById(GetSubDistricyById(GetAddressById(dataUser.address_Id).subdistrict_Id).district_Id).city_Id).province_Id).change(); // -> province
+        document.getElementById("InputStreet").value = GetAddressById(dataUser.address_Id).street; // -> street
+        $("#InputSubDistrict").val(GetAddressById(dataUser.address_Id).subdistrict_Id).change(); // -> sub district
+        $("#InputDistrict").val(GetSubDistricyById(GetAddressById(dataUser.address_Id).subdistrict_Id).district_Id).change(); // -> district
+        $("#InputCity").val(GetDistrictById(GetSubDistricyById(GetAddressById(dataUser.address_Id).subdistrict_Id).district_Id).city_Id).change(); // -> city
+        $("#InputProvince").val(GetCityByid(GetDistrictById(GetSubDistricyById(GetAddressById(dataUser.address_Id).subdistrict_Id).district_Id).city_Id).province_Id).change(); // -> province
+    }
 });

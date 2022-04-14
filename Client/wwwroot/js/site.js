@@ -748,3 +748,242 @@ function FillClassDetView() {
 if (codemyClassesDetail != null) {
     FillClassDetView();
 }
+
+//Tampilkan Daftar Semua Univ
+function TampilkanAllUniv() {
+    $.ajax({
+        type: "GET",
+        url: `https://localhost:44376/api/universities`,
+        async: false,
+        data: {}
+    }).done((result) => {
+        let pilihanUniv = ``;
+        if (result.status == 200) {
+            $.each(result.data, function (index, data) {
+                pilihanUniv += `<option value="${data.id}">${data.name}</option>`;
+            });
+            $("#inUniv").html(pilihanUniv);
+        }
+        else {
+            pilihanUniv = `<option value="-">Data Tidak Ditemukan</option>`;
+            $("#inUniv").html(pilihanUniv);
+        }
+    }).fail((e) => {
+        console.log(e);
+    })
+}
+
+//Tampilkan Semua Province
+function TampilkanAllProvince() {
+    $.ajax({
+        type: "GET",
+        url: `https://localhost:44376/api/provinces`,
+        async: false,
+        data: {}
+    }).done((result) => {
+        let pilihanProvince = ``;
+        if (result.status == 200) {
+            $.each(result.data, function (index, data) {
+                pilihanProvince += `<option value="${data.id}">${data.name}</option>`;
+            });
+            $("#inProv").html(pilihanProvince);
+        }
+        else {
+            pilihanProvince = `<option value="-">Data Tidak Ditemukan</option>`;
+            $("#inProv").html(pilihanProvince);
+        }
+    }).fail((e) => {
+        console.log(e);
+    });
+}
+
+//Tampilkan City By Province_Id
+function TampilkanCityByProvId(provinceId) {
+    $.ajax({
+        type: "GET",
+        url: `https://localhost:44376/api/cities/byprovince/${provinceId}`,
+        async: false,
+        data: {}
+    }).done((result) => {
+        let pilihanCity = ``;
+        if (result.status == 200) {
+            $.each(result.data, function (index, data) {
+                pilihanCity += `<option value="${data.id}">${data.name}</option>`;
+            });
+            $("#inCity").html(pilihanCity);
+        }
+        else {
+            pilihanCity = `<option value="-">Data Tidak Ditemukan</option>`;
+            $("#inCity").html(pilihanCity);
+        }
+    }).fail((e) => {
+        console.log(e);
+    });
+}
+
+//Tampilkan District By City_Id
+function TampilkanDistricyByCityId(cityId) {
+    $.ajax({
+        type: "GET",
+        url: `https://localhost:44376/api/districts/bycity/${cityId}`,
+        async: false,
+        data: {}
+    }).done((result) => {
+        let pilihanDistrict = ``;
+        if (result.status == 200) {
+            $.each(result.data, function (index, data) {
+                pilihanDistrict += `<option value="${data.id}">${data.name}</option>`;
+            });
+            $("#inDis").html(pilihanDistrict);
+        }
+        else {
+            pilihanDistrict = `<option value="-">Data Tidak Ditemukan</option>`;
+            $("#inDis").html(pilihanDistrict);
+        }
+    }).fail((e) => {
+        console.log(e);
+    });
+}
+
+//Tampilkan SubDistrict by District_Id
+function TampilkanSubDistricyByDistrictId(districtId) {
+    $.ajax({
+        type: "GET",
+        url: `https://localhost:44376/api/subdistricts/bydistrict/${districtId}`,
+        async: false,
+        data: {}
+    }).done((result) => {
+        let pilihanSD = ``;
+        if (result.status == 200) {
+            $.each(result.data, function (index, data) {
+                pilihanSD += `<option value="${data.id}">${data.name}</option>`;
+            });
+            $("#inSubDis").html(pilihanSD);
+        }
+        else {
+            pilihanSD = `<option value="-">Data Tidak Ditemukan</option>`;
+            $("#inSubDis").html(pilihanSD);
+        }
+    }).fail((e) => {
+        console.log(e);
+    })
+}
+
+//Insert Register Data
+function RegisterAccount() {
+    let data = new Object();
+    data.Email = document.getElementById("inEmail").value;
+    data.Password = document.getElementById("inPass").value;
+    data.FirstName = document.getElementById("inFName").value;
+    data.LastName = document.getElementById("inLName").value;
+    data.Gender = parseInt(document.getElementById("inGender").value);
+    data.BirthDate = document.getElementById("inBDate").value;
+    data.Street = document.getElementById("inAddress").value;
+    data.SubDistrict_Id = parseInt(document.getElementById("inSubDis").value);
+    data.Major = document.getElementById("inMajor").value;
+    data.University_Id = parseInt(document.getElementById("inUniv").value);
+
+    $("#formRegisterAccount").validate({
+        errorPlacement: function (error, element) {
+
+        }
+    });
+
+    if ($("#formRegisterAccount").valid()) {
+        Swal.fire({
+            title: 'Daftar Account?',
+            text: "Mendaftar Account Ke LMS ini!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Daftar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    url: `https://localhost:44376/api/accounts/register`,
+                    async: false,
+                    data: JSON.stringify(data)
+                }).done((result) => {
+                    if (result.status == 200) {
+                        Swal.fire({
+                            title: 'Selamat',
+                            text: 'Account Anda Berhasil Dibuat',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1550
+                        }).then(function () {
+                            location.reload();
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            title: 'Gagal',
+                            text: 'Akun Anda Gagal Dibuat',
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 1550
+                        }).then(function () {
+                            location.reload();
+                        });
+                    }
+                }).fail((e) => {
+                    console.log(e);
+                });
+            }
+        });
+    };
+}
+
+//Ketika link Register diklick
+document.getElementById("linkRegister").addEventListener("click", function () {
+    TampilkanAllProvince();
+    TampilkanAllUniv();
+
+    document.getElementById("inProv").addEventListener("change", function () {
+        var pilihanProv = this.options[this.selectedIndex].value;
+        TampilkanCityByProvId(pilihanProv);
+    });
+
+    document.getElementById("inCity").addEventListener("change", function () {
+        var pilihanCity = this.options[this.selectedIndex].value;
+        TampilkanDistricyByCityId(pilihanCity);
+    });
+
+    document.getElementById("inDis").addEventListener("change", function () {
+        var pilihanDistrict = this.options[this.selectedIndex].value;
+        TampilkanSubDistricyByDistrictId(pilihanDistrict);
+    });
+})
+
+//Ketika button Register Account diklick -> proses mendaftar akun
+document.getElementById("buttonRegisterAccount").addEventListener("click", function () {
+    RegisterAccount();
+});
+
+
+// Untuk Form Validate
+(function () {
+    'use strict';
+    window.addEventListener('load', function () {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
