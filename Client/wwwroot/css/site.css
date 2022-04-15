@@ -2,7 +2,7 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 html * {
-    font-family: 'Montblanc', sans-serif !important;
+    font-family: 'Poppins';
 }
 
 a.navbar-brand {
