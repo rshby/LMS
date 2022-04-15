@@ -179,15 +179,16 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return BadRequest(new
+                        return Ok(new
                         {
+                            status = 400,
                             message = "gagal kirim otp ke email"
                         });
                     }
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = $"data dengan email {inputData.Email} tidak ada di database"
@@ -197,8 +198,9 @@ namespace LMS.Controllers
             catch (Exception e)
             {
 
-                return BadRequest(new
+                return Ok(new
                 {
+                    status = 400,
                     message = "gagal kirim kode otp",
                     error = e.Message
                 });
@@ -228,7 +230,7 @@ namespace LMS.Controllers
                     else if (hasilChangePassword == -1)
                     {
                         //Password dan ConfirmPassword Tidak Sama
-                        return BadRequest(new
+                        return Ok(new
                         {
                             status = 400,
                             message = "Password dan ConfirmPassword Tidak Sama"
@@ -237,7 +239,7 @@ namespace LMS.Controllers
                     else if (hasilChangePassword == -2)
                     {
                         //Kode OTP Tidak Sesuai
-                        return BadRequest(new
+                        return Ok(new
                         {
                             status = 400,
                             message = "kode OTP tidak sesuai"
@@ -246,7 +248,7 @@ namespace LMS.Controllers
                     else
                     {
                         //Waktu Habis
-                        return BadRequest(new
+                        return Ok(new
                         {
                             status = 400,
                             message = "Kode OTP sudah tidak berlaku"
@@ -255,7 +257,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = $"data dengan email {inputData.Email} tidak ditemukan"
@@ -265,8 +267,9 @@ namespace LMS.Controllers
             catch (Exception e)
             {
 
-                return BadRequest(new
+                return Ok(new
                 {
+                    status = 500,
                     message = "gagal change password",
                     error = e.Message
                 });

@@ -19,8 +19,8 @@ function readSession() {
                      Account
                  </a>
                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                     <a class="dropdown-item" href="~/dashboard">My Classes</a>
-                     <a class="dropdown-item" href="~/account">My Account</a>
+                     <a class="dropdown-item" href="/dashboard">My Classes</a>
+                     <a class="dropdown-item" href="/account">My Account</a>
                      <div class="dropdown-divider"></div>
                      <a class="dropdown-item" href="#">Logout</a>
                  </div>`;
@@ -29,8 +29,8 @@ function readSession() {
         Modal = ``;
     }
     $("#loginLogout").html(inOut);
-    /*$('#navModal').html(Modal);*/
 }
+console.log($("#sessionEmail").val());
 readSession();
 
 
@@ -968,6 +968,132 @@ document.getElementById("buttonRegisterAccount").addEventListener("click", funct
     );
 })();
 
+//Get Data Account by Email
+function GetAccountByEmail(email) {
+    let data = new Object();
+
+    $.ajax({
+        type: "GET",
+        url: `https://localhost:44376/api/accounts/${email}`,
+        async: false,
+        data: {}
+    }).done((result) => {
+        data = result;
+    }).fail((e) => {
+        console.log(e);
+    });
+    return data;
+}
+
+//Button Send OTP untuk Forgot Password Ketika di klick
+document.getElementById("buttonSendOTP").addEventListener("click", function () {
+    let email = document.getElementById("LogEmailFP1").value;
+    let data = new Object();
+    data.Email = email;
+    $.ajax({
+        type: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        dataType: "json",
+        async: false,
+        url: `https://localhost:44376/api/accounts/forgotpassword`,
+        data: JSON.stringify(data)
+    }).done((result) => {
+        if (result.status == 200) {
+            Swal.fire({
+                title: "Sukses",
+                text: "Kode OTP Dikirim ke Email Anda!",
+                icon: "success",
+                showConfirmButton: true
+            }).then(function () {
+                let button = document.getElementById("buttonSendOTP1");
+                button.click();
+            });
+        }
+        else {
+            Swal.fire({
+                title: "Gagal",
+                text: result.message,
+                showConfirmButton: true,
+                icon: "error"
+            });
+        }
+    }).fail((e) => {
+        console.log(e);
+    });
+});
+
+document.getElementById("buttonCheckOTP").addEventListener("click", function () {
+    let email = document.getElementById("LogEmailFP1").value;
+    let inputOTP = document.getElementById("LogEmailFP2").value;
+    let data = GetAccountByEmail(email);
+
+    if (inputOTP == data.otp) {
+        Swal.fire({
+            title: "Sukses",
+            text: "Kode OTP Sesuai",
+            icon: "success",
+            showConfirmButton: true
+        }).then(function () {
+            let button = document.getElementById("buttonCheckOTP1");
+            button.click();
+        });
+    }
+    else {
+        Swal.fire({
+            title: "Gagal",
+            text: "Kode OTP Tidak Sesuai",
+            icon: "error",
+            showConfirmButton: true
+        });
+    }
+});
+
+//Ketika Tombol ChangePassword diklick
+document.getElementById("buttonChangePassword").addEventListener("click", function () {
+    let data = new Object();
+    data.Email = document.getElementById("LogEmailFP1").value;
+    data.Password = document.getElementById("LogNewPass").value;
+    data.ConfirmPassword = document.getElementById("LogConfirmPass").value;
+    data.OTP = document.getElementById("LogEmailFP2").value;
+
+    $.ajax({
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        dataType: "json",
+        type: "POST",
+        url: `https://localhost:44376/api/accounts/changepassword`,
+        async: false,
+        data: JSON.stringify(data)
+    }).done((result) => {
+        if (result.status == 200) {
+            Swal.fire({
+                title: "Sukses",
+                text: "Password Telah Terganti",
+                icon: "success",
+                showConfirmButton: false,
+                timer : 1670
+            }).then(function () {
+                location.reload();
+            });
+        }
+        else {
+            Swal.fire({
+                title: "Gagal",
+                text: result.message,
+                icon: "error",
+                showConfirmButton: false,
+                timer: 1670
+            });
+        }
+    }).fail((e) => {
+        console.log(e);
+    });
+});
 
 //function updLv() {
 //    let updated = $('#lv').val();

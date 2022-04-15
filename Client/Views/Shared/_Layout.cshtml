@@ -255,7 +255,8 @@
                                     <label class="mb-3" style="text-align:justify" for="LogEmailFP1">Masukan Email kamu yang telah terdaftar di Codemy agar kami bisa mengirim kode OTP!</label>
                                     <input type="email" class="form-control" id="LogEmailFP1" placeholder="emailkamu@disini.com">
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block mt-4 mb-4 font-weight-bold" data-target="#forgotPass2Modal" data-toggle="modal" data-dismiss="modal">Send OTP</button>
+                                    <button type="button" class="btn btn-primary btn-lg btn-block mt-4 mb-4 font-weight-bold" id="buttonSendOTP">Send OTP</button>
+                                    <button type="button" class="btn btn-primary btn-lg btn-block mt-4 mb-4 font-weight-bold" hidden id="buttonSendOTP1" data-target="#forgotPass2Modal" data-toggle="modal" data-dismiss="modal">Send OTP</button>
                             </form>
                         </div>
                     </div>
@@ -279,7 +280,8 @@
                                     <label class="mb-3" style="text-align:justify" for="LogEmailFP2">OTP telah dikirim! Silahkan masukkan di sini.</label>
                                     <input type="email" class="form-control" id="LogEmailFP2" placeholder="KODEOTP">
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block mt-4 mb-4 font-weight-bold" data-target="#changePassModal" data-toggle="modal" data-dismiss="modal">Confirm</button>
+                                <button type="button" class="btn btn-primary btn-lg btn-block mt-4 mb-4 font-weight-bold" id="buttonCheckOTP">Confirm</button>
+                                <button type="button" class="btn btn-primary btn-lg btn-block mt-4 mb-4 font-weight-bold" id="buttonCheckOTP1" hidden data-target="#changePassModal" data-toggle="modal" data-dismiss="modal">Confirm</button>
                             </form>
                         </div>
                     </div>
@@ -301,10 +303,10 @@
                             <form class="mx-2">
                                 <div class="form-group mb-3" onsubmit="return false">
                                     <label for="LogPass">Silahkan masukkan password baru kamu.</label>
-                                    <input type="password" class="form-control mb-3" id="LogPass" placeholder="New Password">                                   
-                                    <input type="password" class="form-control" id="LogPass" placeholder="Confirm Password">                                   
+                                    <input type="password" class="form-control mb-3" id="LogNewPass" placeholder="New Password">
+                                    <input type="password" class="form-control" id="LogConfirmPass" placeholder="Confirm Password">
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block mt-4 mb-4 font-weight-bold" data-dismiss="modal">Change</button>
+                                <button type="button" class="btn btn-primary btn-lg btn-block mt-4 mb-4 font-weight-bold" id="buttonChangePassword">Change</button>
                             </form>
                         </div>
                     </div>
