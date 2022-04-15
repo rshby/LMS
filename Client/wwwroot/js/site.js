@@ -315,7 +315,7 @@ function getUserDataByEmail(email) {
             console.log(error);
         });
     return data;
-} 
+}
 
 
 function FillDashboard() {
@@ -398,7 +398,8 @@ function FillDashboard() {
                             <td><a href="class/details/${val.class_Id}" style="color: black;">${val.class_Name}</a></td>
                             <td>
                                 <form action="https://localhost:44329/class/details/${val.class_Id}">
-                                    <button id="btnCt${val.class_Id}" type="submit" class="btn btn-outline-primary">Continue Class</button>
+                                    <button id="btnCt${val.class_Id}" type="button" class="btn btn-outline-primary">Continue Class</button>
+                                    <button id="btnCt${val.class_Id}2" type="submit" hidden class="btn btn-outline-primary">Continue Class</button>
                                 </form>
                             </td>
                         </tr>`;
@@ -441,7 +442,21 @@ function FillDashboard() {
                 `btnCt${val.class_Id}`
             );
             window[`continue${val.class_Id}`].addEventListener("click", function () {
-                alert("Pindah ke current chapter");
+                Swal.fire({
+                    title: 'Lanjutkan Kelas?',
+                    text: "Membuka Chapter Terakhir",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak',
+                }).then((x)=> {
+                    let button = document.getElementById(`btnCt${val.class_Id}2`);
+                    if (x.isConfirmed) {
+                        button.click();
+                    }
+                });
             });
         } else {
             window[`certificate${val.class_Id}`] = document.getElementById(
@@ -678,22 +693,26 @@ function FillClassDetView() {
                                 <button id="btnC${val.chapter}" type="button" class="btn btn-outline-success rounded float-right" disabled>Progress Done</button>
                              </div>`;
             } else {
-                sectsHead += `<a class="list-group-item list-group-item-action" data-toggle="list" href="#body${val.chapter}"><div class="row"><div class="col-sm-2 invisible">✔</div><div class="col-sm-10"><h6>${val.name}</h6></div></div></a>`;
-                sectsBody += `<div class="tab-pane fade" id="body${val.chapter}">
+                if (chap == prog) {
+                    sectsHead += `<a class="list-group-item list-group-item-action active" data-toggle="list" href="#body${val.chapter}"><div class="row"><div class="col-sm-2 invisible">✔</div><div class="col-sm-10"><h6>${val.name}</h6></div></div></a>`;
+                    sectsBody += `<div class="tab-pane fade show active" id="body${val.chapter}">
                                 <h4>${val.name}</h4>
-
                                 <br />
                                 <div class="embed-responsive embed-responsive-16by9">
                                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/${val.content}?rel=0" allowfullscreen></iframe>
                                 </div>`;
-                if (chap == prog) {
                     sectsBody += `<br />
-
                                   <button id="btnC${val.chapter}" class="btn btn-primary rounded float-right">Continue Progress</button>
                                </div>`;
                 } else {
+                    sectsHead += `<a class="list-group-item list-group-item-action" data-toggle="list" href="#body${val.chapter}"><div class="row"><div class="col-sm-2 invisible">✔</div><div class="col-sm-10"><h6>${val.name}</h6></div></div></a>`;
+                    sectsBody += `<div class="tab-pane fade" id="body${val.chapter}">
+                                <h4>${val.name}</h4>
+                                <br />
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/${val.content}?rel=0" allowfullscreen></iframe>
+                                </div>`;
                     sectsBody += `<br />
-
                                   <button id="btnC${val.chapter}" class="btn btn-secondary rounded float-right disabled">Continue Progress</button>
                                </div>`;
                 }
@@ -785,7 +804,7 @@ function FillClassDetView() {
                                 <button id="btnC${val.chapter}" type="button" class="btn btn-outline-success rounded float-right" disabled>Progress Done</button>
                          </div>`;
         });
-        classDetail += `        <button id="feedback" type="button" class="btn btn-info" data-toggle="modal" data-target="#formFb">View Feedback</button>
+        classDetail += `        <button id="feedback" type="button" class="btn btn-info" data-toggle="modal" data-target="#formFb" hidden>View Feedback</button>
                                 <button id="viewCert" type="button" class="btn btn-success">View Certificate</button>
                             </div>
                         </div>
@@ -1221,7 +1240,7 @@ document.getElementById("buttonChangePassword").addEventListener("click", functi
                 text: "Password Telah Terganti",
                 icon: "success",
                 showConfirmButton: false,
-                timer : 1670
+                timer: 1670
             }).then(function () {
                 location.reload();
             });

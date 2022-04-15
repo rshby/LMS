@@ -140,6 +140,14 @@ P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.dll
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.pdb
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.genruntimeconfig.cache
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.csproj.AssemblyReference.cache
+P:\MCC\Tugas\Git\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+P:\MCC\Tugas\Git\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+P:\MCC\Tugas\Git\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+P:\MCC\Tugas\Git\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+P:\MCC\Tugas\Git\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+P:\MCC\Tugas\Git\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+P:\MCC\Tugas\Git\LMS\Client\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Certificate\Index.cshtml.g.cs
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\bin\Debug\netcoreapp3.1\Client.exe
@@ -288,11 +296,3 @@ C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Client.cspr
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Client.dll
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Client.pdb
 C:\Users\ASUS\Documents\Metrodata\LMS\Client\obj\Debug\netcoreapp3.1\Client.genruntimeconfig.cache
-P:\MCC\Tugas\Git\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-P:\MCC\Tugas\Git\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
-P:\MCC\Tugas\Git\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
-P:\MCC\Tugas\Git\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
-P:\MCC\Tugas\Git\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-P:\MCC\Tugas\Git\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
-P:\MCC\Tugas\Git\LMS\Client\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
-P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Certificate\Index.cshtml.g.cs
