@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.cdnfonts.com/css/montblanc">
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/user.css" />
     <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-cyFXZtmM2vBT9TVs"></script>
@@ -45,6 +48,12 @@
             @RenderBody()
         </main>
     </div>
+
+    <p id="sessionEmail" hidden>@HttpContextAccessor.HttpContext.Session.GetString("email")</p>
+    <script>
+        let sesEmail = document.getElementById("sessionEmail").innerHTML;
+        console.log(sesEmail); 
+    </script>
 
     @* Footer *@
     <footer class="border-top text-muted mt-5 pt-3 pb-3 invisible">

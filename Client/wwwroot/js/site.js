@@ -2,19 +2,11 @@ let dashboard = document.getElementById("dashboard");
 let codemyClasses = document.getElementById("codemyClasses");
 let codemyClassesDetail = document.getElementById("codemyClassesDetail");
 
-$(function () {
-    // INITIALIZE DATEPICKER PLUGIN
-    $(".datepicker").datepicker({
-        clearBtn: true,
-        format: "dd/mm/yyyy",
-    });
-});
+console.log(sesEmail);
 
 function readSession() {
     let inOut = ``;
-    let Modal = ``;
-    
-    if ($("#sessionEmail").val() != null) {
+    if (sesEmail.length != 0) {
         inOut = `<a class="nav-item nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      Account
                  </a>
@@ -22,18 +14,15 @@ function readSession() {
                      <a class="dropdown-item" href="/dashboard">My Classes</a>
                      <a class="dropdown-item" href="/account">My Account</a>
                      <div class="dropdown-divider"></div>
-                     <a class="dropdown-item" href="#">Logout</a>
+                     <a class="dropdown-item" href="/login/Terminate">Logout</a>
                  </div>`;
     } else {
         inOut = `<button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#loginModal">Login</button>`;
-        Modal = ``;
     }
     $("#loginLogout").html(inOut);
 }
 console.log($("#sessionEmail").val());
 readSession();
-
-
 
 function GetAllClasses() {
     let data = {};
@@ -186,7 +175,7 @@ function payStatus(id) {
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify({
-            Email: `dennyfpr@gmail.com`,
+            Email: sesEmail,
             Class_Id: id,
         }),
         async: false,
@@ -291,9 +280,35 @@ function feedbackStatus(email) {
         });
     return data;
 }
+function getUserDataByEmail(email) {
+    let data = {};
+    $.ajax({
+        url: `https://localhost:44376/api/users/masterbyemail`,
+        type: `POST`,
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({
+            Email: email
+        }),
+        async: false,
+    })
+        .done((result) => {
+            data = result.data;
+        })
+        .fail((error) => {
+            console.log(error);
+        });
+    return data;
+} 
+
 
 function FillDashboard() {
-    let unpaidTb = TakenUnpaidClass(`dennyfpr@gmail.com`);
+    let welcMsg = getUserDataByEmail(sesEmail);
+    let unpaidTb = TakenUnpaidClass(sesEmail);
     let unpaidCont = ``;
     $.each(unpaidTb, function (idx, val) {
         bPrice = BetterPriceView(val.class_Price);
@@ -309,7 +324,6 @@ function FillDashboard() {
     $("#unpaidClass").html(unpaidCont);
 
     $.each(unpaidTb, function (idx, val) {
-        console.log(val.class_Id);
         window[`payClass${val.class_Id}`] = document.getElementById(
             `btnP${val.class_Id}`
         );
@@ -343,7 +357,7 @@ function FillDashboard() {
         });
     });
 
-    let paidTb = TakenPaidClass(`dennyfpr@gmail.com`);
+    let paidTb = TakenPaidClass(sesEmail);
     let onGoingCont = ``;
     let doneCont = ``;
 
@@ -364,13 +378,14 @@ function FillDashboard() {
                         </tr>`;
         }
     });
+    $("#welcomingMessage").html(`Selamat datang, ${welcMsg.firstName}!`);
     $("#undoneClass").html(onGoingCont);
     $("#doneClass").html(doneCont);
 
     $.each(paidTb, function (idx, val) {
         if (val.takenClass_IsDone == false) {
             window[`continue${val.class_Id}`] = document.getElementById(
-                `btnC${val.class_Id}`
+                `btnCt${val.class_Id}`
             );
             window[`continue${val.class_Id}`].addEventListener("click", function () {
                 alert("Pindah ke current chapter");
@@ -394,34 +409,34 @@ if (dashboard != null) {
 }
 
 function FillClassesView() {
-    //let categories = GetAllCategories();
+    let categories = GetAllCategories();
     //let levels = GetAllLevels();
     //let lvFilter = ``;
-    //let ctgFilter = ``;
+    let ctgFilter = ``;
     let classes = GetAllClasses();
     let classesContent = `<div id="class-list"><ul class="list" style="list-style: none; margin: 0; padding: 0;">`;
     let i = 0;
 
-    //$.each(categories, function (idx, val) {
-    //    ctgFilter += `<option>${val.name}</option>`;
-    //});
+    $.each(categories, function (idx, val) {
+        ctgFilter += `<option>${val.name}</option>`;
+    });
 
     //$.each(levels, function (idx, val) {
     //    lvFilter += `<option>${val.name}</option>`;
     //});
 
-    //let filters = `<div class="col-sm">
     //                   <p class="mb-0">Level</p>
     //                   <select id="lv" class="selectpicker" onchange="updLv()" multiple>
     //                       ${lvFilter}
     //                   </select>
     //               </div>
     //               <div class="col-sm">
-    //                   <p class="mb-0">Category</p>
-    //                   <select id="cg" class="selectpicker" onchange="updCtg()" multiple>
-    //                       ${ctgFilter}
-    //                   </select>
-    //               </div>`;
+    let filters = `<div class="col-sm">
+                       <p class="mb-0">Category</p>
+                       <select id="cg" class="selectpicker" onchange="updCtg()" multiple>
+                           ${ctgFilter}
+                       </select>
+                   </div>`;
 
     $.each(classes, function (idx, val) {
         bPrice = BetterPriceView(val.class_Price);
@@ -435,19 +450,13 @@ function FillClassesView() {
                                 <div class="card-body text-left">
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <img src="${val.class_UrlPic
-            }" alt="" style="width: 100px; height:100px"/>
+                                            <img src="${val.class_UrlPic}" alt="" style="width: 100px; height:100px"/>
                                         </div>
                                         <div class="col-sm-9 align-self-center">
-                                            <h5 class="mb-1 font-weight-bold"><a href="../class/details/${idx + 1
-            }">${val.class_Name}</a></h5>
-                                            <p class="mb-2 text-truncate" style="width: 20rem">${val.class_Desc
-            }</p>
-                                            <p class="mb-2"><button type="button" class="btn btn-outline-dark btn-sm disabled">${val.category_Name
-            }</button> <button type="button" class="btn btn-outline-info btn-sm disabled">${val.level_Name
-            }</button> <button type="button" class="btn btn-outline-warning btn-sm disabled">★${val.class_Rating
-            }</button></p>
-                                            <p class="mb-0">${bPrice}</p>
+                                            <h6 class="mb-1 font-weight-bold" ><a href="../class/details/${idx + 1}">${val.class_Name}</a></h6>
+                                            <p class="mb-2 text-truncate" style="width: 20rem; font-size: 12px;">${val.class_Desc}</p>
+                                            <p class="mb-2"><button type="button" class="btn btn-outline-dark btn-sm disabled" style="font-size: 12px; padding: 3px;">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm disabled" style="font-size: 12px; padding: 3px;">${val.level_Name}</button> <button type="button" class="btn btn-outline-warning btn-sm disabled" style="font-size: 12px; padding: 3px;">★${val.class_Rating}</button></p>
+                                            <p class="font-weight-bold mb-0" style="font-size: 14px">${bPrice}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -460,7 +469,7 @@ function FillClassesView() {
     });
     classesContent += `</ul><ul class="pagination justify-content-center mt-3"></ul></div>`;
     $("#classes").html(classesContent);
-    /*    $('#filters').html(filters);*/
+    $('#filters').html(filters);
 
     var classList = new List("class-list", {
         valueNames: ["name"],
@@ -468,6 +477,86 @@ function FillClassesView() {
         pagination: true,
     });
 }
+function updCtg() {
+    let updated = $('#cg').val();
+    let classes = GetAllClasses();
+    let cList = `<div id="class-list"><ul class="list" style="list-style: none; margin: 0; padding: 0;">`;
+    let i = 1;
+    if (updated.length != 0) {
+        updated.forEach(elm =>
+            $.each(classes, function (idx, val) {
+                if (elm == val.category_Name) {
+                    bPrice = BetterPriceView(val.class_Price);
+
+                    if (i % 2 != 0) {
+                        cList += `<div class="row mb-3 mx-2">`;
+                    }
+
+                    cList += `<li><div class="col-sm">
+                            <div class="card">
+                                <div class="card-body text-left">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <img src="${val.class_UrlPic}" alt="" style="width: 100px; height:100px"/>
+                                        </div>
+                                        <div class="col-sm-9 align-self-center">
+                                            <h5 class="mb-1 font-weight-bold"><a href="../class/details/${idx + 1}">${val.class_Name}</a></h5>
+                                            <p class="mb-2 text-truncate" style="width: 20rem">${val.class_Desc}</p>
+                                            <p class="mb-2"><button type="button" class="btn btn-outline-dark btn-sm disabled">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm disabled">${val.level_Name}</button> <button type="button" class="btn btn-outline-warning btn-sm disabled">★${val.class_Rating}</button></p>
+                                            <p class="mb-0">${bPrice}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       </div></li>`;
+
+                    if (i % 2 == 0) {
+                        cList += `</div>`;
+                    }
+                    i++;
+                }
+            })
+        );
+    } else {
+        $.each(classes, function (idx, val) {
+            bPrice = BetterPriceView(val.class_Price);
+
+            if ((idx + 1) % 2 != 0) {
+                cList += `<div class="row mb-3 mx-2">`;
+            }
+
+            cList += `<li><div class="col-sm">
+                            <div class="card">
+                                <div class="card-body text-left">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <img src="${val.class_UrlPic}" alt="" style="width: 100px; height:100px"/>
+                                        </div>
+                                        <div class="col-sm-9 align-self-center">
+                                            <h5 class="mb-1 font-weight-bold"><a href="../class/details/${idx + 1}">${val.class_Name}</a></h5>
+                                            <p class="mb-2 text-truncate" style="width: 20rem">${val.class_Desc}</p>
+                                            <p class="mb-2"><button type="button" class="btn btn-outline-dark btn-sm disabled">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm disabled">${val.level_Name}</button> <button type="button" class="btn btn-outline-warning btn-sm disabled">★${val.class_Rating}</button></p>
+                                            <p class="mb-0">${bPrice}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       </div></li>`;
+
+            if ((idx + 1) % 2 == 0) {
+                cList += `</div>`;
+            }
+        });
+    }
+    cList += `</ul><ul class="pagination justify-content-center mt-3"></ul></div>`;
+    $("#classes").html(cList);
+    var classList = new List("class-list", {
+        valueNames: ["name"],
+        page: 2,
+        pagination: true,
+    });
+}
+
 
 if (codemyClasses != null) {
     FillClassesView();
@@ -476,17 +565,19 @@ if (codemyClasses != null) {
 function FillClassDetView() {
     let cDet = GetClassById(classId);
     let cSects = GetSectionsByClassId(classId);
-    let takenClass = TakenClassById(`dennyfpr@gmail.com`);
-    let fbStatus = feedbackStatus(`dennyfpr@gmail.com`);
+    let takenClass = TakenClassById(sesEmail);
+    let fbStatus = feedbackStatus(sesEmail);
+    let bPrice = BetterPriceView(`${cDet.class_Price}`);
     let classDetail = `<div class="container mt-5 mb-5">
                         <div class="row">
                             <div class="col-sm-4">
                                 <img src="${cDet.class_UrlPic}" alt="" style="width: 250px; height: 250px;" />
                             </div>
                             <div class="col-sm-8 align-self-center">
-                                <h5 class="mb-3 font-weight-bold">${cDet.class_Name}</h5>
-                                <p class="mb-1">${cDet.class_Desc}</p>
-                                <p class="mb-4"><button type="button" class="btn btn-outline-dark btn-sm disabled">${cDet.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm disabled">${cDet.level_Name}</button> <button type="button" class="btn btn-outline-warning btn-sm disabled">★${cDet.class_Rating}</button></p>`;
+                                <h5 class="mb-1 font-weight-bold">${cDet.class_Name}</h5>
+                                <p class="mb-2">${cDet.class_Desc}</p>
+                                <p class="mb-2"><button type="button" class="btn btn-outline-dark btn-sm disabled">${cDet.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm disabled">${cDet.level_Name}</button> <button type="button" class="btn btn-outline-warning btn-sm disabled">★${cDet.class_Rating}</button></p>
+                                <h4 class="font-weight-bold mb-3">${bPrice}</h4>`;
     let classSections = `<div class="container card mb-3">`;
     let sectsHead = `<div class="list-group" id="list-tab" role="tablist" style="height: 33rem; overflow: scroll;">`;
     let sectsBody = ``;
@@ -679,7 +770,7 @@ function FillClassDetView() {
                     `btnC${val.chapter}`
                 );
                 window[`continue${val.chapter}`].addEventListener("click", function () {
-                    continueChap = ContinueProgressChap(`dennyfpr@gmail.com`);
+                    continueChap = ContinueProgressChap(sesEmail);
                     if (continueChap.status == 200) {
                         Swal.fire({
                             icon: "success",
@@ -706,7 +797,7 @@ function FillClassDetView() {
                 let review = $("#reviewText").val();
                 let rating = parseInt(selected.value);
                 if (review != null && rating != null) {
-                    AddFeddback(`dennyfpr@gmail.com`, rating, review);
+                    AddFeddback(sesEmail, rating, review);
                 }
             });
         }

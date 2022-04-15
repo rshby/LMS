@@ -10,13 +10,8 @@
 
 <div class="mb-5 mt-5">
     <div class="ml-3">
-        <h3>Selamat datang (Nama Lengkap)!</h3>
+        <h3 id="welcomingMessage"></h3>
         <p>Selamat belajar dan bereksplorasi.</p>
-        <p id="sessionEmail" hidden>@HttpContextAccessor.HttpContext.Session.GetString("email")</p>     
-        <script>
-            let sessionEmail = document.getElementById("sessionEmail").innerHTML;
-            console.log(sessionEmail);
-        </script>
     </div>
 </div>
 
