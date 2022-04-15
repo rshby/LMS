@@ -287,7 +287,7 @@ function GetSubDistricyById(id) {
 
 //Update data User ke Database
 function UpdateMasterUser() {
-    let dataUser = GetMasterUserByEmail("reoshby@gmail.com");
+    let dataUser = GetMasterUserByEmail(sesEmail);
     let data = new Object();
     data.Email = dataUser.email;
     data.FirstName = $("#InputFN").val(); // -> ambil dari value form
@@ -350,8 +350,8 @@ $(document).ready(function () {
         TampilkanDistrict();
         TampilkanCity();
 
-        let data = GetMasterUserByEmail("reoshby@gmail.com");
-        let dataUser = GetUserbyEmail("reoshby@gmail.com");
+        let data = GetMasterUserByEmail(sesEmail);
+        let dataUser = GetUserbyEmail(sesEmail);
 
         document.getElementById("InputFN").value = data.firstName;
         document.getElementById("InputLN").value = data.lastName;

@@ -33,6 +33,13 @@ namespace Client.Controllers
             return RedirectToAction("index", "Dashboard");
         }
 
+        public async Task<IActionResult> Terminate()
+        {
+            HttpContext.Session.SetString("jwt", "");
+            HttpContext.Session.SetString("email", "");
+            return RedirectToAction("index", "Home");
+        }
+
         public IActionResult Index()
         {
             return View();
