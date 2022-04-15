@@ -268,7 +268,8 @@ function InsertClass() {
         inClass.Level_Id = Number($("#level").val());
         inClass.Category_Id = Number($("#cate").val());
 
-        //console.log(inClass);
+
+        console.log(inClass);
 
         Swal.fire({
             title: 'Insert Class',
@@ -286,6 +287,7 @@ function InsertClass() {
                     },
                     type: "POST",
                     url: "https://localhost:44376/api/classes/regClass",
+                    cache: false,
                     dataType: "json",
                     data: JSON.stringify(inClass)
                 }).done((result) => {
@@ -296,6 +298,7 @@ function InsertClass() {
                 })
             }
         })
+
     }
 }
 
@@ -500,32 +503,28 @@ function EditClass(classId) {
     temp.Level_Id = Number($('#level-id').val());
     temp.Category_Id = Number($('#category-id').val());
 
-    $("#formClass").validate({
-        errorPlacement: function (error, element) {
-        }
-    });
+
 
     //console.log(temp);
-    if ($("#formClass").valid()) {
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            type: 'PUT',
-            url: `https://localhost:44376/api/classes/UpdateClass`,
-            dataType: 'JSON',
-            data: JSON.stringify(temp)
-        }).done((result) => {
-            Swal.fire(
-                'Updated Class'
-            )
-        }).fail((result) => {
-            Swal.fire(
-                'Failed Update Class'
-            )
-        })
-    }
+    $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        type: 'PUT',
+        url: `https://localhost:44376/api/classes/UpdateClass`,
+        dataType: 'JSON',
+        data: JSON.stringify(temp)
+    }).done((result) => {
+        Swal.fire(
+            'Updated Class'
+        )
+    }).fail((result) => {
+        Swal.fire(
+            'Failed Update Class'
+        )
+    })
+
 }
 
 function EditSection(sectionId) {
@@ -570,38 +569,33 @@ function InsertSection() {
 
     //console.log(inContent);
 
-    $("#formSection").validate({
-        errorPlacement: function (error, element) {
+    Swal.fire({
+        title: 'Insert Sectioin',
+        text: 'Insert New Section?',
+        showCancelButton: true,
+        confirmButtonColor: "#89CFF0",
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                type: "POST",
+                url: "https://localhost:44376/api/classes/InputContent",
+                dataType: "json",
+                data: JSON.stringify(inContent)
+            }).done((result) => {
+                location.reload();
+            }).fail((error) => {
+                Swal.fire
+                'Failed Insert'
+            })
         }
-    });
-    if ($("#formSection").valid()) {
-        Swal.fire({
-            title: 'Insert Sectioin',
-            text: 'Insert New Section?',
-            showCancelButton: true,
-            confirmButtonColor: "#89CFF0",
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-                    type: "POST",
-                    url: "https://localhost:44376/api/classes/InputContent",
-                    dataType: "json",
-                    data: JSON.stringify(inContent)
-                }).done((result) => {
-                    location.reload();
-                }).fail((error) => {
-                    Swal.fire
-                    'Failed Insert'
-                })
-            }
-        })
-    }
+    })
+
 }
 
 function GetReadyClass() {
