@@ -36,7 +36,7 @@ namespace Client
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(10);//set 10 menit   
+                options.IdleTimeout = TimeSpan.FromMinutes(30); //set 10 menit   
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

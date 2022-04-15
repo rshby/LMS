@@ -4,6 +4,8 @@ using Client.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Client.Controllers
@@ -26,11 +28,26 @@ namespace Client.Controllers
             {
                 return RedirectToAction("index");
             }
-            
+
+            //Ambil Rolesnya
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(token);
+            var tokenS = jsonToken as JwtSecurityToken;
+            var rolesLogin = tokenS.Claims.First(claim => claim.Type == "roles").Value;
+
+            //bawa session saat login
             HttpContext.Session.SetString("jwt", token);
             HttpContext.Session.SetString("email", inputData.Email);
-            
-            return RedirectToAction("index", "Dashboard");
+
+            //Cek jika roles adalah peserta
+            if (rolesLogin == "Peserta")
+            {
+                return RedirectToAction("index", "Dashboard");
+            }
+            else
+            {
+                return RedirectToAction("index", "AdminHome");
+            }
         }
 
         public async Task<IActionResult> Terminate()

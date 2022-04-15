@@ -2,8 +2,6 @@ let dashboard = document.getElementById("dashboard");
 let codemyClasses = document.getElementById("codemyClasses");
 let codemyClassesDetail = document.getElementById("codemyClassesDetail");
 
-console.log(sesEmail);
-
 function readSession() {
     let inOut = ``;
     if (sesEmail.length != 0) {
@@ -21,6 +19,7 @@ function readSession() {
     }
     $("#loginLogout").html(inOut);
 }
+
 console.log($("#sessionEmail").val());
 readSession();
 
@@ -305,7 +304,6 @@ function getUserDataByEmail(email) {
     return data;
 }
 
-
 function FillDashboard() {
     let welcMsg = getUserDataByEmail(sesEmail);
     let unpaidTb = TakenUnpaidClass(sesEmail);
@@ -398,7 +396,7 @@ function FillDashboard() {
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Ya',
                     cancelButtonText: 'Tidak',
-                }).then((x)=> {
+                }).then((x) => {
                     let button = document.getElementById(`btnCt${val.class_Id}2`);
                     if (x.isConfirmed) {
                         button.click();
@@ -406,15 +404,24 @@ function FillDashboard() {
                 });
             });
         } else {
-            window[`certificate${val.class_Id}`] = document.getElementById(
-                `btnCf${val.class_Id}`
-            );
-            window[`certificate${val.class_Id}`].addEventListener(
-                "click",
-                function () {
-                    alert("Lihat Certificate");
-                }
-            );
+            window[`certificate${val.class_Id}`] = document.getElementById(`btnCf${val.class_Id}`);
+            window[`certificate${val.class_Id}`].addEventListener("click", function () {
+                Swal.fire({
+                    title: 'Lihat Sertifikat?',
+                    text: "Membuka Sertifikat",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak',
+                }).then((x) => {
+                    if (x.isConfirmed) {
+                        console.log("button diklick");
+                        window.open(`https://localhost:44329/certificate`);
+                    }
+                });            
+            });
         }
     });
 }
@@ -571,7 +578,6 @@ function updCtg() {
         pagination: true,
     });
 }
-
 
 if (codemyClasses != null) {
     FillClassesView();
@@ -1205,97 +1211,26 @@ document.getElementById("buttonChangePassword").addEventListener("click", functi
     });
 });
 
-//function updLv() {
-//    let updated = $('#lv').val();
-//    let classes = GetAllClasses();
-//    let cList = `<div id="class-list"><ul class="list" style="list-style: none; margin: 0; padding: 0;">`;
-//    let i = 1;
-//    let ii = 0;
-//    updated.forEach
-//        (elm =>
-//            $.each(classes, function (idx, val) {
-//                if (i % 2 != 0) {
-//                    cList += `<div class="row mb-3">`;
-//                    i++;
-//                }
-//                if (elm == val.level_Name) {
-//                    cList += `<li><div class="col-sm mb-3">
-//                            <div class="card">
-//                                <div class="card-body text-left">
-//                                    <div class="row">
-//                                        <div class="col-sm-3">
-//                                            <img src="${val.class_UrlPic}" alt="" style="width: 100px; height:100px"/>
-//                                        </div>
-//                                        <div class="col-sm-9 align-self-center">
-//                                            <h5 class="mb-1 font-weight-bold"><a href="../class/details/${idx + 1}">${val.class_Name}</a></h5>
-//                                            <p class="mb-2 text-truncate" style="width: 20rem">${val.class_Desc}</p>
-//                                            <p class="mb-2"><button type="button" class="btn btn-outline-dark btn-sm disabled">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm disabled">${val.level_Name}</button> <button type="button" class="btn btn-outline-warning btn-sm disabled">★${val.class_Rating}</button></p>
-//                                            <p class="mb-0">${bPrice}</p>
-//                                        </div>
-//                                    </div>
-//                                </div>
-//                            </div>
-//                       </div></li>`;
-//                    ii++;
-//                }
-//                if (i % 2 != 0) {
-//                    cList += `</div>`;
-//                }
-//            })
-//        );
-//    if (ii % 2 != 0) {
-//        cList += `<li><div class="col-sm mb-3 invisible">
-//                            <div class="card">
-//                                <div class="card-body text-left">
-//                                    <div class="row">
+//Get Certificate by Email and Class_Id
+function GetCertificate(email, class_id) {
+    let response = new Object();
+    let data = new Object();
+    data.Email = email;
+    data.Class_Id = class_id;
+    $.ajax({
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        type: "POST",
+        url: `https://localhost:44376/api/certificates/byemailclassid`,
+        dataType: "json",
+        data: JSON.stringify(data)
+    }).done((result) => {
+        response = result.data;
+    }).fail((e) => {
+        console.log(e);
+    });
+    return response;
+}
 
-//                                    </div>
-//                                </div>
-//                            </div>
-//                       </div></li>`;
-//    }
-//    if (updated.length != 0) {
-//        cList += `</ul><ul class="pagination justify-content-center"></ul></div>`;
-//        $('#classes').html(cList);
-//        var classList = new List('class-list', {
-//            valueNames: ['name'],
-//            page: 2,
-//            pagination: true
-//        });
-//    } else {
-//        $.each(classes, function (idx, val) {
-//            if (i % 2 != 0) {
-//                cList += `<div class="row mb-3">`;
-//                i++;
-//            }
-//            cList += `<li><div class="col-sm mb-3">
-//                            <div class="card">
-//                                <div class="card-body text-left">
-//                                    <div class="row">
-//                                        <div class="col-sm-3">
-//                                            <img src="${val.class_UrlPic}" alt="" style="width: 100px; height:100px"/>
-//                                        </div>
-//                                        <div class="col-sm-9 align-self-center">
-//                                            <h5 class="mb-1 font-weight-bold"><a href="../class/details/${idx + 1}">${val.class_Name}</a></h5>
-//                                            <p class="mb-2 text-truncate" style="width: 20rem">${val.class_Desc}</p>
-//                                            <p class="mb-2"><button type="button" class="btn btn-outline-dark btn-sm disabled">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm disabled">${val.level_Name}</button> <button type="button" class="btn btn-outline-warning btn-sm disabled">★${val.class_Rating}</button></p>
-//                                            <p class="mb-0">${bPrice}</p>
-//                                        </div>
-//                                    </div>
-//                                </div>
-//                            </div>
-//                       </div></li>`;
-//            ii++;
-//            if (i % 2 != 0) {
-//                cList += `</div>`;
-//            }
-//        })
-//        cList += `</ul><ul class="pagination justify-content-center"></ul></div>`;
-//        $('#classes').html(cList);
-//        var classList = new List('class-list', {
-//            valueNames: ['name'],
-//            page: 2,
-//            pagination: true
-//        });
-//    }
-//}
