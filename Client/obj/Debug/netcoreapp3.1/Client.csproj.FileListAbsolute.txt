@@ -417,3 +417,5 @@ C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Client.cspr
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Client.dll
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Client.pdb
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Client.genruntimeconfig.cache
+C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Certificate\Index.cshtml.g.cs
+C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs

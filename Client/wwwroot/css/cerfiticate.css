@@ -44,27 +44,14 @@ body {
     position: relative;
     width: 800px;
     height: 600px;
-    background-color: #618597;
+    background-color: #2e6081;
     padding: 30px;
     color: #333;
     font-family: 'Open Sans', sans-serif;
     box-shadow: 0 0 5px rgba(0, 0, 0, .5);
-    /*background: -webkit-repeating-linear-gradient(
-    45deg,
-    #618597,
-    #618597 1px,
-    #b2cad6 1px,
-    #b2cad6 2px
-  );
-  background: repeating-linear-gradient(
-    90deg,
-    #618597,
-    #618597 1px,
-    #b2cad6 1px,
-    #b2cad6 2px
-  );*/
 }
-.pm-certificate-container .outer-border {
+
+    .pm-certificate-container .outer-border {
         width: 794px;
         height: 594px;
         position: absolute;
@@ -73,8 +60,7 @@ body {
         top: 50%;
         margin-top: -297px;
         border: 2px solid #fff;
-
-}
+    }
 
 .inner-border {
     width: 730px;
@@ -101,71 +87,84 @@ body {
     margin-top: -260px;
 }
 
-.pm-certificate-border .pm-certificate-block{
-    width: 650px;
-    height: 200px;
-    position: relative;
-    left: 50%;
-    margin-left: -325px;
-    top: 70px;
-    margin-top: 0;
+hr.line-bg {
+    border: 1px solid #2e6081;
+    border-radius: 5px;
+    width: 650px
 }
 
-.pm-certificate-header {
-    margin-bottom: 10px;
+/*.pm-canvas-text{
+    position: absolute;
+    width: 720px;
+    height: 520px;
+    padding: 0;
+    border: 1px solid #E1E5F0;
+    background-color: rgba(255, 255, 255, 1);
+    background-image: none;
+}*/
+
+.center-text {
+    text-align: center;
 }
 
-.pm-certificate-title {
-    position: relative;
-    top: 40px;
+    .center-text .setting-tittle {
+        padding-top: 20px;
+        font-size: 30px;
+        font-weight: bold;
+        font-family: 'Calisto MT';
+    }
+
+    .center-text .setting-code {
+        font-size: 20px;
+        font-weight: bold;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+
+.student-name {
+    padding:0px;
+    font-size: 30px;
+    font-family: 'Calisto MT';
 }
 
-.pm-certificate-title h2{
-    font-size: 34px !important;
+hr.line-name {
+    display: block;
+    border: 1px solid #2e6081;
+    border-radius: 5px;
+    width: 300px
 }
 
-
-.pm-certificate-body {
-    padding: 20px;
+.class-name {
+    font-size: 23px;
+    font-weight: bold;
+    font-family: 'Calisto MT';
 }
 
-.pm-certificate-body .pm-name-text{
-    font-size: 20px;
+.class-desc {
+    font-weight: bold;
+    font-family: 'Calisto MT';
+    font-style: italic;
 }
 
-.pm-earned {
-    margin: 15px 0 20px;
+.ttd {
+    position: absolute;
+    top: 130px;
+    right: 100px;
+    font-family: 'Calisto MT';
 }
 
-.pm-earned .pm-earned-text{
-    font-size: 20px;
+.ttd2 {
+    position: absolute;
+    top: 35px;
+    right: 125px;
+    font-family: 'Calisto MT';
 }
 
-.pm-credits-text {
-    font-size: 15px;
-}
-
-.pm-course-title .pm-earned-text{
-    font-size: 20px;
-}
-
-.pm-credits-text {
-    font-size: 15px;
-}
-
-.pm-certified {
-    font-size: 12px;
-}
-
-.pm-certified .underline{
-    margin-bottom: 5px;
-}
-
-.pm-certificate-footer {
-    width: 650px;
-    height: 100px;
-    position: relative;
-    left: 50%;
-    margin-left: -325px;
-    bottom: -105px;
+.footer-style {
+    position: absolute;
+    top: 155px;
+    left: 25px;
+    color: black;
+    font-family: 'Calisto MT';
+    font-size: 11px;
 }

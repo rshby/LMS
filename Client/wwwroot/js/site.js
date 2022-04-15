@@ -2,13 +2,6 @@
 let codemyClasses = document.getElementById("codemyClasses");
 let codemyClassesDetail = document.getElementById("codemyClassesDetail");
 
-$(function () {
-    // INITIALIZE DATEPICKER PLUGIN
-    $('.datepicker').datepicker({
-        clearBtn: true,
-        format: "dd/mm/yyyy"
-    });
-});
 
 function readSession() {
     let inOut = ``;
@@ -76,7 +69,7 @@ function BetterPriceView(price) {
         p2 = priceStr.slice(3);
         bpv = "Rp" + p1 + "." + p2 + ",00.";
     } else if (priceStr.length == 7) {
-        p1 = priceStr.slice(0,1);
+        p1 = priceStr.slice(0, 1);
         p2 = priceStr.slice(1, 4);
         p3 = priceStr.slice(4, 7);
         bpv = "Rp" + p1 + "." + p2 + "." + p3 + ",00.";
@@ -270,7 +263,6 @@ function feedbackStatus(email) {
     })
     return data;
 }
-
 function FillDashboard() {
     let unpaidTb = TakenUnpaidClass(`dennyfpr@gmail.com`);
     let unpaidCont = ``;
@@ -294,26 +286,26 @@ function FillDashboard() {
             pStatus = payStatus(`${val.class_Id}`);
             if (pStatus == "pending") {
                 Swal.fire({
-                    icon : 'warning',
-                    title : 'Pembayaran Belum Diterima',
-                    text : 'Mohon Selesaikan Pembayaran'
+                    icon: 'warning',
+                    title: 'Pembayaran Belum Diterima',
+                    text: 'Mohon Selesaikan Pembayaran'
                 }).then(function () {
                     location.reload();
                 });
             } else if (pStatus == "sukses") {
                 Swal.fire({
-                    icon : 'success',
-                    title : 'Pembayaran Sukses',
-                    text : 'Pembayaran Berhasil Dikonfirmasi'
+                    icon: 'success',
+                    title: 'Pembayaran Sukses',
+                    text: 'Pembayaran Berhasil Dikonfirmasi'
                 }).then(function () {
                     location.reload();
                 });
             }
             else {
                 Swal.fire({
-                    icon : 'error',
-                    title : 'Pembayaran Gagal',
-                    text : 'Batas Waktu Pembayaran Telah Habis'
+                    icon: 'error',
+                    title: 'Pembayaran Gagal',
+                    text: 'Batas Waktu Pembayaran Telah Habis'
                 }).then(function () {
                     location.reload();
                 });
@@ -324,7 +316,6 @@ function FillDashboard() {
     let paidTb = TakenPaidClass(`dennyfpr@gmail.com`);
     let onGoingCont = ``;
     let doneCont = ``;
-    console.log(paidTb);
     $.each(paidTb, function (idx, val) {
         if (val.takenClass_IsDone == false) {
             onGoingCont += `<tr>
@@ -345,6 +336,7 @@ function FillDashboard() {
     $('#undoneClass').html(onGoingCont);
     $('#doneClass').html(doneCont);
 
+    var data;
     $.each(paidTb, function (idx, val) {
         if (val.takenClass_IsDone == false) {
             window[`continue${val.class_Id}`] = document.getElementById(`btnC${val.class_Id}`);
@@ -354,11 +346,66 @@ function FillDashboard() {
         } else {
             window[`certificate${val.class_Id}`] = document.getElementById(`btnCf${val.class_Id}`);
             window[`certificate${val.class_Id}`].addEventListener('click', function () {
-                alert('Lihat Certificate');
+                //alert('Lihat Certificate');
+                //console.log(val);
+
+                data = GetCertificate(val.email, val.class_Id);
+                var myWindow = window.open("https://localhost:44329/certificate");
+                
+                //myWindow.onload = function () {
+                //    function MoveDataCert(cert) {
+                //        document.getElementById('class-name').innerHTML = `${cert.class_Name}`;
+                //        document.getElementById('cert-code').innerHTML = `${cert.certificate_Code}`;
+                //        document.getElementById('user-name').innerHTML = `${cert.user_FullName}`;
+                //        console.log('page is fully loaded');
+                //    }
+                //    MoveDataCert(data);
+                //}
+
+                myWindow.onload = function () {
+                    document.getElementById('class-name').onload = function () {
+                        document.innerHTML = `${cert.class_Name}`;
+                    }
+                    document.getElementById('cert-code').onload = function () {
+                        document.innerHTML = `${cert.certificate_Code}`;
+                    }
+                    document.getElementById('user-name').onload = function () {
+                        document.innerHTML = `${cert.user_FullName}`;
+                    }
+                };
             });
         }
     });
+};
+
+function MoveDataCert(cert) {
+    document.getElementById('class-name').innerHTML = `${cert.class_Name}`;
+    document.getElementById('cert-code').innerHTML = `${cert.certificate_Code}`;
+    document.getElementById('user-name').innerHTML = `${cert.user_FullName}`;
+    console.log('page is fully loaded');
 }
+
+function GetCertificate(userId, classId) {
+    const temp = new Object();
+    temp.Email = userId;
+    temp.Class_Id = classId;
+    $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        type: "POST",
+        url: "https://localhost:44376/api/certificates/byemailclassid",
+        dataType: "JSON",
+        data: JSON.stringify(temp),
+        async: false
+    }).done((result) => {
+        var data = result.data;
+        fix = data;
+    })
+    return fix;
+}
+
 
 if (dashboard != null) {
     FillDashboard();
@@ -550,7 +597,7 @@ function FillClassDetView() {
     let sectsHead = `<div class="list-group" id="list-tab" role="tablist" style="height: 33rem; overflow: scroll;">`;
     let sectsBody = ``;
 
-        // Belum Daftar
+    // Belum Daftar
     if (takenClass.status == 404) {
         classDetail += `       <button type="button" class="btn btn-primary" onclick="enroll()">Take Class</button>
                             </div>
@@ -574,7 +621,7 @@ function FillClassDetView() {
     } else if (takenClass.data.takenClass_IsPaid == true && takenClass.data.takenClass_IsDone == false) {
         $.each(cSects, function (idx, val) {
             let chap = idx + 1;
-            let prog = takenClass.data.takenClass_ProgressChapter +1;
+            let prog = takenClass.data.takenClass_ProgressChapter + 1;
             if (chap < prog) {
                 sectsHead += `<a class="list-group-item list-group-item-action" data-toggle="list" href="#body${val.chapter}"><div class="row"><div class="col-sm-2">✔</div><div class="col-sm-10"><h6>${val.name}</h6></div></div></a>`;
                 sectsBody += `<div class="tab-pane fade" id="body${val.chapter}">
