@@ -2,8 +2,6 @@ let dashboard = document.getElementById("dashboard");
 let codemyClasses = document.getElementById("codemyClasses");
 let codemyClassesDetail = document.getElementById("codemyClassesDetail");
 
-console.log(sesEmail);
-
 function readSession() {
     let inOut = ``;
     if (sesEmail.length != 0) {
@@ -80,6 +78,20 @@ function BetterPriceView(price) {
         bpv = "Rp" + p1 + "." + p2 + "." + p3 + ",00.";
     }
     return bpv;
+}
+function BetterLevelView(level) {
+    let bLevel = ``;
+    if (level == `Basic`) {
+        bLevel = `⁎ ${level}`;
+    } else if (level == `Intermediate`) {
+        bLevel = `⁑ ${level}`;
+    } else if (level == `Advanced`) {
+        bLevel = `⁂ ${level}`;
+    }
+    return bLevel;
+}
+function myfunction() {
+
 }
 function BetterDateView(date) {
     iDate = new Date(`${date}`);
@@ -308,19 +320,36 @@ function getUserDataByEmail(email) {
 
 function FillDashboard() {
     let welcMsg = getUserDataByEmail(sesEmail);
+    if (sesEmail.length != 0) {
+        $("#welcomingMessage").html(`Selamat datang, ${welcMsg.firstName}!`);
+    }
+
     let unpaidTb = TakenUnpaidClass(sesEmail);
     let unpaidCont = ``;
+    let unpaidHead = ``;
     $.each(unpaidTb, function (idx, val) {
         bPrice = BetterPriceView(val.class_Price);
         bDate = BetterDateView(`${val.takenClass_Expired}`);
         unpaidCont += `<tr>
-                            <td><a href="class/details/${val.class_Id}">${val.class_Name}</a></td>
+                            <td><a href="class/details/${val.class_Id}" style="color: black;">${val.class_Name}</a></td>
                             <td>${bPrice}</td>
                             <td>${bDate}</td>
                             <td><button id="btnP${val.class_Id}" type="button" class="btn btn-outline-dark" onclick="payClass${val.class_Id}()">Konfirmasi Pembayaran</button></td>
                         </tr>`;
     });
-
+    if (unpaidCont.length != 0) {
+        unpaidHead = `<tr>
+                         <th scope="col">Class Name</th>
+                         <th scope="col">Price</th>
+                         <th scope="col">Date Expired</th>
+                         <th scope="col">Action</th>
+                     </tr>`;
+    } else {
+        unpaidHead = `<tr class="text-center">
+                          <th scope="col" style="font-size: 14px; font-weight:lighter">Kamu tidak memiliki kelas yang belum dibayar</th>
+                      </tr>`;
+    }
+    $("#unpaidClassHead").html(unpaidHead);
     $("#unpaidClass").html(unpaidCont);
 
     $.each(unpaidTb, function (idx, val) {
@@ -360,11 +389,13 @@ function FillDashboard() {
     let paidTb = TakenPaidClass(sesEmail);
     let onGoingCont = ``;
     let doneCont = ``;
+    let onGoingHead = ``;
+    let doneHead = ``;
 
     $.each(paidTb, function (idx, val) {
         if (val.takenClass_IsDone == false) {
             onGoingCont += `<tr>
-                            <td><a href="class/details/${val.class_Id}">${val.class_Name}</a></td>
+                            <td><a href="class/details/${val.class_Id}" style="color: black;">${val.class_Name}</a></td>
                             <td>
                                 <form action="https://localhost:44329/class/details/${val.class_Id}">
                                     <button id="btnCt${val.class_Id}" type="submit" class="btn btn-outline-primary">Continue Class</button>
@@ -373,13 +404,35 @@ function FillDashboard() {
                         </tr>`;
         } else {
             doneCont += `<tr>
-                            <td><a href="class/details/${val.class_Id}">${val.class_Name}</a></td>
+                            <td><a href="class/details/${val.class_Id}" style="color: black;">${val.class_Name}</a></td>
                             <td><button id="btnCf${val.class_Id}" type="button" class="btn btn-outline-success  ml-2">Certificate</button></td>
                         </tr>`;
         }
     });
-    $("#welcomingMessage").html(`Selamat datang, ${welcMsg.firstName}!`);
+    if (onGoingCont.length != 0) {
+        onGoingHead = `<tr>
+                          <th scope="col">Class Name</th>
+                          <th scope="col">Action</th>
+                      </tr>`;
+    } else {
+        onGoingHead = `<tr class="text-center">
+                          <th scope="col" style="font-size: 14px; font-weight:lighter">Kamu tidak memiliki kelas yang sedang dijalani</th>
+                      </tr>`;
+    }
+    $("#undoneClassHead").html(onGoingHead);
     $("#undoneClass").html(onGoingCont);
+
+    if (doneCont.length != 0) {
+        doneHead = `<tr>
+                          <th scope="col">Class Name</th>
+                          <th scope="col">Action</th>
+                      </tr>`;
+    } else {
+        doneHead = `<tr class="text-center">
+                          <th scope="col" style="font-size: 14px; font-weight:lighter">Kamu belum memiliki kelas yang sudah selesai</th>
+                      </tr>`;
+    }
+    $("#doneClassHead").html(doneHead);
     $("#doneClass").html(doneCont);
 
     $.each(paidTb, function (idx, val) {
@@ -440,6 +493,7 @@ function FillClassesView() {
 
     $.each(classes, function (idx, val) {
         bPrice = BetterPriceView(val.class_Price);
+        bLevel = BetterLevelView(val.level_Name);
 
         if ((idx + 1) % 2 != 0) {
             classesContent += `<div class="row mb-3 mx-2">`;
@@ -453,9 +507,9 @@ function FillClassesView() {
                                             <img src="${val.class_UrlPic}" alt="" style="width: 100px; height:100px"/>
                                         </div>
                                         <div class="col-sm-9 align-self-center">
-                                            <h6 class="mb-1 font-weight-bold" ><a href="../class/details/${idx + 1}">${val.class_Name}</a></h6>
-                                            <p class="mb-2 text-truncate" style="width: 20rem; font-size: 12px;">${val.class_Desc}</p>
-                                            <p class="mb-2"><button type="button" class="btn btn-outline-dark btn-sm disabled" style="font-size: 12px; padding: 3px;">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm disabled" style="font-size: 12px; padding: 3px;">${val.level_Name}</button> <button type="button" class="btn btn-outline-warning btn-sm disabled" style="font-size: 12px; padding: 3px;">★${val.class_Rating}</button></p>
+                                            <h6 class="mb-1 font-weight-bold" ><a href="../class/details/${idx + 1}" style="color: black;">${val.class_Name}</a></h6>
+                                            <p class="mb-0 text-truncate" style="width: 20rem; font-size: 13px;">${val.class_Desc}</p>
+                                            <p class="mb-1"><button type="button" class="btn btn-outline-dark btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm mx-2" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;${bLevel}&nbsp;</button> <button type="button" class="btn btn-outline-warning btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;★ ${val.class_Rating}&nbsp;</button></p>
                                             <p class="font-weight-bold mb-0" style="font-size: 14px">${bPrice}</p>
                                         </div>
                                     </div>
@@ -467,7 +521,7 @@ function FillClassesView() {
             classesContent += `</div>`;
         }
     });
-    classesContent += `</ul><ul class="pagination justify-content-center mt-3"></ul></div>`;
+    classesContent += `</ul><ul class="pagination justify-content-center mt-3 mb-0"></ul></div>`;
     $("#classes").html(classesContent);
     $('#filters').html(filters);
 
@@ -500,10 +554,10 @@ function updCtg() {
                                             <img src="${val.class_UrlPic}" alt="" style="width: 100px; height:100px"/>
                                         </div>
                                         <div class="col-sm-9 align-self-center">
-                                            <h5 class="mb-1 font-weight-bold"><a href="../class/details/${idx + 1}">${val.class_Name}</a></h5>
-                                            <p class="mb-2 text-truncate" style="width: 20rem">${val.class_Desc}</p>
-                                            <p class="mb-2"><button type="button" class="btn btn-outline-dark btn-sm disabled">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm disabled">${val.level_Name}</button> <button type="button" class="btn btn-outline-warning btn-sm disabled">★${val.class_Rating}</button></p>
-                                            <p class="mb-0">${bPrice}</p>
+                                            <h6 class="mb-1 font-weight-bold" ><a href="../class/details/${idx + 1}" style="color: black;">${val.class_Name}</a></h6>
+                                            <p class="mb-0 text-truncate" style="width: 20rem; font-size: 13px;">${val.class_Desc}</p>
+                                            <p class="mb-1"><button type="button" class="btn btn-outline-dark btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm mx-2" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;${bLevel}&nbsp;</button> <button type="button" class="btn btn-outline-warning btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;★ ${val.class_Rating}&nbsp;</button></p>
+                                            <p class="font-weight-bold mb-0" style="font-size: 14px">${bPrice}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -533,10 +587,10 @@ function updCtg() {
                                             <img src="${val.class_UrlPic}" alt="" style="width: 100px; height:100px"/>
                                         </div>
                                         <div class="col-sm-9 align-self-center">
-                                            <h5 class="mb-1 font-weight-bold"><a href="../class/details/${idx + 1}">${val.class_Name}</a></h5>
-                                            <p class="mb-2 text-truncate" style="width: 20rem">${val.class_Desc}</p>
-                                            <p class="mb-2"><button type="button" class="btn btn-outline-dark btn-sm disabled">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm disabled">${val.level_Name}</button> <button type="button" class="btn btn-outline-warning btn-sm disabled">★${val.class_Rating}</button></p>
-                                            <p class="mb-0">${bPrice}</p>
+                                            <h6 class="mb-1 font-weight-bold" ><a href="../class/details/${idx + 1}" style="color: black;">${val.class_Name}</a></h6>
+                                            <p class="mb-0 text-truncate" style="width: 20rem; font-size: 13px;">${val.class_Desc}</p>
+                                            <p class="mb-1"><button type="button" class="btn btn-outline-dark btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm mx-2" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;${bLevel}&nbsp;</button> <button type="button" class="btn btn-outline-warning btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;★ ${val.class_Rating}&nbsp;</button></p>
+                                            <p class="font-weight-bold mb-0" style="font-size: 14px">${bPrice}</p>
                                         </div>
                                     </div>
                                 </div>
