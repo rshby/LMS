@@ -10,7 +10,7 @@ function GetMasterUserByEmail(email) {
         },
         url: `https://localhost:44376/api/users/masterbyemail`,
         async: false,
-        data : JSON.stringify(data)
+        data: JSON.stringify(data)
     }).done((result) => {
         data = result.data;
     }).fail((e) => {
@@ -52,8 +52,7 @@ function GetEducationByid(id) {
 }
 
 // Tampilkan Semua Universitas ke Form
-function TampilkanUniv()
-{
+function TampilkanUniv() {
     $.ajax({
         type: "GET",
         async: false,
@@ -152,11 +151,10 @@ function GetCityByid(cityId) {
 }
 
 //Tampilkan Semua District
-function TampilkanDistrict()
-{
+function TampilkanDistrict() {
     $.ajax({
         type: "GET",
-        url : `https://localhost:44376/api/districts`,
+        url: `https://localhost:44376/api/districts`,
         async: false
     }).done((result) => {
         let pilihanDistrict = ``;
@@ -285,8 +283,14 @@ function GetSubDistricyById(id) {
     return data;
 }
 
+//Ketika button Register Account diklick -> proses mendaftar akun
+document.getElementById("buttonUpdateAcount").addEventListener("click", function () {
+    UpdateMasterUser();
+});
+
 //Update data User ke Database
 function UpdateMasterUser() {
+    console.log("kepanggil");
     let dataUser = GetMasterUserByEmail(sesEmail);
     let data = new Object();
     data.Email = dataUser.email;
@@ -300,50 +304,55 @@ function UpdateMasterUser() {
     data.Major = $("#InputMajor").val();
     data.University_Id = $("#InputUn").val();
 
-    Swal.fire({
-        title: 'Update Data?',
-        text: "Anda Akan Mengupdate Data!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Update'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                type: "PUT",
-                url: `https://localhost:44376/api/users/updatemaster`,
-                dataType: "json",
-                data: JSON.stringify(data)
-            }).done((result) => {
-                console.log(result);
-            }).fail((e) => {
-                console.log(e);
-            });
-            Swal.fire({
-                title: 'Sukses Update!',
-                text: 'Your file has been Update.',
-                icon: 'success',
-                showConfirmButton: false,
-                timer: 1560
-            }).then(function () {
-                location.reload();
-            });
-        }
+    //Validasi Form Terlebih Dahulu
+    $("#formUpdateAccount").validate({
+        errorPlacement: function (error, element) { },
     });
+
+    console.log($("#formUpdateAccount").valid());
+
+    if ($("#formUpdateAccount").valid()) {
+        Swal.fire({
+            title: 'Update Data?',
+            text: "Anda Akan Mengupdate Data!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Update'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type: "PUT",
+                    url: `https://localhost:44376/api/users/updatemaster`,
+                    dataType: "json",
+                    data: JSON.stringify(data)
+                }).done((result) => {
+                    console.log(result);
+                }).fail((e) => {
+                    console.log(e);
+                });
+                Swal.fire({
+                    title: 'Sukses Update!',
+                    text: 'Your file has been Update.',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 1560
+                }).then(function () {
+                    location.reload();
+                });
+            }
+        });
+    }
 }
 
 $(document).ready(function () {
     //Dijalankan hanya jika link pada browser diakses
     if (window.location.href.indexOf("account") > 1) {
-
-        var sessionEmail = '<%= oSerializer.Serialize(HttpContext.Current.Session["email"]);%>';
-        console.log(sessionEmail);
-
         TampilkanUniv();
         TampilkanProvince();
         TampilkanSubDistrict();
@@ -383,3 +392,30 @@ $(document).ready(function () {
         $("#InputProvince").val(GetCityByid(GetDistrictById(GetSubDistricyById(GetAddressById(dataUser.address_Id).subdistrict_Id).district_Id).city_Id).province_Id).change(); // -> province
     }
 });
+
+// Untuk Form Validate
+(function () {
+    "use strict";
+    window.addEventListener(
+        "load",
+        function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName("needs-validation");
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener(
+                    "submit",
+                    function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add("was-validated");
+                    },
+                    false
+                );
+            });
+        },
+        false
+    );
+})();
