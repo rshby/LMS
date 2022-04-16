@@ -257,49 +257,44 @@ function ReadCategory() {
 }
 
 function InsertClass() {
-    function InsertClass() {
-        //insert value obj
-        const inClass = new Object();
-        inClass.Name = $("#judul").val();
-        inClass.UrlPic = $("#url").val();
-        inClass.Desc = editor.getData();
-        inClass.TotalChapter = Number($("#totChapter").val());
-        inClass.Price = Number($("#price").val());
-        inClass.Level_Id = Number($("#level").val());
-        inClass.Category_Id = Number($("#cate").val());
+    //insert value obj
+    const inClass = new Object();
+    inClass.Name = $("#judul").val();
+    inClass.UrlPic = $("#url").val();
+    inClass.Desc = editor.getData();
+    inClass.TotalChapter = Number($("#totChapter").val());
+    inClass.Price = Number($("#price").val());
+    inClass.Level_Id = Number($("#level").val());
+    inClass.Category_Id = Number($("#cate").val());
 
+    console.log(inClass);
 
-        console.log(inClass);
-
-        Swal.fire({
-            title: 'Insert Class',
-            text: 'Insert New Class?',
-            showCancelButton: true,
-            confirmButtonColor: "#89CFF0",
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-                    type: "POST",
-                    url: "https://localhost:44376/api/classes/regClass",
-                    cache: false,
-                    dataType: "json",
-                    data: JSON.stringify(inClass)
-                }).done((result) => {
-                    location.reload();
-                }).fail((error) => {
-                    Swal.fire
-                    'Failed Insert'
-                })
-            }
-        })
-
-    }
+    Swal.fire({
+        title: 'Insert Class',
+        text: 'Insert New Class?',
+        showCancelButton: true,
+        confirmButtonColor: "#89CFF0",
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                type: "POST",
+                url: "https://localhost:44376/api/classes/regClass",
+                dataType: "json",
+                data: JSON.stringify(inClass)
+            }).done((result) => {
+                location.reload();
+            }).fail((error) => {
+                Swal.fire
+                'Failed Insert'
+            })
+        }
+    })
 }
 
 function DeleteClass(id) {

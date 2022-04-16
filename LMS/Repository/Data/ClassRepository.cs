@@ -24,6 +24,7 @@ namespace LMS.Repository.Data
             {
                 Name = register.Name,
                 Desc = register.Desc,
+                UrlPic = register.UrlPic,
                 TotalChapter = register.TotalChapter,
                 Price = register.Price,
                 Rating = 0.0,
