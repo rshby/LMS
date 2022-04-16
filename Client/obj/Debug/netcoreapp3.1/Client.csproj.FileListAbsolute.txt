@@ -142,3 +142,13 @@ C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Client.genr
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\401.cshtml.g.cs
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\403.cshtml.g.cs
 C:\Users\A S U S\Documents\GitHub\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Home\404.cshtml.g.cs
+C:\Users\A S U S\Documents\GitHub\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\A S U S\Documents\GitHub\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\A S U S\Documents\GitHub\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\A S U S\Documents\GitHub\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\A S U S\Documents\GitHub\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\A S U S\Documents\GitHub\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\A S U S\Documents\GitHub\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\A S U S\Documents\GitHub\LMS\Client\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\A S U S\Documents\GitHub\LMS\Client\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\A S U S\Documents\GitHub\LMS\Client\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll

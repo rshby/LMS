@@ -2960,6 +2960,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.8",
+          "Microsoft.AspNetCore.JsonPatch": "5.0.9",
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "3.1.0",
           "Microsoft.EntityFrameworkCore": "5.0.9",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.5"
         },
