@@ -11,8 +11,8 @@ namespace Client.Controllers
 
         public IActionResult Code(string id)
         {
-            var certEmail = new[] { id };
-            ViewBag.certEmail1 = certEmail;
+            var certCode = new[] { id };
+            ViewBag.certCode1 = certCode;
             return View("index");
         }
     }
