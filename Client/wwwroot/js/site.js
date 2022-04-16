@@ -879,7 +879,7 @@ function FillClassDetView() {
 
         // Sudah Semua
     } else if (fbStatus == 200) {
-        console.log(fbStatus);
+        certificate = GetCertificate(sesEmail, cSects[0].class_Id);
         $.each(cSects, function (idx, val) {
             sectsHead += `<a class="list-group-item list-group-item-action" data-toggle="list" href="#body${val.chapter}"><div class="row"><div class="col-sm-2">✔</div><div class="col-sm-10"><h6>${val.name}</h6></div></div></a>`;
             sectsBody += `<div class="tab-pane fade" id="body${val.chapter}">
@@ -896,6 +896,7 @@ function FillClassDetView() {
         });
         classDetail += `        <button id="feedback" type="button" class="btn btn-info  mt-2" data-toggle="modal" data-target="#formFb" hidden>View Feedback</button>
                                 <button id="viewCert" type="button" class="btn btn-success  mt-2">View Certificate</button>
+                                <a id="viewCert5${cSects[0].class_Id}" href="../../certificate/code/${certificate.certificate_Code}" hidden>...</a>
                             </div>
                         </div>
                    </div>`;
@@ -962,6 +963,26 @@ function FillClassDetView() {
                 if (review != null && rating != null) {
                     AddFeddback(sesEmail, rating, review);
                 }
+            });
+        }
+        else if (fbStatus == 200) {
+            let buttonCertif = document.getElementById("viewCert");
+            buttonCertif.addEventListener("click", function () {
+                Swal.fire({
+                    title: "Buka Certificate?",
+                    text: "Akan Membuka Certificate!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    showConfirmButton: true,
+                    cancelButtonText: "Tidak",
+                    confirmButtonText: "Ya",
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                }).then((x) => {
+                    if (x.isConfirmed) {
+                        document.getElementById(`viewCert5${cSects[0].class_Id}`).click();
+                    }
+                });
             });
         }
     }
