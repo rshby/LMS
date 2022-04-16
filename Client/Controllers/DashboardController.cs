@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Client.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Peserta")]
     public class DashboardController : Controller
     {
         private readonly ILogger<DashboardController> _logger;

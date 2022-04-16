@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Client.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Peserta")]
     public class AccountController : Controller
     {
         public IActionResult Index()
