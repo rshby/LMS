@@ -107,5 +107,41 @@ namespace LMS.Controllers
                 });
             }
         }
+
+        //Get Certifcate by code
+        [HttpGet("bycode/{code}")]
+        public ActionResult GetCertifbyCode(string code)
+        {
+            try
+            {
+                var data = certificateRepo.GetCertificatebyCode(code);
+                if (data != null)
+                {
+                    return Ok(new
+                    {
+                        status = 200,
+                        message = "data ditemukan",
+                        data = data
+                    });
+                }
+                else
+                {
+                    return Ok(new
+                    {
+                        status = 404,
+                        message = "data tidak ditemukan"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                return Ok(new
+                {
+                    status = 500,
+                    message = "gagal get data",
+                    error = e.Message
+                });
+            }
+        }
     }
 }

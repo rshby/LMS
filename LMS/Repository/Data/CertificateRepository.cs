@@ -61,5 +61,13 @@ namespace LMS.Repository.Data
             var data = AllCerfiticate().SingleOrDefault(x => x.User_Email == inputData.Email && x.Class_Id == inputData.Class_Id);
             return data;
         }
+
+        //Get Certificate berdasarkan code_Certificate
+        public CertificateVM GetCertificatebyCode(string certifCode)
+        {
+            //ambil datanya
+            var data = AllCerfiticate().SingleOrDefault(x => x.Certificate_Code == certifCode);
+            return data;
+        }
     }
 }
