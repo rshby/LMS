@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Http;
+using System.Net;
 
 namespace Client
 {
@@ -36,7 +37,7 @@ namespace Client
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30); //set 10 menit   
+                options.IdleTimeout = TimeSpan.FromMinutes(30); //set 30 menit   
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -94,6 +95,24 @@ namespace Client
                 .AllowAnyHeader()
                 .SetIsOriginAllowed(origin => true)
                 .AllowCredentials());
+
+            app.UseStatusCodePages(async context => {
+                var request = context.HttpContext.Request;
+                var response = context.HttpContext.Response;
+
+                if (response.StatusCode.Equals((int)HttpStatusCode.Unauthorized))
+                {
+                    response.Redirect("/unauthorized");
+                }
+                else if (response.StatusCode.Equals((int)HttpStatusCode.NotFound))
+                {
+                    response.Redirect("/notfound");
+                }
+                else if (response.StatusCode.Equals((int)HttpStatusCode.Forbidden))
+                {
+                    response.Redirect("/forbidden");
+                }
+            });
 
             app.UseSession();
             app.Use(async (context, next) =>
