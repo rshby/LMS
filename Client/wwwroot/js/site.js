@@ -335,7 +335,7 @@ function FillHome() {
     let topClass = ``;
     let joinButton = ``;
     if (sesEmail.length == 0) {
-        joinButton = `<a href="#registerModal" id="linkRegister" class="btn btn-outline-primary" data-target="#registerModal" data-toggle="modal" data-dismiss="modal">Yuk bergaung sekarang!</a>`
+        joinButton = `<a href="#registerModal" id="linkRegister1" class="btn btn-outline-primary" data-target="#registerModal" data-toggle="modal" data-dismiss="modal">Yuk bergaung sekarang!</a>`
     }
     $("#joinButton").html(joinButton);
     $.each(threeClasses, function (idx, val) {
@@ -1144,8 +1144,29 @@ function RegisterAccount() {
     }
 }
 
-//Ketika link Register diklick
+//Ketika link Register Pada Login diklick
 document.getElementById("linkRegister").addEventListener("click", function () {
+    TampilkanAllProvince();
+    TampilkanAllUniv();
+
+    document.getElementById("inProv").addEventListener("change", function () {
+        var pilihanProv = this.options[this.selectedIndex].value;
+        TampilkanCityByProvId(pilihanProv);
+    });
+
+    document.getElementById("inCity").addEventListener("change", function () {
+        var pilihanCity = this.options[this.selectedIndex].value;
+        TampilkanDistricyByCityId(pilihanCity);
+    });
+
+    document.getElementById("inDis").addEventListener("change", function () {
+        var pilihanDistrict = this.options[this.selectedIndex].value;
+        TampilkanSubDistricyByDistrictId(pilihanDistrict);
+    });
+});
+
+//Ketika link Register Pada Home diklick
+document.getElementById("linkRegister1").addEventListener("click", function () {
     TampilkanAllProvince();
     TampilkanAllUniv();
 
