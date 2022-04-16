@@ -2,6 +2,7 @@ let home = document.getElementById("home");
 let dashboard = document.getElementById("dashboard");
 let codemyClasses = document.getElementById("codemyClasses");
 let codemyClassesDetail = document.getElementById("codemyClassesDetail");
+let loginLogout = document.getElementById("loginLogout");
 
 function readSession() {
     let inOut = ``;
@@ -21,7 +22,6 @@ function readSession() {
     $("#loginLogout").html(inOut);
 }
 
-console.log($("#sessionEmail").val());
 readSession();
 
 function GetAllClasses() {
@@ -330,6 +330,30 @@ function GetClassesSortedByRating() {
     return data;
 }
 
+//Get Certificate by Email and Class_Id
+function GetCertificate(email, class_id) {
+    let response = new Object();
+    let data = new Object();
+    data.Email = email;
+    data.Class_Id = class_id;
+    $.ajax({
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        type: "POST",
+        url: `https://localhost:44376/api/certificates/byemailclassid`,
+        dataType: "json",
+        data: JSON.stringify(data),
+        async: false
+    }).done((result) => {
+        response = result.data;
+    }).fail((e) => {
+        console.log(e);
+    });
+    return response;
+}
+
 function FillHome() {
     let threeClasses = GetClassesSortedByRating();
     let topClass = ``;
@@ -446,9 +470,11 @@ function FillDashboard() {
                             </td>
                         </tr>`;
         } else {
+            certificate = GetCertificate(sesEmail, val.class_Id);
             doneCont += `<tr>
                             <td><a href="class/details/${val.class_Id}" style="color: black;">${val.class_Name}</a></td>
                             <td><button id="btnCf${val.class_Id}" type="button" class="btn btn-outline-success  ml-2">Certificate</button></td>
+                            <td><a id="viewCert${val.class_Id}" href="../certificate/code/${certificate.certificate_Code}" hidden>...</a></td>
                         </tr>`;
         }
     });
@@ -514,8 +540,7 @@ function FillDashboard() {
                     cancelButtonText: 'Tidak',
                 }).then((x) => {
                     if (x.isConfirmed) {
-                        console.log("button diklick");
-                        window.open(`https://localhost:44329/certificate`);
+                        document.getElementById(`viewCert${val.class_Id}`).click();
                     }
                 });            
             });
@@ -1145,51 +1170,57 @@ function RegisterAccount() {
 }
 
 //Ketika link Register Pada Login diklick
-document.getElementById("linkRegister").addEventListener("click", function () {
-    TampilkanAllProvince();
-    TampilkanAllUniv();
+if (sesEmail.length == 0 && loginLogout != null) {
+    document.getElementById("linkRegister").addEventListener("click", function () {
+        TampilkanAllProvince();
+        TampilkanAllUniv();
 
-    document.getElementById("inProv").addEventListener("change", function () {
-        var pilihanProv = this.options[this.selectedIndex].value;
-        TampilkanCityByProvId(pilihanProv);
-    });
+        document.getElementById("inProv").addEventListener("change", function () {
+            var pilihanProv = this.options[this.selectedIndex].value;
+            TampilkanCityByProvId(pilihanProv);
+        });
 
-    document.getElementById("inCity").addEventListener("change", function () {
-        var pilihanCity = this.options[this.selectedIndex].value;
-        TampilkanDistricyByCityId(pilihanCity);
-    });
+        document.getElementById("inCity").addEventListener("change", function () {
+            var pilihanCity = this.options[this.selectedIndex].value;
+            TampilkanDistricyByCityId(pilihanCity);
+        });
 
-    document.getElementById("inDis").addEventListener("change", function () {
-        var pilihanDistrict = this.options[this.selectedIndex].value;
-        TampilkanSubDistricyByDistrictId(pilihanDistrict);
+        document.getElementById("inDis").addEventListener("change", function () {
+            var pilihanDistrict = this.options[this.selectedIndex].value;
+            TampilkanSubDistricyByDistrictId(pilihanDistrict);
+        });
     });
-});
+}
 
 //Ketika link Register Pada Home diklick
-document.getElementById("linkRegister1").addEventListener("click", function () {
-    TampilkanAllProvince();
-    TampilkanAllUniv();
+if (sesEmail.length == 0 && home != null) {
+    document.getElementById("linkRegister1").addEventListener("click", function () {
+        TampilkanAllProvince();
+        TampilkanAllUniv();
 
-    document.getElementById("inProv").addEventListener("change", function () {
-        var pilihanProv = this.options[this.selectedIndex].value;
-        TampilkanCityByProvId(pilihanProv);
-    });
+        document.getElementById("inProv").addEventListener("change", function () {
+            var pilihanProv = this.options[this.selectedIndex].value;
+            TampilkanCityByProvId(pilihanProv);
+        });
 
-    document.getElementById("inCity").addEventListener("change", function () {
-        var pilihanCity = this.options[this.selectedIndex].value;
-        TampilkanDistricyByCityId(pilihanCity);
-    });
+        document.getElementById("inCity").addEventListener("change", function () {
+            var pilihanCity = this.options[this.selectedIndex].value;
+            TampilkanDistricyByCityId(pilihanCity);
+        });
 
-    document.getElementById("inDis").addEventListener("change", function () {
-        var pilihanDistrict = this.options[this.selectedIndex].value;
-        TampilkanSubDistricyByDistrictId(pilihanDistrict);
+        document.getElementById("inDis").addEventListener("change", function () {
+            var pilihanDistrict = this.options[this.selectedIndex].value;
+            TampilkanSubDistricyByDistrictId(pilihanDistrict);
+        });
     });
-});
+}
 
 //Ketika button Register Account diklick -> proses mendaftar akun
+if (sesEmail.length == 0 && loginLogout != null) {
 document.getElementById("buttonRegisterAccount").addEventListener("click", function () {
     RegisterAccount();
 });
+}
 
 // Untuk Form Validate
 (function () {
@@ -1236,135 +1267,117 @@ function GetAccountByEmail(email) {
 }
 
 //Button Send OTP untuk Forgot Password Ketika di klick
-document.getElementById("buttonSendOTP").addEventListener("click", function () {
-    let email = document.getElementById("LogEmailFP1").value;
-    let data = new Object();
-    data.Email = email;
-    $.ajax({
-        type: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        dataType: "json",
-        async: false,
-        url: `https://localhost:44376/api/accounts/forgotpassword`,
-        data: JSON.stringify(data)
-    }).done((result) => {
-        if (result.status == 200) {
+if (sesEmail.length == 0 && loginLogout != null) {
+    document.getElementById("buttonSendOTP").addEventListener("click", function () {
+        let email = document.getElementById("LogEmailFP1").value;
+        let data = new Object();
+        data.Email = email;
+        $.ajax({
+            type: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            dataType: "json",
+            async: false,
+            url: `https://localhost:44376/api/accounts/forgotpassword`,
+            data: JSON.stringify(data)
+        }).done((result) => {
+            if (result.status == 200) {
+                Swal.fire({
+                    title: "Sukses",
+                    text: "Kode OTP Dikirim ke Email Anda!",
+                    icon: "success",
+                    showConfirmButton: true
+                }).then(function () {
+                    let button = document.getElementById("buttonSendOTP1");
+                    button.click();
+                });
+            }
+            else {
+                Swal.fire({
+                    title: "Gagal",
+                    text: result.message,
+                    showConfirmButton: true,
+                    icon: "error"
+                });
+            }
+        }).fail((e) => {
+            console.log(e);
+        });
+    });
+}
+
+if (sesEmail.length == 0 && loginLogout != null) {
+    document.getElementById("buttonCheckOTP").addEventListener("click", function () {
+        let email = document.getElementById("LogEmailFP1").value;
+        let inputOTP = document.getElementById("LogEmailFP2").value;
+        let data = GetAccountByEmail(email);
+
+        if (inputOTP == data.otp) {
             Swal.fire({
                 title: "Sukses",
-                text: "Kode OTP Dikirim ke Email Anda!",
+                text: "Kode OTP Sesuai",
                 icon: "success",
                 showConfirmButton: true
             }).then(function () {
-                let button = document.getElementById("buttonSendOTP1");
+                let button = document.getElementById("buttonCheckOTP1");
                 button.click();
             });
         }
         else {
             Swal.fire({
                 title: "Gagal",
-                text: result.message,
-                showConfirmButton: true,
-                icon: "error"
-            });
-        }
-    }).fail((e) => {
-        console.log(e);
-    });
-});
-
-document.getElementById("buttonCheckOTP").addEventListener("click", function () {
-    let email = document.getElementById("LogEmailFP1").value;
-    let inputOTP = document.getElementById("LogEmailFP2").value;
-    let data = GetAccountByEmail(email);
-
-    if (inputOTP == data.otp) {
-        Swal.fire({
-            title: "Sukses",
-            text: "Kode OTP Sesuai",
-            icon: "success",
-            showConfirmButton: true
-        }).then(function () {
-            let button = document.getElementById("buttonCheckOTP1");
-            button.click();
-        });
-    }
-    else {
-        Swal.fire({
-            title: "Gagal",
-            text: "Kode OTP Tidak Sesuai",
-            icon: "error",
-            showConfirmButton: true
-        });
-    }
-});
-
-//Ketika Tombol ChangePassword diklick
-document.getElementById("buttonChangePassword").addEventListener("click", function () {
-    let data = new Object();
-    data.Email = document.getElementById("LogEmailFP1").value;
-    data.Password = document.getElementById("LogNewPass").value;
-    data.ConfirmPassword = document.getElementById("LogConfirmPass").value;
-    data.OTP = document.getElementById("LogEmailFP2").value;
-
-    $.ajax({
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-        },
-        dataType: "json",
-        type: "POST",
-        url: `https://localhost:44376/api/accounts/changepassword`,
-        async: false,
-        data: JSON.stringify(data)
-    }).done((result) => {
-        if (result.status == 200) {
-            Swal.fire({
-                title: "Sukses",
-                text: "Password Telah Terganti",
-                icon: "success",
-                showConfirmButton: false,
-                timer: 1670
-            }).then(function () {
-                location.reload();
-            });
-        }
-        else {
-            Swal.fire({
-                title: "Gagal",
-                text: result.message,
+                text: "Kode OTP Tidak Sesuai",
                 icon: "error",
-                showConfirmButton: false,
-                timer: 1670
+                showConfirmButton: true
             });
         }
-    }).fail((e) => {
-        console.log(e);
     });
-});
-
-//Get Certificate by Email and Class_Id
-function GetCertificate(email, class_id) {
-    let response = new Object();
-    let data = new Object();
-    data.Email = email;
-    data.Class_Id = class_id;
-    $.ajax({
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-        },
-        type: "POST",
-        url: `https://localhost:44376/api/certificates/byemailclassid`,
-        dataType: "json",
-        data: JSON.stringify(data)
-    }).done((result) => {
-        response = result.data;
-    }).fail((e) => {
-        console.log(e);
-    });
-    return response;
 }
 
+//Ketika Tombol ChangePassword diklick
+if (sesEmail.length == 0 && loginLogout != null) {
+    document.getElementById("buttonChangePassword").addEventListener("click", function () {
+        let data = new Object();
+        data.Email = document.getElementById("LogEmailFP1").value;
+        data.Password = document.getElementById("LogNewPass").value;
+        data.ConfirmPassword = document.getElementById("LogConfirmPass").value;
+        data.OTP = document.getElementById("LogEmailFP2").value;
+
+        $.ajax({
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            dataType: "json",
+            type: "POST",
+            url: `https://localhost:44376/api/accounts/changepassword`,
+            async: false,
+            data: JSON.stringify(data)
+        }).done((result) => {
+            if (result.status == 200) {
+                Swal.fire({
+                    title: "Sukses",
+                    text: "Password Telah Terganti",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1670
+                }).then(function () {
+                    location.reload();
+                });
+            }
+            else {
+                Swal.fire({
+                    title: "Gagal",
+                    text: result.message,
+                    icon: "error",
+                    showConfirmButton: false,
+                    timer: 1670
+                });
+            }
+        }).fail((e) => {
+            console.log(e);
+        });
+    });
+}

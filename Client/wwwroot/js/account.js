@@ -283,10 +283,7 @@ function GetSubDistricyById(id) {
     return data;
 }
 
-//Ketika button Register Account diklick -> proses mendaftar akun
-document.getElementById("buttonUpdateAcount").addEventListener("click", function () {
-    UpdateMasterUser();
-});
+
 
 //Update data User ke Database
 function UpdateMasterUser() {
@@ -353,6 +350,12 @@ function UpdateMasterUser() {
 $(document).ready(function () {
     //Dijalankan hanya jika link pada browser diakses
     if (window.location.href.indexOf("account") > 1) {
+
+        //Ketika button Register Account diklick -> proses mendaftar akun
+        document.getElementById("buttonUpdateAcount").addEventListener("click", function () {
+            UpdateMasterUser();
+        });
+
         TampilkanUniv();
         TampilkanProvince();
         TampilkanSubDistrict();
