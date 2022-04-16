@@ -8,5 +8,12 @@ namespace Client.Controllers
         {
             return View();
         }
+
+        public IActionResult Code(string id)
+        {
+            var certCode = new[] { id };
+            ViewBag.certCode1 = certCode;
+            return View("index");
+        }
     }
 }

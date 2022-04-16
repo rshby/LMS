@@ -34,32 +34,23 @@
     opacity: 0.4
 }
 
-.datepicker td, .datepicker th {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 0.85rem;
-}
-
-.datepicker {
-    margin-bottom: 3rem;
-}
-
 .pagination li {
     display: inline-block;
     color: black;
     float: left;
-    padding: 8px 16px;
+    padding: 1px 9px;
+    margin: 2px;
     text-decoration: none;
     transition: background-color .3s;
-    border: 1px solid #ddd;
+
 }
 
 .pagination a {
     color: black;
+    font-size: 14px;
 }
 
 .pagination li.active {
-    background-color: #30d1ff;
     color: white;
-    border: 1px solid #30d1ff;
+    border: 1px solid black;
 }

@@ -1,24 +1,29 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 
-<div class="container">
+<div class="container mt-5">
     <div class="card mb-5">
         <div class="card-body">
             <h4>User Profile</h4>
             <div class="dropdown-divider"></div>
             <div class="modal-body" id="DetailEmp">
                 @*<form class="needs-validation" novalidate>*@
-                <form id="addDataForm" class="needs-validation" novalidate>
+                <form class="needs-validation" id="formUpdateAccount" onsubmit="return false" novalidate>
                     <div class="row">
                         <div class="form-group col">
                             <label for="InputFN">Nama Depan</label>
                             <input type="text" class="form-control" id="InputFN" aria-describedby="inputFN" placeholder="cth: Budi" required>
+                            <div class="invalid-feedback">
+                                Mohon Isi Nama Depan
+                            </div>
                         </div>
                         <div class="form-group col">
                             <label for="InputLN">Nama Belakang</label>
                             <input type="text" class="form-control" id="InputLN" aria-describedby="inputLN" placeholder="cth: Setiawan" required>
+                            <div class="invalid-feedback">
+                                Mohon Isi Nama Belakang
+                            </div>
                         </div>
                         <div class="form-group col">
                             <label for="InputGd">Jenis Kelamin</label>
@@ -27,6 +32,9 @@
                                 <option value="0">Laki-laki</option>
                                 <option value="1">Perempuan</option>
                             </select>
+                            <div class="invalid-feedback">
+                                Mohon Isi Jenis Kelamin
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -35,6 +43,9 @@
                             <div class="form-group">
                                 <div class="datepicker date input-group">
                                     <input type="date" placeholder="cth: 2012-12-21" class="form-control" id="InputBd" required>
+                                    <div class="invalid-feedback">
+                                        Mohon Isi Tanggal Lahir
+                                    </div>
                                     <span class="input-group-append"></span>
                                 </div>
                             </div>
@@ -42,49 +53,73 @@
                         <div class="form-group col">
                             <label for="InputPh">Nomor Telepon</label>
                             <input type="text" class="form-control" id="InputPh" aria-describedby="inputPh" placeholder="cth: 0812xxxxxxx" required>
+                            <div class="invalid-feedback">
+                                Mohon Isi Nomor Telepon
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col">
                             <label for="InputDg">Major</label>
                             <input type="text" class="form-control" id="InputMajor" aria-describedby="inputMajor" placeholder="cth: Teknik Informatika" required>
+                            <div class="invalid-feedback">
+                                Mohon Isi Major
+                            </div>
                         </div>
                         <div class="form-group col">
                             <label for="InputUn">Universitas</label>
                             <select class="custom-select mr-sm-2" id="InputUn" required>
                             </select>
+                            <div class="invalid-feedback">
+                                Mohon Isi Universitas
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col">
-                            <label for="InputProvince">Province</label>
+                            <label for="InputProvince">Provinsi</label>
                             <select class="custom-select mr-sm-2" id="InputProvince" required>
                             </select>
+                            <div class="invalid-feedback">
+                                Mohon Isi Provinsi
+                            </div>
                         </div>
                         <div class="form-group col">
-                            <label for="InputCity">City</label>
+                            <label for="InputCity">Kota</label>
                             <select class="custom-select mr-sm-2" id="InputCity" required>
                             </select>
+                            <div class="invalid-feedback">
+                                Mohon Isi Kota
+                            </div>
                         </div>
                         <div class="form-group col">
-                            <label for="InputDistrict">District</label>
+                            <label for="InputDistrict">Kecamatan</label>
                             <select class="custom-select mr-sm-2" id="InputDistrict" required>
                             </select>
+                            <div class="invalid-feedback">
+                                Mohon Isi Kecamatan
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col">
-                            <label for="InputSubDistrict">Sub District</label>
+                            <label for="InputSubDistrict">Kelurahan</label>
                             <select class="custom-select mr-sm-2" id="InputSubDistrict" required>
                             </select>
+                            <div class="invalid-feedback">
+                                Mohon Isi Kelurahan
+                            </div>
                         </div>
                         <div class="form-group col">
-                            <label for="InputUn">Street</label>
+                            <label for="InputUn">Alamat</label>
                             <input type="text" class="form-control" id="InputStreet" aria-describedby="inputStreet" placeholder="cth: Jl. Merdeka" required>
+                            <div class="invalid-feedback">
+                                Mohon Isi Alamat
+                            </div>
                         </div>
                     </div>
                     <br />
-                    <button type="button" id="dataSubmit" class="btn btn-primary rounded float-right" onclick="UpdateMasterUser()" style="width: 150px">Update</button>
+                    <button type="submit" id="buttonUpdateAcount" class="btn btn-primary rounded float-right" style="width: 150px">Update</button>
                 </form>
             </div>
         </div>
