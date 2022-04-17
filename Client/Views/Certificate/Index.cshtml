@@ -29,79 +29,39 @@
         <div class="inner-border"></div>
 
         <div class="pm-certificate-border col-xs-12">
-            <div class="row pm-certificate-header">
-                <div class="pm-certificate-title cursive col-xs-12 text-center">
-                    <h2>Buffalo Public Schools Certificate of Completion</h2>
+            <div class="pm-canvas-text">
+                <div class="center-text">
+                    <div class="setting-tittle">Certificate of Completion</div>
+                    <div class="class-name" id="class_name">Class Name</div>
+                    <div class="setting-code" id="cert_code">This Code Sertif</div>
+
+                    <hr class="line-bg">
+                    <br>
+                    <br>
+                    <div class="student-name" id="user_name">Example Name Participan</div>
+                    <hr class="line-name">
+                    <p class="class-desc"> Thanks for being participant of course and growed your skill.</p>
                 </div>
-            </div>
+                <p class=""></p>
+                <div class="row">
 
-            <div class="row pm-certificate-body">
-
-                <div class="pm-certificate-block">
-                    <div class="col-xs-12">
-                        <div class="row">
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                            <div class="pm-certificate-name underline margin-0 col-xs-8 text-center">
-                                <span class="pm-name-text bold" id="judulSertif">TrueNorth Administrator</span>
+                    <div class="col" style="position : relative;">
+                        <footer class="main-footer">
+                            <div class="footer-style">
+                                #Participan <strong><a href="https://localhost:44329/">Codemy</a>.</strong> All rights reserved.
                             </div>
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                        </div>
+                        </footer>
                     </div>
 
-                    <div class="col-xs-12">
-                        <div class="row">
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                            <div class="pm-earned col-xs-8 text-center">
-                                <span class="pm-earned-text padding-0 block cursive">has earned</span>
-                                <span class="pm-credits-text block bold sans">PD175: 1.0 Credit Hours</span>
-                            </div>
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                            <div class="col-xs-12"></div>
-                        </div>
+
+                    <div class="col" style="position : relative;">
+                        <center>
+                            <img class="ttd2" src="https://drive.google.com/uc?export=view&id=1PRI-khOq2Toj1M0KBl-B8NCK1e2GxVe7" alt="" width="80" height="80">
+                            <div class="ttd">(Codemy Company)</div>
+                        </center>
                     </div>
 
-                    <div class="col-xs-12">
-                        <div class="row">
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                            <div class="pm-course-title col-xs-8 text-center">
-                                <span class="pm-earned-text block cursive">while completing the training course entitled</span>
-                            </div>
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12">
-                        <div class="row">
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                            <div class="pm-course-title underline col-xs-8 text-center">
-                                <span class="pm-credits-text block bold sans">BPS PGS Initial PLO for Principals at Cluster Meetings</span>
-                            </div>
-                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
-                        </div>
-                    </div>
                 </div>
-
-                <div class="col-xs-12">
-                    <div class="row">
-                        <div class="pm-certificate-footer">
-                            <div class="col-xs-4 pm-certified col-xs-4 text-center">
-                                <span class="pm-credits-text block sans">Buffalo City School District</span>
-                                <span class="pm-empty-space block underline"></span>
-                                <span class="bold block">Crystal Benton Instructional Specialist II, Staff Development</span>
-                            </div>
-                            <div class="col-xs-4">
-                                <!-- LEAVE EMPTY -->
-                            </div>
-                            <div class="col-xs-4 pm-certified col-xs-4 text-center">
-                                <span class="pm-credits-text block sans">Date Completed</span>
-                                <span class="pm-empty-space block underline"></span>
-                                <span class="bold block">DOB: </span>
-                                <span class="bold block">Social Security # (last 4 digits)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
         </div>
@@ -129,7 +89,9 @@
             return data;
         }
         let certData = GetCertificateByCode(certCode);
-        $("#judulSertif").html(certData.class_Name);
+        $("#class_name").html(certData.class_Name);
+        $("#cert_code").html(certData.certificate_Code);
+        $("#user_name").html(certData.user_FullName);
     </script>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
