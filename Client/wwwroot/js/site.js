@@ -1132,8 +1132,6 @@ function RegisterAccount() {
     data.Major = document.getElementById("inMajor").value;
     data.University_Id = parseInt(document.getElementById("inUniv").value);
 
-    console.log(data);
-
     $("#formRegisterAccount").validate({
         errorPlacement: function (error, element) { },
     });
@@ -1297,9 +1295,7 @@ if (sesEmail.length == 0 && (home != null || loginLogout != null)) {
             var forms = document.getElementsByClassName("needs-validation");
             // Loop over them and prevent submission
             var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener(
-                    "submit",
-                    function (event) {
+                form.addEventListener("submit", function (event) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();
