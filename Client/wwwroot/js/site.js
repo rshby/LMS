@@ -762,10 +762,7 @@ function FillClassDetView() {
                          </div>`;
 
         // Belum Selesai
-    } else if (
-        takenClass.data.takenClass_IsPaid == true &&
-        takenClass.data.takenClass_IsDone == false
-    ) {
+    } else if (takenClass.data.takenClass_IsPaid == true && takenClass.data.takenClass_IsDone == false) {
         $.each(cSects, function (idx, val) {
             let chap = idx + 1;
             let prog = takenClass.data.takenClass_ProgressChapter + 1;
@@ -803,7 +800,7 @@ function FillClassDetView() {
                                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/${val.content}?rel=0" allowfullscreen></iframe>
                                 </div>`;
                     sectsBody += `<br />
-                                  <button id="btnC${val.chapter}" class="btn btn-secondary rounded float-right disabled">Continue Progress</button>
+                                  <button id="btnC1${val.chapter}" class="btn btn-secondary rounded float-right" disabled>Continue Progress</button>
                                </div>`;
                 }
             }
@@ -1288,9 +1285,7 @@ if (sesEmail.length == 0 && (home != null || loginLogout != null)) {
 // Untuk Form Validate
 (function () {
     "use strict";
-    window.addEventListener(
-        "load",
-        function () {
+    window.addEventListener("load", function () {
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName("needs-validation");
             // Loop over them and prevent submission
