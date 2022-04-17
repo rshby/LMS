@@ -29,7 +29,8 @@ namespace LMS.Repository.Data
                 Price = register.Price,
                 Rating = 0.0,
                 Level_Id = register.Level_Id,
-                Category_Id = register.Category_Id
+                Category_Id = register.Category_Id,
+                UrlPic = register.UrlPic
             };
 
             myContext.Classes.Add(cls);
@@ -45,17 +46,23 @@ namespace LMS.Repository.Data
             {
                 Id = updateRegis.Id,
                 Name = updateRegis.Name,
+                UrlPic = updateRegis.UrlPic,
                 Desc = updateRegis.Desc,
                 TotalChapter = updateRegis.TotalChapter,
                 Price = updateRegis.Price,
                 Rating = data.Rating,
                 Level_Id = updateRegis.Level_Id,
-                Category_Id = updateRegis.Category_Id
+                Category_Id = updateRegis.Category_Id,
+                Category = data.Category,
+                Level = data.Level,
+                Sections = data.Sections,
+                TakenClasses = data.TakenClasses
+                
             };
 
-            myContext.Entry(cls).State = EntityState.Modified;
-            var result = myContext.SaveChanges();
-            return result;
+            myContext.Entry(data).CurrentValues.SetValues(cls);
+            myContext.SaveChanges();
+            return 1;
         }
 
         //Content input

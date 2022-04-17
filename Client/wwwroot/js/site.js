@@ -762,10 +762,7 @@ function FillClassDetView() {
                          </div>`;
 
         // Belum Selesai
-    } else if (
-        takenClass.data.takenClass_IsPaid == true &&
-        takenClass.data.takenClass_IsDone == false
-    ) {
+    } else if (takenClass.data.takenClass_IsPaid == true && takenClass.data.takenClass_IsDone == false) {
         $.each(cSects, function (idx, val) {
             let chap = idx + 1;
             let prog = takenClass.data.takenClass_ProgressChapter + 1;
@@ -801,7 +798,7 @@ function FillClassDetView() {
                                     <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/${val.content}?rel=0" allowfullscreen></iframe>
                                 </div>`;
                     sectsBody += `<br />
-                                  <button id="btnC${val.chapter}" class="btn btn-secondary rounded float-right disabled">Continue Progress</button>
+                                  <button id="btnC1${val.chapter}" class="btn btn-secondary rounded float-right" disabled>Continue Progress</button>
                                </div>`;
                 }
             }
@@ -1123,8 +1120,6 @@ function RegisterAccount() {
     data.Major = document.getElementById("inMajor").value;
     data.University_Id = parseInt(document.getElementById("inUniv").value);
 
-    console.log(data);
-
     $("#formRegisterAccount").validate({
         errorPlacement: function (error, element) { },
     });
@@ -1234,19 +1229,59 @@ if (sesEmail.length == 0 && loginLogout != null) {
     });
 }
 
+// Ketika tombol login diklick -> untuk login
+if (sesEmail.length == 0 && (home != null || loginLogout != null)) {
+    document.getElementById("buttonLogin").addEventListener("click", function () {
+        let data = new Object();
+        data.Email = document.getElementById("LogEmail").value;
+        data.Password = document.getElementById("LogPass").value;
+
+        $.ajax({
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            type: "POST",
+            url: `https://localhost:44376/api/accounts/login`,
+            dataType: "json",
+            data: JSON.stringify(data)
+        }).done((result) => {
+            if (result.status == 200) {
+                Swal.fire({
+                    text: "Sukses Login",
+                    title: "Login Berhasil",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer : 1660
+                }).then((e) => {
+                    let btnSubmit = document.getElementById("buttonSubmitLogin");
+                    btnSubmit.click();
+                });
+            }
+            else {
+                Swal.fire({
+                    text: result.message,
+                    title: "Gagal Login",
+                    icon: "error",
+                    showConfirmButton: false,
+                    timer: 1660
+                });
+            }
+        }).fail((e) => {
+            console.log(e);
+        });
+    });
+}
+
 // Untuk Form Validate
 (function () {
     "use strict";
-    window.addEventListener(
-        "load",
-        function () {
+    window.addEventListener("load", function () {
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName("needs-validation");
             // Loop over them and prevent submission
             var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener(
-                    "submit",
-                    function (event) {
+                form.addEventListener("submit", function (event) {
                         if (form.checkValidity() === false) {
                             event.preventDefault();
                             event.stopPropagation();

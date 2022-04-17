@@ -2,6 +2,7 @@
 using LMS.Models;
 using LMS.Repository.Data;
 using LMS.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
