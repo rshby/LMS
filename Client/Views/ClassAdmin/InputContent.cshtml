@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     Layout = "_ViewGeneralAdmin";
 }
 
@@ -13,102 +14,36 @@
     </head>
     <body>
         <content>
-            <form class="canvas shadow">
+            <form class="canvas shadow needs-validation" onsubmit="return false" novalidate id ="formSection">
 
                 <div class="form-group">
                     <label for="class">Choose Class</label>
-                    <select name="class" class="form-control" id="">
-                        <option value="" disabled selected>~Choose Class~</option>
-                        <option value="1">Phyton</option>
-                        <option value="2">Java</option>
-                        <option value="3">Sesuai Kelas yang di daftarkan</option>
+                    <select name="class" class="form-control" id="class-id">
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="chapter">Chapter</label>
-                    <select name="chapter" class="form-control" id="">
-                        <option value="" disabled selected>~Choose Chapter~</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">Sesuai Chapter yang dibuat pada kelas</option>
+                    <select name="chapter" placeholder="Choose Class" class="form-control" id="onSection">
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="title">Title Section</label>
-                    <input type="text" name="title" class="form-control" placeholder="Input Header" id="">
+                    <input type="text" name="title" class="form-control" placeholder="Input Tittle" id="name">
                 </div>
 
                 <div class="form-group">
-                    <label for="content">Content</label>
-                    <textarea type="text" name="content" placeholder="Input Content" class="form-control" id="content"> </textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="price">Class Price</label>
-                    <input type="text" name="price" placeholder="Input Price Class" class="form-control" id="">
+                    <label for="content">Content (Video Code)</label>
+                    <input type="text" name="content" class="form-control" placeholder="Input Code Video" id="link-video">
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" id="btn1" class="btn btn-primary" onclick="">Create</button>
-                    <button type="reset" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="InsertSection()">Create</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </form>
         </content>
         <p></p>
     </body>
 </dev>
-
-
-<div class="form-group">
-    <label for="rating">Rating</label>
-    <input type="text" name="rating" disabled value="${data.rating}" class="form-control" id="rating">
-</div>
-
-<div class="form-group">
-    <label for="tittle">Tittle Class</label>
-    <input type="text" name="tittle" class="form-control" value="${data.name}" id="judul">
-</div>
-
-<div class="form-group">
-    <label for="url">URL Code</label>
-    <input type="text" name="url" class="form-control" value="${data.urlPic}" id="url">
-</div>
-
-<div class="form-group">
-    <label for="Desc">Description</label>
-    <input type="text" name="content" class="form-control" value="${data.desc}" id="descEdit">
-</div>
-
-<div class="form-group">
-    <label for="TotalChapter">Total Chapter</label>
-    <input type="text" name="TotalChapter" value="${data.totalChapter}" class="form-control" id="totChapter">
-</div>
-
-<div class="form-group">
-    <label for="price">Class Price</label>
-    <input type="text" name="price" value="${data.price}" class="form-control" id="price">
-</div>
-
-<div class="form-group">
-    <label for="level">Level Class</label>
-    <input type="text" name="level" value="${LevelConv(level)}" disabled class="form-control" id="level">
-</div>
-
-<div class="form-group">
-    <label for="category">Category Class</label>
-    <div class="row">
-        <div class="col">
-            <input type="text" name="category" value="${data.category_Id}" disabled class="form-control" id="category-id">
-        </div>
-        <div class="col">
-            <input type="text" name="category" value="${CategoryConv(category)}" disabled class="form-control" id="category">
-        </div>
-    </div>
-</div>
-
-<div class="modal-footer">
-    <button type="button" class="btn btn-primary" onclick="EditClass(${data.id})">Create</button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-</div>
