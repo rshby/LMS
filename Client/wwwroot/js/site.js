@@ -1243,6 +1243,50 @@ document.getElementById("buttonRegisterAccount").addEventListener("click", funct
 });
 }
 
+// Ketika tombol login diklick -> untuk login
+if (sesEmail.length == 0 && (home != null || loginLogout != null)) {
+    document.getElementById("buttonLogin").addEventListener("click", function () {
+        let data = new Object();
+        data.Email = document.getElementById("LogEmail").value;
+        data.Password = document.getElementById("LogPass").value;
+
+        $.ajax({
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            type: "POST",
+            url: `https://localhost:44376/api/accounts/login`,
+            dataType: "json",
+            data: JSON.stringify(data)
+        }).done((result) => {
+            if (result.status == 200) {
+                Swal.fire({
+                    text: "Sukses Login",
+                    title: "Login Berhasil",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer : 1660
+                }).then((e) => {
+                    let btnSubmit = document.getElementById("buttonSubmitLogin");
+                    btnSubmit.click();
+                });
+            }
+            else {
+                Swal.fire({
+                    text: result.message,
+                    title: "Gagal Login",
+                    icon: "error",
+                    showConfirmButton: false,
+                    timer: 1660
+                });
+            }
+        }).fail((e) => {
+            console.log(e);
+        });
+    });
+}
+
 // Untuk Form Validate
 (function () {
     "use strict";

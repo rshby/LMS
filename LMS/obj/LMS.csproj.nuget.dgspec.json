@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\LMS\\LMS.csproj": {}
+    "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\LMS\\LMS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj": {
+    "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\Client.csproj",
         "projectName": "Client",
-        "projectPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj",
-        "packagesPath": "C:\\Users\\A S U S\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\Client.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\A S U S\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -83,21 +83,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\LMS\\LMS.csproj": {
+    "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\LMS\\LMS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\LMS\\LMS.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\LMS\\LMS.csproj",
         "projectName": "LMS",
-        "projectPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\LMS\\LMS.csproj",
-        "packagesPath": "C:\\Users\\A S U S\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\LMS\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\LMS\\LMS.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\LMS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\A S U S\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -111,8 +111,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj": {
-                "projectPath": "C:\\Users\\A S U S\\Documents\\GitHub\\LMS\\Client\\Client.csproj"
+              "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\Client.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\Documents\\Metrodata\\LMS\\Client\\Client.csproj"
               }
             }
           }
@@ -200,7 +200,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

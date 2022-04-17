@@ -69,7 +69,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return BadRequest(new
+                    return Ok(new
                     {
                         status = 400,
                         message = "data register tidak terisi"
@@ -79,8 +79,9 @@ namespace LMS.Controllers
             catch (Exception e)
             {
 
-                return BadRequest(new
+                return Ok(new
                 {
+                    status = 500,
                     message = "gagal insert",
                     error = e.Message
                 });
@@ -130,7 +131,7 @@ namespace LMS.Controllers
                     }
                     else
                     {
-                        return BadRequest(new
+                        return Ok(new
                         {
                             status = 400,
                             message = "password anda salah"
@@ -139,7 +140,7 @@ namespace LMS.Controllers
                 }
                 else
                 {
-                    return NotFound(new
+                    return Ok(new
                     {
                         status = 404,
                         message = "data email tidak ditemukan di database"
@@ -149,8 +150,9 @@ namespace LMS.Controllers
             catch (Exception e)
             {
 
-                return BadRequest(new
+                return Ok(new
                 {
+                    status = 500,
                     message = "gagal login",
                     error = e.Message
                 });
