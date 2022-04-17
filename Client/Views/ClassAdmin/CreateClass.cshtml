@@ -12,47 +12,54 @@
     </head>
     <body>
         <content>
-            <form class="canvas shadow">
+            <form class="canvas shadow" id="formClass" >
 
                 <div class="form-group">
-                    <label for="tittle">Tittle Class</label>
-                    <input type="text" name="tittle" class="form-control" placeholder="Input Title" id="judul">
+                    <label for="tittleCls">Tittle Class</label>
+                    <input type="text" name="tittleCls" class="form-control" placeholder="Input Title" id="judul" required>
+                    
                 </div>
 
                 <div class="form-group">
                     <label for="url">URL Code</label>
-                    <input type="text" name="url" class="form-control" placeholder="Input Url Code" id="url">
+                    <input type="text" name="url" class="form-control" placeholder="Input Url Code" id="url" required>
+                 
                 </div>
 
                 <div class="form-group">
                     <label for="Desc">Description</label>
-                    <textarea type="text" name="content" class="form-control" id="desc"> </textarea>
+                    <textarea type="text" name="Desc" class="form-control" id="desc" required> </textarea>
+                   
                 </div>
 
                 <div class="form-group">
                     <label for="TotalChapter">Total Chapter</label>
-                    <input type="text" name="TotalChapter" placeholder="Input Total Chapter" class="form-control" id="totChapter">
+                    <input type="text" name="TotalChapter" placeholder="Input Total Chapter" class="form-control" id="totChapter" required>
+                     
                 </div>
 
                 <div class="form-group">
                     <label for="price">Class Price</label>
-                    <input type="text" name="price" placeholder="Input Price Class" class="form-control" id="price">
+                    <input type="text" name="price" placeholder="Input Price Class" class="form-control" id="price" required>
+                   
                 </div>
 
                 <div class="form-group">
                     <label for="level">Level Class</label>
-                    <select name="level" data-target="" class="form-control" id="level">
+                    <select name="level" data-target="" class="form-control" id="level" required>
                     </select>
+                
                 </div>
 
                 <div class="form-group">
                     <label for="category">Category Class</label>
-                    <select name="category" class="form-control" id="cate">
+                    <select name="category" class="form-control" id="cate" required>
                     </select>
+                   
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="InsertClass()">Create</button>
+                    <button type="submit" class="btn btn-primary" onclick="InsertClass()">Create</button>
                 </div>
             </form>
         </content>

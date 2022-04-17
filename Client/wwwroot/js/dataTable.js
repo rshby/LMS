@@ -166,7 +166,6 @@
             }
         ]
     })
-
     //Read Form
     ReadLevel();
     ReadCategory();
@@ -255,7 +254,9 @@ function ReadCategory() {
     })
 }
 
+
 function InsertClass() {
+
     //insert value obj
     const inClass = new Object();
     inClass.Name = $("#judul").val();
@@ -266,11 +267,12 @@ function InsertClass() {
     inClass.Level_Id = Number($("#level").val());
     inClass.Category_Id = Number($("#cate").val());
 
-    console.log(inClass);
+    //console.log(inClass);
 
     Swal.fire({
         title: 'Insert Class',
         text: 'Insert New Class?',
+        icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: "#89CFF0",
         confirmButtonText: 'Yes',
@@ -287,7 +289,16 @@ function InsertClass() {
                 dataType: "json",
                 data: JSON.stringify(inClass)
             }).done((result) => {
-                location.reload();
+                Swal.fire({
+                    title: "Suscces",
+                    text: "Suscces Create Class",
+                    icon: "info",
+                    showConfirmButton: false,
+                    timer: 1550,
+                }).then((result) => {
+                    location.reload();
+                })
+
             }).fail((error) => {
                 Swal.fire
                 'Failed Insert'
@@ -312,13 +323,25 @@ function DeleteClass(id) {
                 url: `https://localhost:44376/api/classes/${id}`,
                 async: false
             }).done((deleted => {
-                Swal.fire(
-                    'Deleted Class'
-                ).then((result) => {
+                Swal.fire({
+                    tittle: "Succes",
+                    text: "Succes Deleted",
+                    icon: "info",
+                    showConfirmButton: false,
+                    timer: 1550,
+                }).then((result) => {
                     location.reload();
                 })
             })
-            )
+            ).fail((result) => {
+                Swal.fire({
+                    tittle: "Failed",
+                    text: "Failed Deleted",
+                    icon: "warning",
+                    showConfirmButton: false,
+                    timer: 1550,
+                })
+            })
         }
     }).fail((error) => {
         return error;
@@ -341,13 +364,25 @@ function DeleteSection(id) {
                 url: `https://localhost:44376/api/sections/${id}`,
                 async: false
             }).done((deleted => {
-                Swal.fire(
-                    'Deleted Section'
-                ).then((result) => {
+                Swal.fire({
+                    tittle: "Succes",
+                    text: "Succes Deleted",
+                    icon: "info",
+                    showConfirmButton: false,
+                    timer: 1550,
+                }).then((result) => {
                     location.reload();
                 })
             })
-            )
+            ).fail((result) => {
+                Swal.fire({
+                    tittle: "Failed",
+                    text: "Failed Deleted",
+                    icon: "warning",
+                    showConfirmButton: false,
+                    timer: 1550,
+                })
+            })
         }
     }).fail((error) => {
         return error;
@@ -474,6 +509,7 @@ function ReadSection(sectionId) {
 
 function EditClass(classId) {
 
+
     let temp = new Object();
 
     temp.Id = classId;
@@ -485,27 +521,44 @@ function EditClass(classId) {
     temp.Level_Id = Number($('#level-id').val());
     temp.Category_Id = Number($('#category-id').val());
 
-
+    Swal.fire({
+        title: "Update Data Class",
+        text: "Sure Update this Class?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: "#89CFF0",
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                type: 'PUT',
+                url: `https://localhost:44376/api/classes/UpdateClass`,
+                dataType: 'JSON',
+                data: JSON.stringify(temp)
+            }).done((result) => {
+                Swal.fire({
+                    title: "Suscces",
+                    text: "Suscces Update Class",
+                    icon: "info",
+                    showConfirmButton: false,
+                    timer: 1550,
+                }).then((result) => {
+                    location.reload();
+                })
+            }).fail((result) => {
+                Swal.fire(
+                    'Failed Update Class'
+                )
+            })
+        }
+    })
 
     //console.log(temp);
-    $.ajax({
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        type: 'PUT',
-        url: `https://localhost:44376/api/classes/UpdateClass`,
-        dataType: 'JSON',
-        data: JSON.stringify(temp)
-    }).done((result) => {
-        Swal.fire(
-            'Updated Class'
-        )
-    }).fail((result) => {
-        Swal.fire(
-            'Failed Update Class'
-        )
-    })
 
 }
 
@@ -519,96 +572,122 @@ function EditSection(sectionId) {
     temp.content = $('#content').val();
 
     console.log(temp);
-    $.ajax({
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        type: 'PUT',
-        url: `https://localhost:44376/api/classes/UpdateContent`,
-        dataType: 'JSON',
-        data: JSON.stringify(temp)
-    }).done((result) => {
-        Swal.fire(
-            'Updated Section'
-        ).then((result) => {
-            location.reload();
-        })
-    }).fail((result) => {
-        Swal.fire(
-            'Failed Update Section'
-        )
-    })
-}
-
-function InsertSection() {
-    //insert value obj
-    const inContent = new Object();
-    inContent.class_id = Number($("#class-id").val());
-    inContent.chapter = Number($("#onSection").val());
-    inContent.name = $("#name").val();
-    inContent.content = $("#link-video").val();
-
-    //console.log(inContent);
 
     Swal.fire({
-        title: 'Insert Sectioin',
-        text: 'Insert New Section?',
+        title: "Update Data Class",
+        text: "Sure Update this Class?",
+        icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: "#89CFF0",
         confirmButtonText: 'Yes',
         cancelButtonText: 'No'
     }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                type: "POST",
-                url: "https://localhost:44376/api/classes/InputContent",
-                dataType: "json",
-                data: JSON.stringify(inContent)
-            }).done((result) => {
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            type: 'PUT',
+            url: `https://localhost:44376/api/classes/UpdateContent`,
+            dataType: 'JSON',
+            data: JSON.stringify(temp)
+        }).done((result) => {
+            Swal.fire({
+                title: "Suscces",
+                text: "Suscces Update Sectioin",
+                icon: "info",
+                showConfirmButton: false,
+                timer: 1550,
+            }).then((result) => {
                 location.reload();
-            }).fail((error) => {
-                Swal.fire
-                'Failed Insert'
             })
-        }
+        }).fail((result) => {
+            Swal.fire(
+                'Failed Update Section'
+            )
+        })
     })
+       
+    }
 
-}
+function InsertSection() {
+            //insert value obj
+            const inContent = new Object();
+            inContent.class_id = Number($("#class-id").val());
+            inContent.chapter = Number($("#onSection").val());
+            inContent.name = $("#name").val();
+            inContent.content = $("#link-video").val();
+
+            //console.log(inContent);
+
+            Swal.fire({
+                title: 'Insert Sectioin',
+                text: 'Insert New Section?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: "#89CFF0",
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        type: "POST",
+                        url: "https://localhost:44376/api/classes/InputContent",
+                        dataType: "json",
+                        data: JSON.stringify(inContent)
+                    }).done((result) => {
+                        Swal.fire({
+                            title: "Selamat",
+                            text: "Suscces Create Section",
+                            icon: "info",
+                            showConfirmButton: false,
+                            timer: 1550,
+                        }).then((result) => {
+                            location.reload();
+                        })
+                    }).fail((error) => {
+                        Swal.fire(
+                            'Failed Insert'
+                        )
+                    })
+                }
+            })
+
+        }
 
 function GetReadyClass() {
-    $.ajax({
-        type: 'GET',
-        url: 'https://localhost:44376/api/classes'
-    }).done((result) => {
-        var data = result.data
-        var text = `<option disabled selected> ~Choose Class~ </option>`;
-        $.each(data, function (key, val) {
-            text += `<option value = "${val.id}"> ${val.name}</option>`;
-        });
-        $('#class-id').html(text);
-    }).fail((error) => {
-        error.message(error)
-    })
-}
+            $.ajax({
+                type: 'GET',
+                url: 'https://localhost:44376/api/classes'
+            }).done((result) => {
+                var data = result.data
+                var text = `<option disabled selected> ~Choose Class~ </option>`;
+                $.each(data, function (key, val) {
+                    text += `<option value = "${val.id}"> ${val.name}</option>`;
+                });
+                $('#class-id').html(text);
+            }).fail((error) => {
+                error.message(error)
+            })
+        }
 
 
 $('#class-id').on('change', function () {
-    var valueSelected = this.value;
-    $.ajax({
-        type: 'GET',
-        url: `https://localhost:44376/api/classes/${valueSelected}`,
-        async: false
-    }).done((result) => {
-        var text = `<option disabled selected> ~Choose Contain Section~ </option>`;
-        //console.log(result.totalChapter);
-        for (var i = 0; i < result.totalChapter; i++) {
-            text += `<option value = "${i + 1}"> ${i + 1}</option>`;
-        }
-        $('#onSection').html(text);
-    })
-});
+            var valueSelected = this.value;
+            $.ajax({
+                type: 'GET',
+                url: `https://localhost:44376/api/classes/${valueSelected}`,
+                async: false
+            }).done((result) => {
+                var text = `<option disabled selected> ~Choose Contain Section~ </option>`;
+                //console.log(result.totalChapter);
+                for (var i = 0; i < result.totalChapter; i++) {
+                    text += `<option value = "${i + 1}"> ${i + 1}</option>`;
+                }
+                $('#onSection').html(text);
+            })
+        });
