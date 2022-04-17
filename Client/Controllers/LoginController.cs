@@ -39,6 +39,8 @@ namespace Client.Controllers
             HttpContext.Session.SetString("jwt", token);
             HttpContext.Session.SetString("email", inputData.Email);
 
+            
+
             //Cek jika roles adalah peserta
             if (rolesLogin == "Peserta")
             {

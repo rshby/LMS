@@ -14,8 +14,7 @@
     </head>
     <body>
         <content>
-            <form class="canvas shadow needs-validation" onsubmit="return false" novalidate id ="formSection">
-
+            <form class="canvas shadow" id = "formSection">
                 <div class="form-group">
                     <label for="class">Choose Class</label>
                     <select name="class" class="form-control" id="class-id">
@@ -29,18 +28,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="title">Title Section</label>
-                    <input type="text" name="title" class="form-control" placeholder="Input Tittle" id="name">
+                    <label for="titleSection">Title Section</label>
+                    <input type="text" name="titleSection" class="form-control" placeholder="Input Tittle" id="name">
                 </div>
 
                 <div class="form-group">
-                    <label for="content">Content (Video Code)</label>
-                    <input type="text" name="content" class="form-control" placeholder="Input Code Video" id="link-video">
+                    <label for="section">Content (Video Code)</label>
+                    <input type="text" name="section" class="form-control" placeholder="Input Code Video" id="link-video">
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" onclick="InsertSection()">Create</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </form>
         </content>
