@@ -86,8 +86,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a asp-controller="AdminHome" asp-action="index" class="brand-link">
-                <img src="~/lib/bootstrap/dist/img/admin.png" class="shadow" width="40" height="40">
-                <span class="brand-text font-weight-light"> Controller Admin</span>
+                <div class="brand-text font-weight-light"> <img src="https://drive.google.com/uc?export=view&id=1PRI-khOq2Toj1M0KBl-B8NCK1e2GxVe7" class="shadow" width="25" height="25">  Codemy Admin</div>
             </a>
 
             <!-- Sidebar -->
@@ -254,10 +253,15 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
+     <!--Validation CDN-->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
     <!-- Bootstrap 4 -->
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/js/dataTable.js"></script>
-
+    <script src="~/js/Validate.js"></script>
 
     <!-- AdminLTE App -->
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
@@ -271,6 +275,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.colVis.min.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
