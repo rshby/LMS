@@ -25,26 +25,49 @@
 @* Pembayaran Midtrans *@
 <script>
     function enroll() {
-        let token = "";
-        $.ajax({
-            url: "https://localhost:44376/api/takenclasses/register",
-            type: "post",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            data: JSON.stringify(
-                {
-                    "Email": sesEmail,
-                    "Class_Id": classId
-                }),
-            async: false
-        }).done((result) => {
-            token = result.dataToken.token;
-            snap.pay(token);
-        }).fail((error) => {
-            console.log(error);
-        })
+        classPrice = GetClassById(classId).class_Price;
+
+        if (classPrice > 0) {
+            let token = "";
+            $.ajax({
+                url: "https://localhost:44376/api/takenclasses/register",
+                type: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                data: JSON.stringify(
+                    {
+                        "Email": sesEmail,
+                        "Class_Id": classId
+                    }),
+                async: false
+            }).done((result) => {
+                token = result.dataToken.token;
+                snap.pay(token);
+            }).fail((error) => {
+                console.log(error);
+            })
+        } else {
+            $.ajax({
+                url: "https://localhost:44376/api/takenclasses/register/free",
+                type: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                data: JSON.stringify(
+                    {
+                        "Email": sesEmail,
+                        "Class_Id": classId
+                    }),
+                async: false
+            }).done((result) => {
+                location.reload();
+            }).fail((error) => {
+                console.log(error);
+            })
+        }
     }
 </script>
 

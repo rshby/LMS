@@ -69,7 +69,9 @@ function GetAllCategories() {
 function BetterPriceView(price) {
     bpv = "";
     let priceStr = price.toString();
-    if (priceStr.length == 6) {
+    if (priceStr.length == 1) {
+        bpv = "GRATIS!";
+    } else if (priceStr.length == 6) {
         p1 = priceStr.slice(0, 3);
         p2 = priceStr.slice(3);
         bpv = "Rp" + p1 + "." + p2 + ",00.";
@@ -745,7 +747,7 @@ function FillClassDetView() {
                                 <img class="align-self-center text-center" src="https://icon-library.com/images/lock-icon-transparent-background/lock-icon-transparent-background-10.jpg" style="width:500px; height:500px;" alt="Card image">
                           </div>`;
         });
-        classDetail += `       <h5 class="font-weight-bold mb-3">${bPrice}</h5>
+        classDetail += `       <h5 class="font-weight-bold mb-3 ">${bPrice}</h5>
                                <a href="#registerModal" id="linkRegister" class="btn btn-outline-primary" data-target="#registerModal" data-toggle="modal" data-dismiss="modal">Register dulu yuk!</a>
                             </div>
                         </div>
