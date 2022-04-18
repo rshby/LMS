@@ -542,7 +542,7 @@ function FillDashboard() {
                     if (x.isConfirmed) {
                         document.getElementById(`viewCert${val.class_Id}`).click();
                     }
-                });            
+                });
             });
         }
     });
@@ -1233,9 +1233,9 @@ if (sesEmail.length == 0 && home != null) {
 
 //Ketika button Register Account diklick -> proses mendaftar akun
 if (sesEmail.length == 0 && loginLogout != null) {
-document.getElementById("buttonRegisterAccount").addEventListener("click", function () {
-    RegisterAccount();
-});
+    document.getElementById("buttonRegisterAccount").addEventListener("click", function () {
+        RegisterAccount();
+    });
 }
 
 // Ketika tombol login diklick -> untuk login
@@ -1256,25 +1256,39 @@ if (sesEmail.length == 0 && (home != null || loginLogout != null)) {
             data: JSON.stringify(data)
         }).done((result) => {
             if (result.status == 200) {
-                Swal.fire({
-                    text: "Sukses Login",
-                    title: "Login Berhasil",
-                    icon: "success",
-                    showConfirmButton: false,
-                    timer : 1660
-                }).then((e) => {
-                    let btnSubmit = document.getElementById("buttonSubmitLogin");
-                    btnSubmit.click();
-                });
+
+                toastr.success('Login Berhasil');
+
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "100",
+                    "hideDuration": "500",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                let btnSubmit = document.getElementById("buttonSubmitLogin");
+                btnSubmit.click();
             }
             else {
-                Swal.fire({
-                    text: result.message,
-                    title: "Gagal Login",
-                    icon: "error",
-                    showConfirmButton: false,
-                    timer: 1660
-                });
+                if (result.message == "data email tidak ditemukan di database") {
+                    let emailMsg = document.getElementById("errorMessageLoginEmail");
+                    emailMsg.innerHTML = "Email Tidak Ada Di Database!!";
+                } else {
+                    let emailMsg = document.getElementById("errorMessageLoginEmail");
+                    emailMsg.innerHTML = "";
+                    let passSmg = document.getElementById("errorMessageLoginPassword");
+                    passSmg.innerHTML = "Password Salah!!";
+                }
             }
         }).fail((e) => {
             console.log(e);
@@ -1286,21 +1300,21 @@ if (sesEmail.length == 0 && (home != null || loginLogout != null)) {
 (function () {
     "use strict";
     window.addEventListener("load", function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName("needs-validation");
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener("submit", function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add("was-validated");
-                    },
-                    false
-                );
-            });
-        },
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName("needs-validation");
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function (form) {
+            form.addEventListener("submit", function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add("was-validated");
+            },
+                false
+            );
+        });
+    },
         false
     );
 })();
