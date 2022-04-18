@@ -1241,6 +1241,10 @@ document.getElementById("buttonRegisterAccount").addEventListener("click", funct
 // Ketika tombol login diklick -> untuk login
 if (sesEmail.length == 0 && (home != null || loginLogout != null)) {
     document.getElementById("buttonLogin").addEventListener("click", function () {
+        let emailMsg = document.getElementById("errorMessageLoginEmail");
+        emailMsg.innerHTML = "";
+        let passSmg = document.getElementById("errorMessageLoginPassword");
+        passSmg.innerHTML = "";
         let data = new Object();
         data.Email = document.getElementById("LogEmail").value;
         data.Password = document.getElementById("LogPass").value;
@@ -1256,25 +1260,18 @@ if (sesEmail.length == 0 && (home != null || loginLogout != null)) {
             data: JSON.stringify(data)
         }).done((result) => {
             if (result.status == 200) {
-                Swal.fire({
-                    text: "Sukses Login",
-                    title: "Login Berhasil",
-                    icon: "success",
-                    showConfirmButton: false,
-                    timer : 1660
-                }).then((e) => {
-                    let btnSubmit = document.getElementById("buttonSubmitLogin");
-                    btnSubmit.click();
-                });
+                let btnSubmit = document.getElementById("buttonSubmitLogin");
+                btnSubmit.click();
             }
             else {
-                Swal.fire({
-                    text: result.message,
-                    title: "Gagal Login",
-                    icon: "error",
-                    showConfirmButton: false,
-                    timer: 1660
-                });
+                if (result.message == "data email tidak ditemukan di database") {
+                    let emailMsg = document.getElementById("errorMessageLoginEmail");
+                    emailMsg.innerHTML = "Email Tidak Ada Di Database!!";
+                }
+                else {
+                    let passSmg = document.getElementById("errorMessageLoginPassword");
+                    passSmg.innerHTML = "Password Salah!!";
+                }
             }
         }).fail((e) => {
             console.log(e);

@@ -330,7 +330,7 @@ namespace LMS.Repository.Data
             //Cek data apakah ada di database
             var cek = myContext.TakenClasses.FirstOrDefault(x => (x.Email == inputData.Email) && (x.Class_Id == inputData.Class_Id));
 
-            if (cek != null)
+            if (cek == null)
             {
                 // buat variabel yang menampung data TakenClass
                 TakenClass newData = new TakenClass()
