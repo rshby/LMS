@@ -87,6 +87,29 @@ function BetterRatingView(rating) {
     newRating = rating.toFixed(1);
     return newRating
 }
+function BetterRatingView2(rating) {
+    let detail = ``;
+    console.log(rating);
+    let newRating = rating.toFixed(1).toString();
+    console.log(newRating);
+    if (newRating == 5) {
+        detail = "Perfect";
+        newRating += ` (${detail})`;
+    } else if (newRating >= 3) {
+        detail = "Great";
+        newRating += ` (${detail})`;
+    } else if (newRating >= 2) {
+        detail = "Okay";
+        newRating += ` (${detail})`;
+    } else if (newRating >= 1) {
+        detail = "Bad";
+        newRating += ` (${detail})`;
+    } else if (newRating >= 0) {
+        detail = "Empty";
+        newRating += ` (${detail})`;
+    }
+    return newRating
+}
 function BetterLevelView(level) {
     let bLevel = ``;
     if (level == `Basic`) {
@@ -561,8 +584,6 @@ if (dashboard != null) {
 
 function FillClassesView() {
     let categories = GetAllCategories();
-    //let levels = GetAllLevels();
-    //let lvFilter = ``;
     let ctgFilter = ``;
     let classes = GetAllClasses();
     let classesContent = `<div id="class-list"><ul class="list" style="list-style: none; margin: 0; padding: 0;">`;
@@ -572,16 +593,6 @@ function FillClassesView() {
         ctgFilter += `<option>${val.name}</option>`;
     });
 
-    //$.each(levels, function (idx, val) {
-    //    lvFilter += `<option>${val.name}</option>`;
-    //});
-
-    //                   <p class="mb-0">Level</p>
-    //                   <select id="lv" class="selectpicker" onchange="updLv()" multiple>
-    //                       ${lvFilter}
-    //                   </select>
-    //               </div>
-    //               <div class="col-sm">
     let filters = `<div class="col-sm">
                        <p class="mb-0">Category</p>
                        <select id="cg" class="selectpicker" onchange="updCtg()" multiple>
@@ -592,7 +603,7 @@ function FillClassesView() {
     $.each(classes, function (idx, val) {
         bPrice = BetterPriceView(val.class_Price);
         bLevel = BetterLevelView(val.level_Name);
-        bRating = BetterRatingView(val.class_Rating);
+        bRating = BetterRatingView2(val.class_Rating);
 
         if ((idx + 1) % 2 != 0) {
             classesContent += `<div class="row mb-3 mx-2">`;
@@ -641,7 +652,7 @@ function updCtg() {
                 if (elm == val.category_Name) {
                     bPrice = BetterPriceView(val.class_Price);
                     bLevel = BetterLevelView(val.level_Name);
-                    bRating = BetterRatingView(val.class_Rating);
+                    bRating = BetterRatingView2(val.class_Rating);
 
                     if (i % 2 != 0) {
                         cList += `<div class="row mb-3 mx-2">`;
@@ -676,7 +687,7 @@ function updCtg() {
         $.each(classes, function (idx, val) {
             bPrice = BetterPriceView(val.class_Price);
             bLevel = BetterLevelView(val.level_Name);
-            bRating = BetterRatingView(val.class_Rating);
+            bRating = BetterRatingView2(val.class_Rating);
 
             if ((idx + 1) % 2 != 0) {
                 cList += `<div class="row mb-3 mx-2">`;
@@ -724,7 +735,8 @@ function FillClassDetView() {
     let takenClass = TakenClassById(sesEmail);
     let fbStatus = feedbackStatus(sesEmail);
     let bPrice = BetterPriceView(`${cDet.class_Price}`);
-    bLevel = BetterLevelView(cDet.level_Name);
+    let bRating = BetterRatingView2(cDet.class_Rating);
+    let bLevel = BetterLevelView(cDet.level_Name);
     let classDetail = `<div class="container mt-5 mb-5">
                         <div class="row">
                             <div class="col-sm-4">
@@ -733,7 +745,7 @@ function FillClassDetView() {
                             <div class="col-sm-8 align-self-center">
                                 <h4 class="mb-1 font-weight-bold">${cDet.class_Name}</h4>
                                 <p class="mb-1" style="font-size: 15px; font-weight: lighter; opacity: 0.8;" >${cDet.class_Desc}</p>
-                                <p class="mb-2"><button type="button" class="btn btn-outline-dark btn-sm" style="font-size: 16px; padding: 0px; border-style: hidden;">${cDet.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm mx-3" style="font-size: 16px; padding: 0px; border-style: hidden;">&nbsp;${bLevel}&nbsp;</button> <button type="button" class="btn btn-outline-warning btn-sm" style="font-size: 16px; padding: 0px; border-style: hidden;">&nbsp;★ ${cDet.class_Rating}&nbsp;</button></p>
+                                <p class="mb-2"><button type="button" class="btn btn-outline-dark btn-sm" style="font-size: 16px; padding: 0px; border-style: hidden;">${cDet.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm mx-3" style="font-size: 16px; padding: 0px; border-style: hidden;">&nbsp;${bLevel}&nbsp;</button> <button type="button" class="btn btn-outline-warning btn-sm" style="font-size: 16px; padding: 0px; border-style: hidden;">&nbsp;★ ${bRating}&nbsp;</button></p>
                                 `;
     let classSections = `<div class="container card mb-3">`;
     let sectsHead = `<div class="list-group" id="list-tab" role="tablist" style="height: 33rem; overflow: scroll;">`;
