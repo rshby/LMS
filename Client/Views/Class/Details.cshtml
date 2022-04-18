@@ -63,7 +63,15 @@
                     }),
                 async: false
             }).done((result) => {
-                location.reload();
+                Swal.fire({
+                    title: "Sukses",
+                    text: "Berhasil Daftar Class",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1660
+                }).then(function () {
+                    location.reload();
+                });
             }).fail((error) => {
                 console.log(error);
             })
