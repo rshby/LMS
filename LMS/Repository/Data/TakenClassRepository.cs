@@ -324,5 +324,37 @@ namespace LMS.Repository.Data
             var status = JsonConvert.DeserializeObject<KonfirmasiMidtransVM>(response.Content);
             return status.transaction_status.ToString();
         }
+
+        public int RegisterTCFree(RegisterTakenClassVM inputData)
+        {
+            //Cek data apakah ada di database
+            var cek = myContext.TakenClasses.FirstOrDefault(x => (x.Email == inputData.Email) && (x.Class_Id == inputData.Class_Id));
+
+            if (cek != null)
+            {
+                // buat variabel yang menampung data TakenClass
+                TakenClass newData = new TakenClass()
+                {
+                    Email = inputData.Email,
+                    ProgressChapter = 0,
+                    IsDone = false,
+                    OrderId = $"Pay_{inputData.Email}_{inputData.Class_Id}_{DateTime.Now.ToString("MM-dd-yyyyHH:mm")}",
+                    Expired = DateTime.Now.AddDays(1),
+                    IsPaid = true,  // -> harga 0 = sudah bayar
+                    Class_Id = inputData.Class_Id
+                };
+
+                //Insert Ke Database TakenClass
+                myContext.TakenClasses.Add(newData);
+                myContext.SaveChanges();
+
+                //Sukses Register TakenClass
+                return 1;
+            }
+            else
+            {
+                return -1; // -> data email dan Class_Id tidak ada
+            }
+        }
     }
 }
