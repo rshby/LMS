@@ -481,5 +481,42 @@ namespace LMS.Controllers
                 });
             }
         }
+
+        //Register Class Apabila Classnya Free
+        [HttpPost("register/free")]
+        public ActionResult RegisterFree(RegisterTakenClassVM inputData)
+        {
+            try
+            {
+                var data = takenClassRepo.RegisterTCFree(inputData);
+
+                if (data == 1)
+                {
+                    return Ok(new
+                    {
+                        status = 200,
+                        message = "sukses register taken class free"
+                    });
+                }
+                else
+                {
+                    return Ok(new
+                    {
+                        status = 404,
+                        message = "data tidak ditemukan"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+
+                return Ok(new
+                {
+                    status = 500,
+                    message = "gagal register",
+                    error = e.Message
+                });
+            }
+        }
     }
 }
