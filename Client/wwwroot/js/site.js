@@ -81,6 +81,10 @@ function BetterPriceView(price) {
     }
     return bpv;
 }
+function BetterRatingView(rating) {
+    newRating = rating.toFixed(1);
+    return newRating
+}
 function BetterLevelView(level) {
     let bLevel = ``;
     if (level == `Basic`) {
@@ -363,6 +367,7 @@ function FillHome() {
     }
     $("#joinButton").html(joinButton);
     $.each(threeClasses, function (idx, val) {
+        bRating = BetterRatingView(val.class_Rating);
         if (idx < 3) {
             bLevel = BetterLevelView(val.level_Name);
             topClass += `<div class="col-md-4">
@@ -370,7 +375,7 @@ function FillHome() {
                                 <img class="card-img-top align-self-center mt-3" src="${val.class_UrlPic}" style="width: 150px; height: 150px;">
                                 <div class="card-body">
                                     <h5 class="card-title mb-1 font-weight-bold">${val.class_Name}</h5>
-                                    <p class="mb-3"><button type="button" class="btn btn-outline-dark btn-sm" style="font-size: 14px; padding: 0px; border-style: hidden;">Fullstack</button> <button type="button" class="btn btn-outline-info btn-sm mx-2" style="font-size: 14px; padding: 0px; border-style: hidden;">&nbsp;${bLevel}&nbsp;</button> <button type="button" class="btn btn-outline-warning btn-sm" style="font-size: 14px; padding: 0px; border-style: hidden;">&nbsp;★ ${val.class_Rating}&nbsp;</button></p>
+                                    <p class="mb-3"><button type="button" class="btn btn-outline-dark btn-sm" style="font-size: 14px; padding: 0px; border-style: hidden;">Fullstack</button> <button type="button" class="btn btn-outline-info btn-sm mx-2" style="font-size: 14px; padding: 0px; border-style: hidden;">&nbsp;${bLevel}&nbsp;</button> <button type="button" class="btn btn-outline-warning btn-sm" style="font-size: 14px; padding: 0px; border-style: hidden;">&nbsp;★ ${bRating}&nbsp;</button></p>
                                     <a href="/class/details/${val.class_Id}" class="btn btn-primary">Check the Class</a>
                                 </div>
                             </div>
@@ -585,6 +590,7 @@ function FillClassesView() {
     $.each(classes, function (idx, val) {
         bPrice = BetterPriceView(val.class_Price);
         bLevel = BetterLevelView(val.level_Name);
+        bRating = BetterRatingView(val.class_Rating);
 
         if ((idx + 1) % 2 != 0) {
             classesContent += `<div class="row mb-3 mx-2">`;
@@ -600,7 +606,7 @@ function FillClassesView() {
                                         <div class="col-sm-9 align-self-center">
                                             <h6 class="mb-1 font-weight-bold" ><a href="../class/details/${idx + 1}" style="color: black;">${val.class_Name}</a></h6>
                                             <p class="mb-0 text-truncate font-weight-light" style="width: 20rem; font-size: 13px;">${val.class_Desc}</p>
-                                            <p class="mb-1"><button type="button" class="btn btn-outline-dark btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm mx-2" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;${bLevel}&nbsp;</button> <button type="button" class="btn btn-outline-warning btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;★ ${val.class_Rating}&nbsp;</button></p>
+                                            <p class="mb-1"><button type="button" class="btn btn-outline-dark btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm mx-2" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;${bLevel}&nbsp;</button> <button type="button" class="btn btn-outline-warning btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;★ ${bRating}&nbsp;</button></p>
                                             <p class="font-weight-bold mb-0" style="font-size: 14px">${bPrice}</p>
                                         </div>
                                     </div>
@@ -633,6 +639,7 @@ function updCtg() {
                 if (elm == val.category_Name) {
                     bPrice = BetterPriceView(val.class_Price);
                     bLevel = BetterLevelView(val.level_Name);
+                    bRating = BetterRatingView(val.class_Rating);
 
                     if (i % 2 != 0) {
                         cList += `<div class="row mb-3 mx-2">`;
@@ -648,7 +655,7 @@ function updCtg() {
                                         <div class="col-sm-9 align-self-center">
                                             <h6 class="mb-1 font-weight-bold" ><a href="../class/details/${idx + 1}" style="color: black;">${val.class_Name}</a></h6>
                                             <p class="mb-0 text-truncate" style="width: 20rem; font-size: 13px;">${val.class_Desc}</p>
-                                            <p class="mb-1"><button type="button" class="btn btn-outline-dark btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm mx-2" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;${bLevel}&nbsp;</button> <button type="button" class="btn btn-outline-warning btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;★ ${val.class_Rating}&nbsp;</button></p>
+                                            <p class="mb-1"><button type="button" class="btn btn-outline-dark btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm mx-2" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;${bLevel}&nbsp;</button> <button type="button" class="btn btn-outline-warning btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;★ ${bRating}&nbsp;</button></p>
                                             <p class="font-weight-bold mb-0" style="font-size: 14px">${bPrice}</p>
                                         </div>
                                     </div>
@@ -667,6 +674,7 @@ function updCtg() {
         $.each(classes, function (idx, val) {
             bPrice = BetterPriceView(val.class_Price);
             bLevel = BetterLevelView(val.level_Name);
+            bRating = BetterRatingView(val.class_Rating);
 
             if ((idx + 1) % 2 != 0) {
                 cList += `<div class="row mb-3 mx-2">`;
@@ -682,7 +690,7 @@ function updCtg() {
                                         <div class="col-sm-9 align-self-center">
                                             <h6 class="mb-1 font-weight-bold" ><a href="../class/details/${idx + 1}" style="color: black;">${val.class_Name}</a></h6>
                                             <p class="mb-0 text-truncate" style="width: 20rem; font-size: 13px;">${val.class_Desc}</p>
-                                            <p class="mb-1"><button type="button" class="btn btn-outline-dark btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm mx-2" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;${bLevel}&nbsp;</button> <button type="button" class="btn btn-outline-warning btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;★ ${val.class_Rating}&nbsp;</button></p>
+                                            <p class="mb-1"><button type="button" class="btn btn-outline-dark btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">${val.category_Name}</button> <button type="button" class="btn btn-outline-info btn-sm mx-2" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;${bLevel}&nbsp;</button> <button type="button" class="btn btn-outline-warning btn-sm" style="font-size: 13px; padding: 0px; border-style: hidden;">&nbsp;★ ${bRating}&nbsp;</button></p>
                                             <p class="font-weight-bold mb-0" style="font-size: 14px">${bPrice}</p>
                                         </div>
                                     </div>
@@ -731,34 +739,100 @@ function FillClassDetView() {
 
     // Belum Login
     if (sesEmail.length == 0) {
+        $.each(cSects, function (idx, val) {
+            sectsHead += `<a class="list-group-item list-group-item-action" data-toggle="list" href="#body${val.chapter}"><div class="row"><div class="col-sm-2 invisible">✔</div><div class="col-sm-10"><h6>${val.name}</h6></div></div></a>`;
+            sectsBody += `<div class="tab-pane fade align-self-center text-center" id="body${val.chapter}">
+                                <img class="align-self-center text-center" src="https://icon-library.com/images/lock-icon-transparent-background/lock-icon-transparent-background-10.jpg" style="width:500px; height:500px;" alt="Card image">
+                          </div>`;
+        });
         classDetail += `       <h5 class="font-weight-bold mb-3">${bPrice}</h5>
                                <a href="#registerModal" id="linkRegister" class="btn btn-outline-primary" data-target="#registerModal" data-toggle="modal" data-dismiss="modal">Register dulu yuk!</a>
                             </div>
                         </div>
                    </div>`;
-        classSections += `<img class="card-img align-self-center" src="https://icon-library.com/images/lock-icon-transparent-background/lock-icon-transparent-background-10.jpg" style="width:500px; height:500px;" alt="Card image">
-                         <div class="card-img-overlay"></div>
+        classSections += `   <div class="card-body">
+                                <ul class="nav nav-tabs mb-3">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#classSect">Class Sections</a>
+                                    </li>
+                                </ul>
+                                <div id="#classSect" class="row">
+                                    <div class="col-4">
+                                            ${sectsHead}
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="tab-content" id="nav-tabContent">
+                                            ${sectsBody}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                          </div>`;
 
         // Belum Daftar
     } else if (takenClass.status == 404) {
+        $.each(cSects, function (idx, val) {
+            sectsHead += `<a class="list-group-item list-group-item-action" data-toggle="list" href="#body${val.chapter}"><div class="row"><div class="col-sm-2 invisible">✔</div><div class="col-sm-10"><h6>${val.name}</h6></div></div></a>`;
+            sectsBody += `<div class="tab-pane fade align-self-center text-center" id="body${val.chapter}">
+                                <img class="align-self-center text-center" src="https://icon-library.com/images/lock-icon-transparent-background/lock-icon-transparent-background-10.jpg" style="width:500px; height:500px;" alt="Card image">
+                          </div>`;
+        });
         classDetail += `       <h5 class="font-weight-bold mb-3">${bPrice}</h5>
                                <button type="button" class="btn btn-primary" onclick="enroll()">Take Class</button>
                             </div>
                         </div>
                    </div>`;
-        classSections += `<img class="card-img align-self-center" src="https://icon-library.com/images/lock-icon-transparent-background/lock-icon-transparent-background-10.jpg" style="width:500px; height:500px;" alt="Card image">
-                         <div class="card-img-overlay"></div>
+        classSections += `   <div class="card-body">
+                                <ul class="nav nav-tabs mb-3">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#classSect">Class Sections</a>
+                                    </li>
+                                </ul>
+                                <div id="#classSect" class="row">
+                                    <div class="col-4">
+                                            ${sectsHead}
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="tab-content" id="nav-tabContent">
+                                            ${sectsBody}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                          </div>`;
 
         // Belum Bayar
     } else if (takenClass.data.takenClass_IsPaid == false) {
+        $.each(cSects, function (idx, val) {
+            sectsHead += `<a class="list-group-item list-group-item-action" data-toggle="list" href="#body${val.chapter}"><div class="row"><div class="col-sm-2 invisible">✔</div><div class="col-sm-10"><h6>${val.name}</h6></div></div></a>`;
+            sectsBody += `<div class="tab-pane fade align-self-center text-center" id="body${val.chapter}">
+                                <img class="align-self-center text-center" src="https://icon-library.com/images/lock-icon-transparent-background/lock-icon-transparent-background-10.jpg" style="width:500px; height:500px;" alt="Card image">
+                          </div>`;
+        });
         classDetail += `       <button id="enroll" type="button" class="btn btn-secondary mt-2" disabled>Waiting For Payment</button>
                             </div>
                         </div>
                    </div>`;
-        classSections += `<img class="card-img align-self-center" src="https://icon-library.com/images/lock-icon-transparent-background/lock-icon-transparent-background-10.jpg" style="width:500px; height:500px;" alt="Card image">
-                         <div class="card-img-overlay"></div>
+        classSections += `   <div class="card-body">
+                                <ul class="nav nav-tabs mb-3">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#classSect">Class Sections</a>
+                                    </li>
+                                </ul>
+                                <div id="#classSect" class="row">
+                                    <div class="col-4">
+                                            ${sectsHead}
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="tab-content" id="nav-tabContent">
+                                            ${sectsBody}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                          </div>`;
 
         // Belum Selesai
