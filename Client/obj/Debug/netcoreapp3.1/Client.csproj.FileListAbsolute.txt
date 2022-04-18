@@ -112,8 +112,6 @@ P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.TagHelpers.input.cach
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.TagHelpers.output.cache
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Client.RazorCoreGenerate.cache
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\Account\Index.cshtml.g.cs
-P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\AdminHome\DaftarPembayaran.cshtml.g.cs
-P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\AdminHome\DataUser.cshtml.g.cs
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\AdminHome\Index.cshtml.g.cs
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\ClassAdmin\CreateClass.cshtml.g.cs
 P:\MCC\Tugas\Git\LMS\Client\obj\Debug\netcoreapp3.1\Razor\Views\ClassAdmin\DataPembayaran.cshtml.g.cs
