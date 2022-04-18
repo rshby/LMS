@@ -359,7 +359,7 @@ function FillHome() {
     let topClass = ``;
     let joinButton = ``;
     if (sesEmail.length == 0) {
-        joinButton = `<a href="#registerModal" id="linkRegister1" class="btn btn-outline-primary" data-target="#registerModal" data-toggle="modal" data-dismiss="modal">Yuk bergaung sekarang!</a>`
+        joinButton = `<a href="#registerModal" id="linkRegister1" class="btn btn-outline-primary" data-target="#registerModal" data-toggle="modal" data-dismiss="modal">Yuk bergabung sekarang!</a>`
     }
     $("#joinButton").html(joinButton);
     $.each(threeClasses, function (idx, val) {

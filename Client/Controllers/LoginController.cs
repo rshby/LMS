@@ -33,13 +33,11 @@ namespace Client.Controllers
             var handler = new JwtSecurityTokenHandler();
             var jsonToken = handler.ReadToken(token);
             var tokenS = jsonToken as JwtSecurityToken;
-            var rolesLogin = tokenS.Claims.First(claim => claim.Type == "roles").Value;
+            var rolesLogin = tokenS.Claims.First(claim => claim.Type == "roles").Value; // -> Peserta, Admin, Trainer
 
             //bawa session saat login
-            HttpContext.Session.SetString("jwt", token);
+            HttpContext.Session.SetString("jwt", token); // -> wpieukash12312lkajhsfkaj0293
             HttpContext.Session.SetString("email", inputData.Email);
-
-            
 
             //Cek jika roles adalah peserta
             if (rolesLogin == "Peserta")
